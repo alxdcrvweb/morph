@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<AppLoader>
 				<Provider container={container} key={container.id} >
 					<MainLayout>
+						{/* @ts-ignore */}
 						<Component {...pageProps} />
 					</MainLayout>
 				</Provider >

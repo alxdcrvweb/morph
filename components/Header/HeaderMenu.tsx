@@ -17,6 +17,7 @@ const HeaderMenu: FC<HeaderMenuProps> = ({ routerPath, openMenu, closeMenuHandle
 	const isTablet = useMediaQuery({ maxWidth: 991.98 })
 
 	return (
+		// @ts-ignore
 		<CSSTransition
 			in={openMenu}
 			timeout={500}
@@ -29,7 +30,8 @@ const HeaderMenu: FC<HeaderMenuProps> = ({ routerPath, openMenu, closeMenuHandle
 			}}
 			mountOnEnter
 			unmountOnExit
-		>
+		> 
+	 {/* @ts-ignore */}
 			<nav className={cn(styles.menu)}>
 				{isTablet ? <HeaderMobileMenu routerPath={routerPath} closeMenuHandler={closeMenuHandler} />
 					: <HeaderDesktopMenu closeMenuHandler={closeMenuHandler} />}

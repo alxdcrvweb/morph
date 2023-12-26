@@ -84,6 +84,7 @@ const TerminalContent: FC = observer(() => {
 				mountOnEnter
 				unmountOnExit
 			>
+				{/* @ts-ignore */}
 				<TerminalModal />
 			</CSSTransition >
 			<CSSTransition
@@ -98,6 +99,7 @@ const TerminalContent: FC = observer(() => {
 				mountOnEnter
 				unmountOnExit
 			>
+				{/* @ts-ignore */}
 				<CongratulationModal text={congratsText} title={congratsTitle} setAttention={setAttentionModal} />
 			</CSSTransition >
 		</>
