@@ -29,6 +29,7 @@
 		"i": "^0.3.7",
 		"inversify": "^6.0.1",
 		"inversify-react": "^1.0.0",
+		"lmdb-store": "^1.6.14",
 		"locomotive-scroll": "^4.1.4",
 		"mobx": "^6.3.8",
 		"mobx-react": "^7.2.1",
