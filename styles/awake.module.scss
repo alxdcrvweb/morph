@@ -1,0 +1,212 @@
+@import "./mixins";
+@import "./variables";
+@import "./keyframes";
+
+.awake {
+	// .awake__art
+	&__art {
+		position: absolute;
+		// z-index: 1;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		& > img,
+		& > video {
+			pointer-events: none;
+			position: absolute;
+			width: 105vw;
+			height: 115vh;
+			top: -7.5vh;
+			left: -2.5vw;
+			object-fit: cover;
+			object-position: center;
+		}
+		& > img {
+			// &:nth-child(-n + 3) {
+			// 	z-index: 1;
+			// }
+			// &:nth-child(n + 3) {
+			// 	z-index: 3;
+			// }
+		}
+		& > svg {
+			pointer-events: none;
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			@media (max-width: ($md2+px)) {
+				display: none !important;
+			}
+		}
+		// .awake__art_1
+		&_1 {
+			clip-path: url("#svgPath");
+			& > svg {
+				circle {
+					&:nth-child(1) {
+						r: 10%;
+					}
+					&:nth-child(2) {
+						r: 30%;
+					}
+					&:nth-child(3) {
+						r: 5%;
+					}
+				}
+			}
+		}
+		// .awake__art_2
+		&_2 {
+			clip-path: url("#svgPath2");
+			& > svg {
+				circle {
+					&:nth-child(1) {
+						r: 5%;
+					}
+					&:nth-child(2) {
+						r: 30%;
+					}
+					&:nth-child(3) {
+						r: 8%;
+					}
+				}
+			}
+		}
+		svg {
+		}
+	}
+	// .awake__pupil
+	&__pupil {
+		@media (any-hover: none) {
+			transition: transform 1s ease 0s;
+		}
+	}
+
+	// .awake__pulse
+	&__pulse {
+		&_1 {
+			animation: neonPulse 4s infinite ease-in;
+		}
+		&_2 {
+			animation: neonPulse 3s infinite ease-in-out;
+		}
+		&_3 {
+			animation: neonPulse 3.3s infinite ease-in;
+		}
+		&_4 {
+			animation: neonPulse 2.5s infinite ease;
+		}
+		&_5 {
+			animation: neonPulse 4s infinite ease-in;
+		}
+		&_6 {
+			animation: wheelsPulse 3s infinite ease-in;
+		}
+	}
+	// .awake__droid
+	&__droid {
+		position: absolute;
+		z-index: 3;
+		bottom: 43%;
+		left: 52%;
+		@media (max-width: ($md3+px)) {
+			left: calc(50% + 30px);
+		}
+	}
+	// .awake__animateDroid
+	&__animateDroid {
+		@include adaptiv-value("width", 49, 38, 1);
+		animation: droidAnimate 10s infinite linear;
+	}
+	// .awake__hands
+	&__hands {
+		position: absolute;
+		top: 30%;
+		left: calc(50% - 75px);
+		width: 150px;
+		height: 150px;
+		cursor: pointer;
+	}
+}
+
+.awakeEye {
+	position: absolute;
+	z-index: 2;
+	top: 5vh;
+	left: calc(50% - 75px);
+	width: 150px;
+	height: 150px;
+	@media (max-width: ($md2+px)) {
+		left: calc(50% - 60px);
+		width: 120px;
+		height: 120px;
+	}
+	svg {
+		position: relative;
+		cursor: pointer;
+	}
+	&:before {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		width: 300%;
+		height: 300%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: radial-gradient(circle, rgba(69, 127, 142, 0.2) 0%, rgba(69, 127, 142, 0) 70%);
+	}
+
+	@media (max-width: ($md3+px)) {
+		top: 13vh;
+		left: calc(50% - 50px);
+		width: 100px;
+		height: 100px;
+	}
+	// .awakeEye_second
+	&_second {
+		width: 120px;
+		height: 120px;
+		top: 20vh;
+		left: calc(50% - 60px);
+		@media (max-width: ($md2+px)) {
+			// top: 17vh;
+			left: calc(50% - 50px);
+			width: 100px;
+			height: 100px;
+		}
+	}
+	// .awakeEye__pupil
+	&__pupil {
+		@media (any-hover: none) {
+			transition: transform 1s ease 0s;
+		}
+	}
+
+	// .awakeEye__neon
+	&__neon {
+		position: absolute;
+		width: 323%;
+		height: 313%;
+		top: 61%;
+		left: 53%;
+		transform: translate(-50%, -50%);
+		transform-origin: center;
+		// animation: rotateNeonEye 20s infinite linear;
+	}
+}
+
+@keyframes rotateNeonEye {
+	0% {
+		// opacity: 1;
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		// opacity: 0.3;
+		transform: translate(-50%, -50%) rotate(3600deg);
+	}
+}

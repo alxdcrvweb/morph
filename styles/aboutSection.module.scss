@@ -1,0 +1,128 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+@import "./keyframes.scss";
+
+.aboutSection {
+	position: relative;
+	height: 100%;
+	@media (max-width: ($md2+px)) {
+		display: flex;
+		flex-direction: column;
+	}
+	// .aboutSection__body
+	&__body {
+		position: relative;
+		height: 100%;
+	}
+	// .aboutSection__title
+	&__title {
+		@include adaptiv-value("font-size", 88, 40, 1);
+		line-height: 136%;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		font-weight: 100;
+	}
+	// .aboutSection__route
+	&__route {
+		cursor: pointer;
+		position: fixed;
+		z-index: 5;
+		bottom: 60px;
+		right: 60px;
+		height: 64px;
+		width: 64px;
+		border-radius: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: background 0.5s ease 0s;
+		background: #131b22;
+		@media (any-hover: hover) {
+			&:hover {
+				background: #fff;
+				p {
+					opacity: 1;
+				}
+				.aboutSection__icon {
+					filter: invert(1);
+				}
+				.aboutSection__icon > :nth-child(1) {
+					opacity: 0 !important;
+				}
+				.aboutSection__icon > :nth-child(2) {
+					opacity: 1 !important;
+				}
+			}
+		}
+		// .aboutSection__route_light
+		&_light {
+			background: #fff;
+			.aboutSection__icon {
+				filter: invert(1);
+			}
+			@media (any-hover: hover) {
+				&:hover {
+					background: #131b22;
+					.aboutSection__icon {
+						filter: invert(0);
+					}
+				}
+			}
+		}
+
+		@media (max-width: ($md2+px)) {
+			bottom: 16px;
+			right: 16px;
+		}
+
+		p {
+			opacity: 0;
+			pointer-events: none;
+			transition: color 0.5s ease 0s, opacity 0.5s ease 0s;
+			position: absolute;
+			bottom: calc(100% + 18px);
+			left: 50%;
+			transform: translateX(-50%);
+			font-family: "Moderat";
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 130%;
+			text-align: center;
+			letter-spacing: 0.06em;
+			color: #ffffff;
+			width: 120px;
+			@media (any-hover: none) {
+				display: none;
+			}
+		}
+	}
+	// .aboutSection__icon
+	&__icon {
+		transition: filter 0.5s ease 0s;
+		position: relative;
+		width: 32px;
+		height: 32px;
+		& > :nth-child(1) {
+			transition: opacity 0.5s ease 0s;
+			opacity: 1 !important;
+		}
+		& > :nth-child(2) {
+			transition: opacity 0.5s ease 0s;
+			opacity: 0 !important;
+		}
+	}
+
+	// .aboutSection__art
+	&__art {
+		@media (max-width: ($md2+px)) {
+			position: relative;
+			flex: 0 0 100vh;
+			order: 2;
+			overflow: hidden;
+		}
+	}
+	// .aboutSection__info
+	&__info {
+		flex: 1 1 auto;
+	}
+}

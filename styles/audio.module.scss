@@ -1,0 +1,95 @@
+@import "./mixins";
+@import "./variables";
+@import "./keyframes";
+
+.audio {
+	pointer-events: auto;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 32px;
+	height: 32px;
+	flex: 0 0 32px;
+	path {
+		transition: stroke 0.3s ease 0s;
+	}
+	// .audio_sleeping
+	&_sleeping {
+		svg {
+			@media (any-hover: hover) {
+				&:hover {
+					path {
+						stroke: #88f4f4;
+					}
+				}
+			}
+		}
+		&.audio_active {
+			path {
+				stroke: #88f4f4;
+			}
+			svg {
+				@media (any-hover: hover) {
+					&:hover {
+						path {
+							stroke: #88f4f4;
+						}
+					}
+				}
+			}
+		}
+	}
+	// .audio_awake
+	&_awake {
+		svg {
+			@media (any-hover: hover) {
+				&:hover {
+					path {
+						stroke: rgb(151, 32, 31);
+					}
+				}
+			}
+		}
+		&.audio_active {
+			path {
+				stroke: rgb(151, 32, 31);
+			}
+			svg {
+				@media (any-hover: hover) {
+					&:hover {
+						path {
+							stroke: rgb(151, 32, 31);
+						}
+					}
+				}
+			}
+		}
+	}
+	// .audio__terminal
+	&_terminal {
+		svg {
+			@media (any-hover: hover) {
+				&:hover {
+					path {
+						stroke: rgb(111, 40, 64);
+					}
+				}
+			}
+		}
+		&.audio_active {
+			path {
+				stroke: rgb(111, 40, 64);
+			}
+			svg {
+				@media (any-hover: hover) {
+					&:hover {
+						path {
+							stroke: rgb(111, 40, 64);
+						}
+					}
+				}
+			}
+		}
+	}
+}

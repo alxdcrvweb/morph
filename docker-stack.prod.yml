@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  next:
+    image: registry.bykollab.com/${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}:${PROD_VERSION}
+    environment:
+      - NEXT_PROD_GA_ID=${NEXT_PROD_GA_ID}
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=web"
+        - "traefik.http.routers.prod-${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}.rule=Host(`mrphs-collection.com`)"
+        - "traefik.http.routers.prod-${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}.entrypoints=https"
+        - "traefik.http.routers.prod-${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}.tls"
+        - "traefik.http.services.prod-${CI_PROJECT_NAMESPACE}-${CI_PROJECT_NAME}.loadbalancer.server.port=3000"
+
+networks:
+  default:
+    name: web
+    external: true

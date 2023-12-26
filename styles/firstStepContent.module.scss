@@ -1,0 +1,109 @@
+@import "./mixins";
+@import "./variables";
+@import "./keyframes";
+
+.firstStepContent {
+	font-family: "Moderat";
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+	z-index: 2;
+	pointer-events: none;
+	&.enter {
+		.firstStepContent__body {
+			opacity: 0;
+			transform: translate(-50%, -10%);
+		}
+	}
+	&.enterActive {
+		.firstStepContent__body {
+			opacity: 0;
+			transform: translate(-50%, -10%);
+		}
+	}
+	&.enterDone {
+		.firstStepContent__body {
+			opacity: 1;
+			transform: translate(-50%, 0%);
+		}
+	}
+	&.exitActive {
+		.firstStepContent__body {
+			opacity: 1;
+			transform: translate(-50%, 0%);
+		}
+	}
+	&.exitDone {
+		.firstStepContent__body {
+			opacity: 0;
+			transform: translate(-50%, 10%);
+		}
+	}
+	&.exit {
+		.firstStepContent__body {
+			opacity: 0;
+			transform: translate(-50%, 10%);
+		}
+	}
+	//  .firstStepContent__body
+	&__body {
+		pointer-events: fill;
+		backdrop-filter: blur(14px);
+		background: rgba(0, 0, 0, 0.1);
+		transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+		position: absolute;
+		z-index: 5;
+		top: 25%;
+		opacity: 1;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		line-height: 150%;
+		text-align: center;
+		letter-spacing: 0.06em;
+		max-width: 406px;
+		border-radius: 16px;
+		padding: 32px;
+		overflow: hidden;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+		border-top: 1px solid rgba(255, 255, 255, 0.5);
+		&:before {
+			content: "";
+			position: absolute;
+			z-index: 2;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			border-width: 1px;
+			border-style: solid;
+			border-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)) 1 100%;
+		}
+		@media (max-width: ($md3+px)) {
+			width: 100%;
+		}
+	}
+	// .firstStepContent__box
+	&__box {
+		position: relative;
+		z-index: 2;
+		display: grid;
+		align-content: start;
+		justify-items: center;
+	}
+	//  .firstStepContentContent__text
+	&__text {
+		display: grid;
+		align-content: start;
+		row-gap: 16px;
+		&:not(:last-child) {
+			margin-bottom: 24px;
+		}
+		a {
+			color: inherit;
+		}
+	}
+	// .firstStepContentContent__link
+	&__link {
+		cursor: pointer;
+	}
+}

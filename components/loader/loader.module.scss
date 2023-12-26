@@ -1,0 +1,36 @@
+.loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100%;
+	overflow: hidden;
+	background-color: rgb(0, 0, 0);
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 999999999;
+	svg {
+		width: 300px;
+		fill: #ffffff;
+		circle {
+			transition: r 0.1s ease 0s;
+		}
+	}
+	// .loader_terminal
+	&_terminal {
+		background-color: rgb(209, 209, 209);
+		svg {
+			fill: #000;
+		}
+	}
+	// .loader__text
+	&__text {
+		max-width: 800px;
+		text-align: center;
+		line-height: 140%;
+		color: #000;
+	}
+}
