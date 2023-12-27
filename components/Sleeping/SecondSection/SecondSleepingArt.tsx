@@ -54,9 +54,9 @@ const SecondSleepingArt: FC<SecondSleepingArtProps> = (({ circle1Ref, circle2Ref
 					<source src='/videos/sleeping/SleepingSecondPageVideo.mp4' type="video/mp4" /> */}
 				</video>
 				<SecondEye />
-				<img src={fog1} className={cn('paralaxItem')} data-speed='1' alt="fog1" />
+				{/* <img src={fog1} className={cn('paralaxItem')} data-speed='1' alt="fog1" />
 				<img src={fog2} className={cn('paralaxItem')} data-speed='1' alt="fog2" />
-				<img src={fog3} className={cn('paralaxItem')} data-speed='1' alt="fog3" />
+				<img src={fog3} className={cn('paralaxItem')} data-speed='1' alt="fog3" /> */}
 				{/* <img src={stones1} className={cn('paralaxItem')} data-speed='2' alt="stones1" />
 				<img src={stoneIllumination1} className={cn(styles.sleeping__pulse_2, 'paralaxItem')} data-speed='2' alt="stoneIllumination1" />
 				<img src={stones2} className={cn('paralaxItem')} data-speed='1.5' alt="stones2" /> */}
