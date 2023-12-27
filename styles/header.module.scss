@@ -32,6 +32,10 @@
 		column-gap: 40px;
 		flex-wrap: wrap;
 	}
+	// .header__active
+	&__active {
+		color: #75FFF4;
+	}
 	// .header__menu
 	&__menu {
 		cursor: pointer;
@@ -40,6 +44,7 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		overflow: hidden;
+		font-family: "Moderat";
 		span {
 			flex: 0 0 20px;
 			padding: 2px 0;

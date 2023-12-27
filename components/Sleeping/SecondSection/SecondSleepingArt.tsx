@@ -54,7 +54,7 @@ const SecondSleepingArt: FC<SecondSleepingArtProps> = (({ circle1Ref, circle2Ref
 					<source src='/videos/sleeping/SleepingSecondPageVideo.mp4' type="video/mp4" /> */}
 				</video>
 				<SecondEye />
-				<img src={fog1} className={cn('paralaxItem')} data-speed='1' alt="fog1" />
+				{/* <img src={fog1} className={cn('paralaxItem')} data-speed='1' alt="fog1" />
 				<img src={fog2} className={cn('paralaxItem')} data-speed='1' alt="fog2" />
 				<img src={fog3} className={cn('paralaxItem')} data-speed='1' alt="fog3" />
 				<img src={stones1} className={cn('paralaxItem')} data-speed='2' alt="stones1" />
@@ -62,7 +62,7 @@ const SecondSleepingArt: FC<SecondSleepingArtProps> = (({ circle1Ref, circle2Ref
 				<img src={stones2} className={cn('paralaxItem')} data-speed='1.5' alt="stones2" />
 				<img src={stoneIllumination2} className={cn(styles.sleeping__pulse_5, 'paralaxItem')} data-speed='1.5' alt="stoneIllumination2" />
 				<img src={haze1} className={cn('paralaxItem')} data-speed='3' alt="haze1" />
-				<img src={rock2} className={cn('paralaxItem')} data-speed='3' alt="rock2" />
+				<img src={rock2} className={cn('paralaxItem')} data-speed='3' alt="rock2" /> */}
 				<img src={backlight} className={cn(styles.sleeping__pulse_4, 'paralaxItem')} data-speed='3' alt="backlight" />
 				<img src={firelines} className={cn(styles.sleeping__pulse_6, 'paralaxItem')} data-speed='4.5' alt="firelines" />
 				<img src={fog4} className={cn('paralaxItem')} data-speed='4' alt="fog4" />
