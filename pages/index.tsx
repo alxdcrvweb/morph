@@ -9,7 +9,7 @@ const MainPage: FC = observer(() => {
 
 	return (
 		<div>
-			<ChoseSection FirstArt={ChoseArt} />
+			{/* <ChoseSection FirstArt={ChoseArt} /> */}
 			
 			
 		</div>
