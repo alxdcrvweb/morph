@@ -14,15 +14,15 @@
 // module.exports = withTM()
 
 module.exports = {
-	// async redirects() {
-	// 	return [
-	// 		{
-	// 			source: '/',
-	// 			destination: '/sleeping',
-	// 			permanent: true,
-	// 		},
-	// 	]
-	// },
+	async redirects() {
+		return [
+			{
+				source: '/',
+				destination: '/sleeping',
+				permanent: true,
+			},
+		]
+	},
 	images: {
 		domains: ['ipfs.io'],
 	},
