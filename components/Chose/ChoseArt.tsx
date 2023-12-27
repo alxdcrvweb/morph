@@ -30,15 +30,15 @@ const ChoseArt: FC<FirstAwakeArtProps> = (({ circle1Ref, circle2Ref, circle3Ref 
 
 	return (
 		<div className={cn(styles.awake__art, styles.awake__art_1)}>
-			<img src={background} className={'paralaxItem'} data-speed='1' alt="background" />
+			<img src={background} className={'paralaxItem'} data-speed='1' alt="background" style={{zIndex:0}}/>
 	
-			<img src={sleep} className={'paralaxItem'} data-speed='3' alt="sleep" />
-			<img src={awake} className={'paralaxItem'} data-speed='3' alt="awake" />
-			<img src={light1} className={'paralaxItem'} data-speed='3' alt="light1" />
-			<img src={light2} className={'paralaxItem'} data-speed='3' alt="light2" />
-			<img src={light3} className={'paralaxItem'} data-speed='3' alt="light3" />
+			<img src={sleep} className={'paralaxItem'} data-speed='3' alt="sleep"style={{zIndex:1}} />
+			<img src={awake} className={'paralaxItem'} data-speed='3' alt="awake"style={{zIndex:2}} />
+			<img src={light1} className={'paralaxItem'} data-speed='3' alt="light1"style={{zIndex:3}} />
+			<img src={light2} className={'paralaxItem'} data-speed='3' alt="light2"style={{zIndex:4}} />
+			<img src={light3} className={'paralaxItem'} data-speed='3' alt="light3"style={{zIndex:5}} />
 			{/* <img src={wheels} className={cn('paralaxItem', styles.awake__pulse_6)} data-speed='3' alt="wheels" /> */}
-			<img src={noise} alt="noise" />
+			<img src={noise} alt="noise"style={{zIndex:6}} />
 			{/* <div className={cn('paralaxItem', styles.awake__droid)} data-speed='3' >
 				<div className={styles.awake__animateDroid}>
 					<img src={droid} alt="droid" />
