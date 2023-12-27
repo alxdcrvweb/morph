@@ -56,18 +56,18 @@ const SecondSleepingArt: FC<SecondSleepingArtProps> = (({ circle1Ref, circle2Ref
 				<SecondEye />
 				{/* <img src={fog1} className={cn('paralaxItem')} data-speed='1' alt="fog1" />
 				<img src={fog2} className={cn('paralaxItem')} data-speed='1' alt="fog2" />
-				<img src={fog3} className={cn('paralaxItem')} data-speed='1' alt="fog3" /> */}
-				<img src={stones1} style={{zIndex:1}} className={cn('paralaxItem')} data-speed='2' alt="stones1" />
-				<img src={stoneIllumination1} style={{zIndex:2}} className={cn(styles.sleeping__pulse_2, 'paralaxItem')} data-speed='2' alt="stoneIllumination1" />
-				<img src={stones2} style={{zIndex:3}} className={cn('paralaxItem')} data-speed='1.5' alt="stones2" />
-				<img src={stoneIllumination2} style={{zIndex:4}} className={cn(styles.sleeping__pulse_5, 'paralaxItem')} data-speed='1.5' alt="stoneIllumination2" />
-				<img src={haze1} style={{zIndex:5}} className={cn('paralaxItem')} data-speed='3' alt="haze1" />
-				<img src={rock2} style={{zIndex:6}} className={cn('paralaxItem')} data-speed='3' alt="rock2" />
-				<img src={backlight} style={{zIndex:7}} className={cn(styles.sleeping__pulse_4, 'paralaxItem')} data-speed='3' alt="backlight" />
-				<img src={firelines} style={{zIndex:8}} className={cn(styles.sleeping__pulse_6, 'paralaxItem')} data-speed='4.5' alt="firelines" />
-				<img src={fog4} style={{zIndex:9}} className={cn('paralaxItem')} data-speed='4' alt="fog4" />
-				<img src={fog5} style={{zIndex:10}} className={cn('paralaxItem')} data-speed='4' alt="fog5" />
-				<img src={noise} style={{zIndex:11}}  alt="noise" />
+				<img src={fog3} className={cn('paralaxItem')} data-speed='1' alt="fog3" />
+				<img src={stones1} className={cn('paralaxItem')} data-speed='2' alt="stones1" />
+				<img src={stoneIllumination1} className={cn(styles.sleeping__pulse_2, 'paralaxItem')} data-speed='2' alt="stoneIllumination1" />
+				<img src={stones2} className={cn('paralaxItem')} data-speed='1.5' alt="stones2" />
+				<img src={stoneIllumination2} className={cn(styles.sleeping__pulse_5, 'paralaxItem')} data-speed='1.5' alt="stoneIllumination2" />
+				<img src={haze1} className={cn('paralaxItem')} data-speed='3' alt="haze1" />
+				<img src={rock2} className={cn('paralaxItem')} data-speed='3' alt="rock2" /> */}
+				<img src={backlight} className={cn(styles.sleeping__pulse_4, 'paralaxItem')} data-speed='3' alt="backlight" />
+				<img src={firelines} className={cn(styles.sleeping__pulse_6, 'paralaxItem')} data-speed='4.5' alt="firelines" />
+				<img src={fog4} className={cn('paralaxItem')} data-speed='4' alt="fog4" />
+				<img src={fog5} className={cn('paralaxItem')} data-speed='4' alt="fog5" />
+				<img src={noise} alt="noise" />
 				<div className={`${styles.sleeping__stone} paralaxItem`} data-speed='2'>
 					<img onClick={() => router.push('/terminal')} src={stone} alt="stone" />
 				</div>
