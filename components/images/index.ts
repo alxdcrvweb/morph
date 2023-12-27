@@ -35,6 +35,14 @@ export const IMAGES = {
 		neonArms: '/awake/secondPage/neonArms.png',
 		neon: '/awake/secondPage/neon.png',
 	},
+	chose: {
+		background: '/chose/background.png',
+		sleep: "/chose/sleep.png",
+		awake: '/chose/awake.png',
+		light1: '/chose/light1.png',
+		light2: '/chose/light2.png',
+		light3: '/chose/light3.png'
+	},
 	sleeping: {
 		background: '/sleeping/firstPage/background.webp',
 		fireflies: '/sleeping/firstPage/fireflies.webp',
