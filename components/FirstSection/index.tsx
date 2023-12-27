@@ -58,7 +58,7 @@ const FirstSection: FC<FirstSectionProps> = observer(({ FirstArt }) => {
 				tl1.to([circle1Ref.current, circle2Ref.current, circle3Ref.current], {
 					scrollTrigger: {
 						trigger: sectionRef.current,
-						end: `+=0`,
+						end: `+=600`,
 						scrub: 1,
 						pin: true,
 					},
