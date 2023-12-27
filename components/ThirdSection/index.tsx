@@ -60,7 +60,7 @@ const ThirdSection: FC<ThirdSectionProps> = observer(({ OurTeamList, teamItem1Re
 					tl.to(refList[i], {
 						scrollTrigger: {
 							trigger: sectionRef.current,
-							end: '+=70%',
+							end: '+=20%',
 							scrub: i + 1,
 							pin: true,
 						},
