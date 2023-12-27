@@ -58,8 +58,8 @@ const SecondSleepingArt: FC<SecondSleepingArtProps> = (({ circle1Ref, circle2Ref
 				<img src={fog2} className={cn('paralaxItem')} data-speed='1' alt="fog2" />
 				<img src={fog3} className={cn('paralaxItem')} data-speed='1' alt="fog3" /> */}
 				<img src={stones1} className={cn('paralaxItem')} data-speed='2' alt="stones1" />
-				{/* <img src={stoneIllumination1} className={cn(styles.sleeping__pulse_2, 'paralaxItem')} data-speed='2' alt="stoneIllumination1" /> */}
-				<img src={stones2} className={cn('paralaxItem')} data-speed='1.5' alt="stones2" />
+				<img src={stoneIllumination1} className={cn(styles.sleeping__pulse_2, 'paralaxItem')} data-speed='2' alt="stoneIllumination1" />
+				{/* <img src={stones2} className={cn('paralaxItem')} data-speed='1.5' alt="stones2" /> */}
 				<img src={stoneIllumination2} className={cn(styles.sleeping__pulse_5, 'paralaxItem')} data-speed='1.5' alt="stoneIllumination2" />
 				<img src={haze1} className={cn('paralaxItem')} data-speed='3' alt="haze1" />
 				<img src={rock2} className={cn('paralaxItem')} data-speed='3' alt="rock2" />
