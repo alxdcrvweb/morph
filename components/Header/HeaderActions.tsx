@@ -90,8 +90,8 @@ const HeaderActions: FC<HeaderProps> = observer(
               </span>
             ) : !address ? (
               <>
-                <span>Connect Wallet</span>
-                <span>Connect Wallet</span>
+                <span>Connect</span>
+                <span>Connect</span>
               </>
             ) : (
               <>

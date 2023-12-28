@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { FC, MutableRefObject, useEffect, useState } from "react";
+import { FC, MutableRefObject, useEffect, useRef, useState } from "react";
 // styles
 import styles from "../../styles/awake.module.scss";
 // images
@@ -18,16 +18,12 @@ interface FirstAwakeArtProps {
   circle3Ref: MutableRefObject<SVGCircleElement | null>;
 }
 
-const ChoseArt: FC<FirstAwakeArtProps> = ({
-  circle1Ref,
-  circle2Ref,
-  circle3Ref,
-}) => {
-  const router = useRouter();
+const ChoseArt: FC<FirstAwakeArtProps> = () => {
+  const router = useRouter()
   const { width } = useWindowDimensions();
   const [currentPos, setCurrentPos] = useState(0);
   const [active, setActive] = useState("");
-  //   console.log(width, currentPos);
+  const ref = useRef() as any
   useEffect(() => {
     if (width) {
       setCurrentPos(width / 2);
@@ -53,10 +49,15 @@ const ChoseArt: FC<FirstAwakeArtProps> = ({
       onMouseMove={(e) => {
         setCurrentPos(e.clientX);
       }}
-      onClick={() => {
+      ref={ref}
+      onClick={(e) => {
+        console.log(ref);
         if (active == "sleep") {
+          
+          // ref.current.scrollTo({ top: 0, behavior: 'smooth' });
           router.push("/sleeping");
         } else if (active == "awake") {
+          // ref.current.scrollTo({ top: 0, behavior: 'smooth' });
           router.push("/awake");
         }
       }}
@@ -132,40 +133,7 @@ const ChoseArt: FC<FirstAwakeArtProps> = ({
 					<img src={droid} alt="droid" />
 				</div>
 			</div> */}
-      <svg height="0" width="0">
-        <defs>
-          <clipPath id="svgPath">
-            <circle
-              ref={circle1Ref}
-              stroke="#000000"
-              strokeMiterlimit="10"
-              cx="10%"
-              cy="30%"
-            />
-            <circle
-              ref={circle2Ref}
-              stroke="#000000"
-              strokeMiterlimit="10"
-              cx="50%"
-              cy="90%"
-            />
-            <circle
-              ref={circle3Ref}
-              stroke="#000000"
-              strokeMiterlimit="10"
-              cx="80%"
-              cy="80%"
-            />
-            <circle
-              stroke="#000000"
-              strokeMiterlimit="10"
-              cx="0%"
-              cy="0%"
-              r="1"
-            />
-          </clipPath>
-        </defs>
-      </svg>
+     
       <ChoseFooter active={active} />
     </div>
   );

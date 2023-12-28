@@ -18,65 +18,51 @@ interface FirstSectionProps {
 
 const ChoseSection: FC<FirstSectionProps> = observer(({ FirstArt }) => {
 
-	const { scroll } = useLocomotiveScroll()
 	const mainTitleRef = useRef(null)
-	const helpingRef = useRef<HTMLDivElement>(null)
-	const sectionRef = useRef<HTMLElement>(null)
-	const circle1Ref = useRef(null)
-	const circle2Ref = useRef(null)
-	const circle3Ref = useRef(null)
-
-	const mouseHandler = (e: globalThis.MouseEvent) => {
-		mouseMoveHandler(e, sectionRef)
-	}
-
-	useEffect(() => {
-		sectionRef.current?.addEventListener('mousemove', mouseHandler)
-		return () => sectionRef.current?.removeEventListener('mousemove', mouseHandler)
-	}, [])
 
 
-	useEffect(() => {
-		if (!scroll) return
 
-		ScrollTrigger.scrollerProxy(scroll.el, {
-			scrollTop(value) {
-				return arguments.length ? scroll.scrollTo(value, 0, 0) : scroll.scroll.instance.scroll.y;
-			},
-			getBoundingClientRect() {
-				return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-			},
-			pinType: scroll.el!.style.transform ? "transform" : "fixed"
-		});
+	// useEffect(() => {
+	// 	if (!scroll) return
 
-		ScrollTrigger.defaults({ scroller: scroll.el })
+	// 	ScrollTrigger.scrollerProxy(scroll.el, {
+	// 		scrollTop(value) {
+	// 			return arguments.length ? scroll.scrollTo(value, 0, 0) : scroll.scroll.instance.scroll.y;
+	// 		},
+	// 		getBoundingClientRect() {
+	// 			return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+	// 		},
+	// 		pinType: scroll.el!.style.transform ? "transform" : "fixed"
+	// 	});
 
-		const tl1 = gsap.timeline()
+	// 	ScrollTrigger.defaults({ scroller: scroll.el })
 
-		ScrollTrigger.matchMedia({
-			'(min-width: 991.98px)': function () {
-				tl1.to([circle1Ref.current, circle2Ref.current, circle3Ref.current], {
-					scrollTrigger: {
-						trigger: sectionRef.current,
-						end: `+=600`,
-						scrub: 1,
-						pin: true,
-					},
-					r: '80%',
-					ease: "none",
-					duration: 10,
-				})
-			}
-		})
+	// 	const tl1 = gsap.timeline()
 
-		return () => { tl1.kill() }
+	// 	ScrollTrigger.matchMedia({
+	// 		'(min-width: 991.98px)': function () {
+	// 			tl1.to([circle1Ref.current, circle2Ref.current, circle3Ref.current], {
+	// 				scrollTrigger: {
+	// 					trigger: sectionRef.current,
+	// 					end: `+=600`,
+	// 					scrub: 1,
+	// 					pin: true,
+	// 				},
+	// 				r: '80%',
+	// 				ease: "none",
+	// 				duration: 10,
+	// 			})
+	// 		}
+	// 	})
 
-	}, [scroll])
+	// 	return () => { tl1.kill() }
+
+	// }, [scroll])
 
 	return (
 		<div id='first'>
-			<section className={styles.aboutSection} ref={sectionRef} >
-				<FirstArt circle1Ref={circle1Ref} circle2Ref={circle2Ref} circle3Ref={circle3Ref} />
+			<section className={styles.aboutSection} >
+				<FirstArt />
 				<FirstStep mainTitleRef={mainTitleRef} />
 				
 			</section >
