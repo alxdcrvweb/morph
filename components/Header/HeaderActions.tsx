@@ -25,7 +25,10 @@ const HeaderActions: FC<HeaderProps> = observer(
     console.log(" HeaderActions routerPath", routerPath);
     useEffect(() => {
       console.log(router.asPath);
-      if (router.asPath.includes("sleeping")) {
+      if (
+        router.asPath.includes("sleeping") ||
+        router.asPath.includes("awake")
+      ) {
         setActive("sleeping");
       } else if (router.asPath.includes("story")) {
         setActive("story");
@@ -41,57 +44,63 @@ const HeaderActions: FC<HeaderProps> = observer(
 
     return (
       <div className={styles.header__actions}>
-        <Link href='/sleeping'>
-          <div
-            className={cn(
-              styles.header__menu,
-              active == "sleeping" && styles.header__active
-            )}
-          >
-            {/* <span>Menu</span>
+        {active !== "" && (
+          <Link href="/sleeping">
+            <div
+              className={cn(
+                styles.header__menu,
+                active == "sleeping" && styles.header__active
+              )}
+            >
+              {/* <span>Menu</span>
 				<span>Menu</span> */}
-            Journey
-          </div>
-        </Link>
-        <Link href='/story'>
-          <div
-            className={cn(
-              styles.header__menu,
-              active == "story" && styles.header__active
-            )}
-          >
-            {/* <span>Menu</span>
+              Journey
+            </div>
+          </Link>
+        )}
+        {active !== "" && (
+          <Link href="/story">
+            <div
+              className={cn(
+                styles.header__menu,
+                active == "story" && styles.header__active
+              )}
+            >
+              {/* <span>Menu</span>
 				<span>Menu</span> */}
-            Story
-          </div>
-        </Link>
+              Story
+            </div>
+          </Link>
+        )}
         <Social routerPath={routerPath} />
-        <div
-          className={cn(
-            styles.header__connect,
-            "_btn",
-            !disabledConnectBtn && "_doubleFonts",
-            routerPath === "awake" && "_btn_awake",
-            routerPath === "terminal" && "_btn_terminal"
-          )}
-          onClick={clickHandler}
-        >
-          {disabledConnectBtn ? (
-            <span className={styles.header__eye}>
-              <Image src={eye} alt="eye icon" width={32} height={32} />
-            </span>
-          ) : !address ? (
-            <>
-              <span>Connect Wallet</span>
-              <span>Connect Wallet</span>
-            </>
-          ) : (
-            <>
-              <span>{maskAddress(address)}</span>
-              <span>Disconnect</span>
-            </>
-          )}
-        </div>
+        {active !== "" && (
+          <div
+            className={cn(
+              styles.header__connect,
+              "_btn",
+              !disabledConnectBtn && "_doubleFonts",
+              routerPath === "awake" && "_btn_awake",
+              routerPath === "terminal" && "_btn_terminal"
+            )}
+            onClick={clickHandler}
+          >
+            {disabledConnectBtn ? (
+              <span className={styles.header__eye}>
+                <Image src={eye} alt="eye icon" width={32} height={32} />
+              </span>
+            ) : !address ? (
+              <>
+                <span>Connect Wallet</span>
+                <span>Connect Wallet</span>
+              </>
+            ) : (
+              <>
+                <span>{maskAddress(address)}</span>
+                <span>Disconnect</span>
+              </>
+            )}
+          </div>
+        )}
       </div>
     );
   }

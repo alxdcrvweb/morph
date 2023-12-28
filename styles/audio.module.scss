@@ -46,20 +46,20 @@
 			@media (any-hover: hover) {
 				&:hover {
 					path {
-						stroke: rgb(151, 32, 31);
+						stroke: white
 					}
 				}
 			}
 		}
 		&.audio_active {
 			path {
-				stroke: rgb(151, 32, 31);
+				stroke: white
 			}
 			svg {
 				@media (any-hover: hover) {
 					&:hover {
 						path {
-							stroke: rgb(151, 32, 31);
+							stroke: rgb(111, 40, 64);
 						}
 					}
 				}
@@ -79,7 +79,7 @@
 		}
 		&.audio_active {
 			path {
-				stroke: rgb(111, 40, 64);
+				stroke: white
 			}
 			svg {
 				@media (any-hover: hover) {
