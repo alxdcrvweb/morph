@@ -31,7 +31,7 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
 				</li>
 				<li>
 					<a
-						href="https://discord.gg/TvqWRqdW5B"
+						href="https://discord.gg/WukVVsAqTy"
 						target={'_blank'}
 						rel="noreferrer"
 						className={cn(
