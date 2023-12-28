@@ -47,7 +47,7 @@ const ChoseArt: FC<FirstAwakeArtProps> = () => {
       setActive("");
     }
   }, [currentPos]);
-  console.log(active);
+  // console.log(active);
   return (
     <div
       className={cn(styles.awake__art, styles.awake__art_1)}
