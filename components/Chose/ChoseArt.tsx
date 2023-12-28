@@ -19,16 +19,20 @@ interface FirstAwakeArtProps {
 }
 
 const ChoseArt: FC<FirstAwakeArtProps> = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { width } = useWindowDimensions();
   const [currentPos, setCurrentPos] = useState(0);
+  const [opacity, setOpacity] = useState(1);
   const [active, setActive] = useState("");
-  const ref = useRef() as any
+  const ref = useRef() as any;
   useEffect(() => {
     if (width) {
       setCurrentPos(width / 2);
     }
   }, [width]);
+  useEffect(() => {
+    setOpacity(0);
+  }, []);
   useEffect(() => {
     const precent = (width / 100) * 30;
     const choseLeft = precent;
@@ -53,7 +57,6 @@ const ChoseArt: FC<FirstAwakeArtProps> = () => {
       onClick={(e) => {
         console.log(ref);
         if (active == "sleep") {
-          
           // ref.current.scrollTo({ top: 0, behavior: 'smooth' });
           router.push("/sleeping");
         } else if (active == "awake") {
@@ -62,6 +65,10 @@ const ChoseArt: FC<FirstAwakeArtProps> = () => {
         }
       }}
     >
+      <div
+        className={styles.bg}
+        style={{ opacity: opacity, transition: "2500ms ease-out opacity" }}
+      />
       <img
         src={background}
         className={"paralaxItem"}
@@ -133,7 +140,7 @@ const ChoseArt: FC<FirstAwakeArtProps> = () => {
 					<img src={droid} alt="droid" />
 				</div>
 			</div> */}
-     
+
       <ChoseFooter active={active} />
     </div>
   );

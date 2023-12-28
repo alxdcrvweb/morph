@@ -46,7 +46,7 @@ const FirstSleepingArt: FC<FirstSleepingArtProps> = (({ circle1Ref, circle2Ref, 
 
 	return (
 		<div className={cn(styles.sleeping__art, styles.sleeping__art_1)}>
-			<img src={background} className={'paralaxItem'} data-speed='2' alt="background" />
+			<img src={background} className={'paralaxItem'} data-speed='2' alt="background"  />
 			<img src={fireflies} className={'paralaxItem'} data-speed='2' alt="fireflies" />
 			<img src={city} className={'paralaxItem'} data-speed='2' alt="city" />
 			<img src={art} className={'paralaxItem'} data-speed='3' alt="art" />
