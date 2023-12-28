@@ -52,8 +52,8 @@ const HeaderActions: FC<HeaderProps> = observer(
                 active == "sleeping" && styles.header__active
               )}
             >
-              {/* <span>Menu</span>
-				<span>Menu</span> */}
+              {/* <span>Journey</span>
+				<span>Journey</span> */}
               Journey
             </div>
           </Link>
