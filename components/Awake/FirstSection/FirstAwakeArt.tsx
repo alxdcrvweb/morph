@@ -40,22 +40,22 @@ const FirstAwakeArt: FC<FirstAwakeArtProps> = (({ circle1Ref, circle2Ref, circle
 
 	return (
 		<div className={cn(styles.awake__art, styles.awake__art_1)}>
-			<img src={background} className={'paralaxItem'} data-speed='2' alt="background" />
+			<img src={background} className={'paralaxItem'} data-speed='0' alt="background" />
 			<img src={fireflies} className={'paralaxItem'} data-speed='2' alt="fireflies" />
 			<img src={art} className={'paralaxItem'} data-speed='3' alt="art" />
 			<img src={neonArt05} className={'paralaxItem'} data-speed='3' alt="neonArt05" />
 			<AwakeEye />
-			<img src={neonArt01} className={cn('paralaxItem', styles.awake__pulse_1)} data-speed='3' alt="neonArt01" />
-			<img src={neonArt02} className={cn('paralaxItem', styles.awake__pulse_2)} data-speed='3' alt="neonArt02" />
-			<img src={neonArt03} className={cn('paralaxItem', styles.awake__pulse_3)} data-speed='3' alt="neonArt03" />
-			<img src={neonArt04} className={cn('paralaxItem', styles.awake__pulse_4)} data-speed='3' alt="neonArt04" />
+			{/*<img src={neonArt01} className={cn('paralaxItem', styles.awake__pulse_1)} data-speed='3' alt="neonArt01" />*/}
+			{/*<img src={neonArt02} className={cn('paralaxItem', styles.awake__pulse_2)} data-speed='3' alt="neonArt02" />*/}
+			{/*<img src={neonArt03} className={cn('paralaxItem', styles.awake__pulse_3)} data-speed='3' alt="neonArt03" />*/}
+			{/*<img src={neonArt04} className={cn('paralaxItem', styles.awake__pulse_4)} data-speed='3' alt="neonArt04" />*/}
 			<img src={track} className={cn('paralaxItem', styles.awake__pulse_5)} data-speed='3' alt="track" />
-			<img src={neon01} className={'paralaxItem'} data-speed='2' alt="neon01" />
-			<img src={neon02} className={'paralaxItem'} data-speed='2' alt="neon02" />
-			<img src={neon03} className={'paralaxItem'} data-speed='2' alt="neon03" />
+			{/*<img src={neon01} className={'paralaxItem'} data-speed='2' alt="neon01" />*/}
+			{/*<img src={neon02} className={'paralaxItem'} data-speed='2' alt="neon02" />*/}
+			{/*<img src={neon03} className={'paralaxItem'} data-speed='2' alt="neon03" />*/}
 			<img src={city} className={'paralaxItem'} data-speed='2' alt="city" />
 			<img src={girl} className={'paralaxItem'} data-speed='3' alt="girl" />
-			<img src={wheels} className={cn('paralaxItem', styles.awake__pulse_6)} data-speed='3' alt="wheels" />
+			{/*<img src={wheels} className={cn('paralaxItem', styles.awake__pulse_6)} data-speed='3' alt="wheels" />*/}
 			<img src={noise} alt="noise" />
 			<div className={cn('paralaxItem', styles.awake__droid)} data-speed='3' >
 				<div className={styles.awake__animateDroid}>
