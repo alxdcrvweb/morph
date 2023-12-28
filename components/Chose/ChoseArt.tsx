@@ -28,6 +28,8 @@ const ChoseArt: FC<FirstAwakeArtProps> = () => {
   useEffect(() => {
     if (width) {
       setCurrentPos(width / 2);
+    } if(width<600) {
+      router.push("/sleeping")
     }
   }, [width]);
   useEffect(() => {
