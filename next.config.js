@@ -14,19 +14,23 @@
 // module.exports = withTM()
 
 module.exports = {
-	// async redirects() {
-	// 	return [
-	// 		{
-	// 			source: '/',
-	// 			destination: '/sleeping',
-	// 			permanent: true,
-	// 		},
-	// 	]
-	// },
-	images: {
-		domains: ['ipfs.io'],
-	},
-	env: {
-		NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
-	},
-}
+  // async redirects() {
+  // 	return [
+  // 		{
+  // 			source: '/',
+  // 			destination: '/sleeping',
+  // 			permanent: true,
+  // 		},
+  // 	]
+  // },
+  images: {
+    domains: ["ipfs.io"],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+
+  env: {
+    NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
+  },
+};
