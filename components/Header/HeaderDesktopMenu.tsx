@@ -13,7 +13,7 @@ const HeaderDesktopMenu: FC<HeaderMenuProps> = ({ closeMenuHandler }) => {
 
 	const menuList = [
 		{ text: 'Journey', link: '/sleeping', id: 1 },
-		{ text: 'StoRy', link: '/story', id: 2 },
+		{ text: 'Story', link: '/story', id: 2 },
 	]
 
 	return (

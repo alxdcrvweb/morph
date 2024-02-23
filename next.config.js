@@ -26,7 +26,7 @@ module.exports = {
 	images: {
 		domains: ['ipfs.io'],
 	},
-	// env: {
-	// 	NEXT_GA_ID: 'G-SCDZ2W05BW',
-	// },
+	env: {
+		NEYNAR_API_KEY: process.env.NEYNAR_API_KEY,
+	},
 }

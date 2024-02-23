@@ -1,0 +1,42 @@
+.mint__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../../public/mintbg.png");
+  color: white;
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+.mint__date {
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 950;
+  margin-bottom: 10px;
+  font-style: italic;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+.mint__text {
+  font-size: 20px;
+  letter-spacing: 3px;
+  font-weight: 400;
+  max-width: 610px;
+  text-align: center;
+  line-height: 24.37px;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    line-height: 20px;
+    max-width: 380px;
+  }
+}
+.mint__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

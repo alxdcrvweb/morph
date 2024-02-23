@@ -44,6 +44,7 @@
     flex-direction: column;
     justify-content: flex-start;
     overflow: hidden;
+    color: #fff;
     font-family: "Moderat";
     span {
       flex: 0 0 20px;
@@ -73,6 +74,19 @@
   &__eye {
     transform-origin: center;
     animation: rotateEye 3s infinite linear;
+  }
+}
+.wrapcast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "DMSans-Semibold";
+  img {
+    margin-right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+    object-fit: cover;
   }
 }
 .headerBurger {

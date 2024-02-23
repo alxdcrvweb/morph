@@ -13,27 +13,21 @@ import Link from "next/link";
 
 interface HeaderProps {
   routerPath: string;
-  openMenuHandler: () => void;
+  active: string;
 }
 
 const HeaderActions: FC<HeaderProps> = observer(
-  ({ routerPath, openMenuHandler }) => {
+  ({ routerPath, active }) => {
     const router = useRouter();
-    const { address, disconnectWallet, disabledConnectBtn, connectWallet } =
-      useInjection(UserStore);
-    const [active, setActive] = useState("");
+    const {
+      address,
+      disconnectWallet,
+      disabledConnectBtn,
+      connectWallet,
+      warpcasterUser,
+    } = useInjection(UserStore);
     console.log(" HeaderActions routerPath", routerPath);
-    useEffect(() => {
-      console.log(router.asPath);
-      if (
-        router.asPath.includes("sleeping") ||
-        router.asPath.includes("awake")
-      ) {
-        setActive("sleeping");
-      } else if (router.asPath.includes("story")) {
-        setActive("story");
-      }
-    }, [router.asPath]);
+
     const clickHandler = () => {
       if (address) {
         disconnectWallet();
@@ -45,11 +39,24 @@ const HeaderActions: FC<HeaderProps> = observer(
     return (
       <div className={styles.header__actions}>
         {active !== "" && (
+          <a href="https://warpcast.com/~/channel/morpheus" target="_blank" >
+            <div
+              className={cn(
+                styles.header__menu,
+              )}
+            >
+              {/* <span>Journey</span>
+				<span>Journey</span> */}
+              Warpcast
+            </div>
+          </a>
+        )}
+        {active !== "" && (
           <Link href="/sleeping">
             <div
               className={cn(
                 styles.header__menu,
-                active == "sleeping" && styles.header__active
+                active == "active" && styles.header__active
               )}
             >
               {/* <span>Journey</span>
@@ -72,8 +79,8 @@ const HeaderActions: FC<HeaderProps> = observer(
             </div>
           </Link>
         )}
-        <Social routerPath={routerPath} />
-        {active !== "" && (
+        {active !== "mint" && <Social routerPath={routerPath} />}
+        {/* {active !== "" && (
           <div
             className={cn(
               styles.header__connect,
@@ -99,6 +106,11 @@ const HeaderActions: FC<HeaderProps> = observer(
                 <span>Disconnect</span>
               </>
             )}
+          </div>
+        )} */}
+        {warpcasterUser && active !== "" && (
+          <div className={styles.wrapcast}>
+            <img src={warpcasterUser?.pfp_url} />@{warpcasterUser?.display_name}
           </div>
         )}
       </div>

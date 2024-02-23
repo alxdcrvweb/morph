@@ -6,15 +6,22 @@
 // 	font-weight: 400;
 // 	font-style: normal;
 // }
-
-// @font-face {
-// 	font-family: "DestruidoInterior";
-// 	font-display: swap;
-// 	src: url("/fonts/DestruidoInterior/DestruidoInterior.woff2") format("woff2"),
-// 		url("/fonts/DestruidoInterior/DestruidoInterior.woff") format("woff");
-// 	font-weight: 200;
-// 	font-style: normal;
-// }
+@font-face {
+	font-family: "DMSans-Semibold";
+	font-display: swap;
+	src: url("/fonts/DMSansSemiBold/DMSans-SemiBold.woff2") format("woff2"),
+		url("/fonts/DMSansSemiBold/DMSans-SemiBold.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+}
+@font-face {
+	font-family: "DMSans";
+	font-display: swap;
+	src: url("/fonts/DMSans/DMSans-Regular.woff2") format("woff2"),
+		url("/fonts/DMSans/DMSans-Regular.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+}
 @font-face {
 	font-family: "ApocLC";
 	font-display: swap;

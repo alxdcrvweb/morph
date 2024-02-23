@@ -20,6 +20,7 @@
 		"@types/store": "^2.0.2",
 		"@types/three": "^0.135.0",
 		"axios": "^0.24.0",
+		"base-64": "^1.0.0",
 		"bignumber.js": "^9.0.2",
 		"defer-promise": "^2.0.1",
 		"ethers": "^5.5.2",

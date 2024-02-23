@@ -13,15 +13,15 @@ const Story: NextPage = observer(() => {
 
 	const { address, web3, connectWallet } = useInjection(UserStore)
 
-	useEffect(() => {
-		if (!address || !web3) {
-			connectWallet()
-		}
-	}, [])
+	// useEffect(() => {
+	// 	if (!address || !web3) {
+	// 		connectWallet()
+	// 	}
+	// }, [])
 
 	return (
 		<section className={styles.story}>
-			{!address && !web3 ? <StoryConnect /> : <StorySlider />}
+			{<StorySlider />}
 		</section>
 	);
 })
