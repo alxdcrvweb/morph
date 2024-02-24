@@ -5,12 +5,16 @@ import HeaderActions from "./HeaderActions";
 import HeaderMenu from "./HeaderMenu";
 import cn from "classnames";
 import { useRouter } from "next/router";
+import { useInjection } from "inversify-react";
+import { UserStore } from "../../stores/UserStore";
+import Social from "../Social";
+import { observer } from "mobx-react";
 
 interface HeaderProps {
   routerPath: string;
 }
 
-const Header: FC<HeaderProps> = ({ routerPath }) => {
+const Header: FC<HeaderProps> = observer(({ routerPath }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
   const [active, setActive] = useState("");
@@ -31,16 +35,27 @@ const Header: FC<HeaderProps> = ({ routerPath }) => {
   const closeMenuHandler = () => {
     setOpenMenu(false);
   };
-
+  const { warpcasterUser } = useInjection(UserStore);
   return (
     <header className={styles.header}>
       <div className={styles.header__line}>
-        <AudioPlayer routerPath={routerPath} />
-        <HeaderActions
-          active={active}
-          routerPath={routerPath}
-          openMenuHandler={openMenuHandler}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {active == "active" && <AudioPlayer routerPath={routerPath} />}
+          <HeaderActions
+            active={active}
+            routerPath={routerPath}
+            // openMenuHandler={openMenuHandler}
+          />
+        </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {active !== "mint" && <Social routerPath={routerPath} />}
+          {warpcasterUser && active !== "" && (
+            <div className={styles.wrapcast}>
+              <img src={warpcasterUser?.pfp_url} />@
+              {warpcasterUser?.display_name}
+            </div>
+          )}
+        </div>
       </div>
       {active == "active" && (
         <div
@@ -68,7 +83,7 @@ const Header: FC<HeaderProps> = ({ routerPath }) => {
       />
     </header>
   );
-};
+});
 
 export default Header;
 

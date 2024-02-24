@@ -17,7 +17,7 @@ const StepTitle = () => {
     <div className={styles.firstStep__title}>
       {"MORPHEUS".split("").map((letter, index) => {
         const classList =
-          index === firstDigi || index === secondDigi ? "nostra" : "";
+          index === firstDigi || index === secondDigi ? "nostra" : "apocLight";
         return (
           <span key={letter} className={classList}>
             {letter}

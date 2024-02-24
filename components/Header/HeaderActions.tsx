@@ -79,7 +79,7 @@ const HeaderActions: FC<HeaderProps> = observer(
             </div>
           </Link>
         )}
-        {active !== "mint" && <Social routerPath={routerPath} />}
+        
         {/* {active !== "" && (
           <div
             className={cn(
@@ -108,11 +108,7 @@ const HeaderActions: FC<HeaderProps> = observer(
             )}
           </div>
         )} */}
-        {warpcasterUser && active !== "" && (
-          <div className={styles.wrapcast}>
-            <img src={warpcasterUser?.pfp_url} />@{warpcasterUser?.display_name}
-          </div>
-        )}
+       
       </div>
     );
   }
