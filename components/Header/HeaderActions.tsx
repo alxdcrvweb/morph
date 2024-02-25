@@ -79,7 +79,20 @@ const HeaderActions: FC<HeaderProps> = observer(
             </div>
           </Link>
         )}
-        
+        {active !== "" && (
+          <Link href="/mint">
+            <div
+              className={cn(
+                styles.header__menu,
+                active == "mint" && styles.header__active
+              )}
+            >
+              {/* <span>Menu</span>
+				<span>Menu</span> */}
+              Mint
+            </div>
+          </Link>
+        )}
         {/* {active !== "" && (
           <div
             className={cn(

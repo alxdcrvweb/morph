@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Waiting from "../../components/Mint/waiting";
+import Waiting from "../../components/Mint/mint";
 import axios from "axios";
 import { useEffect } from "react";
 import Mint from "./index";

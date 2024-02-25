@@ -22,6 +22,15 @@
     font-size: 12px;
   }
 }
+.mint__second__layer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  top: 0;
+  z-index: -1;
+  opacity: 0.6;
+}
 .mint__button {
   width: 178.18px;
   height: 49px;

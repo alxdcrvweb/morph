@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./mint.module.scss";
 import StepTitle from "../FirstSection/Title";
 import { observer } from "mobx-react";
@@ -6,14 +6,25 @@ import { useInjection } from "inversify-react";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import Timer from "./timer";
-
-const Waiting = observer(() => {
-  const mintStore = useInjection(ModalStore)
+export const timeToMint = Date.parse("2024-02-27 19:00:00 GMT+0100");
+const Mint = observer(() => {
+  const [timerEnd, setTimerEnd] = useState<number>(0);
+  const mintStore = useInjection(ModalStore);
   const openMintModal = () => {
-    mintStore.showModal(ModalsEnum.Mint)
+    mintStore.showModal(ModalsEnum.Mint);
   };
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setTimerEnd(timeToMint - Date.parse(new Date().toString()));
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  console.log(timerEnd);
   return (
     <div className={style.mint__main}>
+      <img className={style.mint__second__layer} src="/mintSecondLayer.png" />
       <div className={style.mint__top}>
         <svg
           width="57"
@@ -30,7 +41,7 @@ const Waiting = observer(() => {
           />
         </svg>
 
-        <Timer />
+        {timerEnd > 0 ? <Timer /> : <StepTitle />}
       </div>
       <div
         style={{
@@ -39,9 +50,11 @@ const Waiting = observer(() => {
           alignItems: "center",
         }}
       >
-        {/* <button className={style.mint__button} onClick={openMintModal}>
-          Mint
-        </button> */}
+        {timerEnd < 0 && (
+          <button className={style.mint__button} onClick={openMintModal}>
+            Mint
+          </button>
+        )}
         <div className={style.mint__text}>
           Hand drawn, Farcaster native collection focused on world building and
           immersive experience
@@ -50,4 +63,4 @@ const Waiting = observer(() => {
     </div>
   );
 });
-export default Waiting;
+export default Mint;

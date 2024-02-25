@@ -1,10 +1,10 @@
-import Waiting from "../../components/Mint/waiting";
+import Mint from "../../components/Mint/mint";
 
-const Mint = () => {
+const MintPage = () => {
   return (
     <div>
-      <Waiting />
+      <Mint />
     </div>
   );
 };
-export default Mint;
+export default MintPage;
