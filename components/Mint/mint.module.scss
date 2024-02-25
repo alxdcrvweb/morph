@@ -22,6 +22,20 @@
     font-size: 12px;
   }
 }
+.mint__button {
+  width: 178.18px;
+  height: 49px;
+  border-radius: 111px;
+  border: 1px solid #6df6ff;
+  background-color: rgba(109, 246, 255, 0.1);
+  color: #FFFFFF;
+  font-size: 18px;
+  font-family: "DMSans";
+  margin-bottom: 30px;
+  &:hover {
+    background-color: rgba(109, 246, 255, 0.4);
+  }
+}
 .mint__text {
   font-size: 18px;
   letter-spacing: 1px;
@@ -30,8 +44,7 @@
   text-align: center;
   line-height: 24.37px;
   @media (max-width: 768px) {
-    font-size: 12px;
-    line-height: 20px;
+    line-height: 25px;
     max-width: 380px;
   }
 }

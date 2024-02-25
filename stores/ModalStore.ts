@@ -1,32 +1,42 @@
-import { action, makeObservable, observable } from "mobx";
-import { RootStore } from "./RootStore";
 import { injectable } from "inversify";
+import { RootStore } from "./RootStore";
+import { action, makeObservable, observable } from "mobx";
+import { ModalsEnum } from "../modals";
 
-export enum Modals {
-	_,
-	Connect,
-	Pool,
-	Migrate,
-	Token,
+
+
+
+export interface ModalEntry {
+    key: ModalsEnum;
+    data?: any;
 }
 
-export const PERSISTENT_MODALS = [];
+
 
 @injectable()
 export class ModalStore {
-	@observable activeModal?: Modals;
-	@observable tempStorage?: any;
+    @observable activeModals: ModalEntry[] = [];
 
-	public constructor(protected rootStore: RootStore) {
-		makeObservable(this);
-	}
+    constructor(private readonly rootStore: RootStore) {
+        makeObservable(this);
+    }
 
-	@action showModal(modal: Modals, data?: any) {
-		this.activeModal = modal;
-		this.tempStorage = data;
-	}
 
-	@action hideModals() {
-		this.activeModal = undefined;
-	}
+    @action showModal = (key: ModalsEnum, data?: any) => {
+        console.log('key', key);
+        this.activeModals.push({ key, data });
+        console.log(this.activeModals)
+    }
+
+    isVisible = (key: ModalsEnum) => {
+        return this.activeModals.some(m => m.key === key);
+    }
+
+    @action hideModal = (idx: number) => {
+        this.activeModals = this.activeModals.filter((m, i) => i !== idx);
+    }
+
+    @action hideAllModals = () => {
+        this.activeModals = [];
+    }
 }

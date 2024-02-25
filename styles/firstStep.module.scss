@@ -1,7 +1,15 @@
 @import "./mixins";
 @import "./variables";
 @import "./keyframes";
-
+.small__title {
+	@include adaptiv-value("font-size", 56, 20, 1);
+	line-height: 136%;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	font-weight: 400;
+	text-shadow: rgb(176, 176, 176) 1px 0 10px;
+	margin-bottom: 20px;
+}
 .firstStep {
 	pointer-events: none;
 	position: absolute;
@@ -32,6 +40,24 @@
 		text-transform: uppercase;
 		font-weight: 400;
 		text-shadow: rgb(176, 176, 176) 1px 0 10px;
+	}
+	&__timer {
+		font-size: 95px;
+		line-height: 136%;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		font-weight: 400;
+		text-shadow: rgb(176, 176, 176) 1px 0 1px;
+		font-style: italic;
+		font-family: "ApocLCLight";
+		width: 500px;
+		line-height: 130px;
+		@media (max-width:600px) {
+			font-size: 64.2px;
+			width: 345px;
+			margin-top: 15px;
+			line-height: 90px;
+		}
 	}
 	//  .firstStep__subtitle
 	&__subtitle {
