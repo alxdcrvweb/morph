@@ -27,11 +27,6 @@ export default function MainLayout({ children }: MyHead) {
   const routerPathName = router.asPath.split("/")[1];
   const mainRef = useRef(null);
   const userStore = useInjection(Web3Store);
-  useEffect(() => {
-    if (userStore) {
-      userStore.initialConnect();
-    }
-  }, [userStore]);
   const getUserById = async (id: string | null) => {
     try {
       const response = await axios.get(

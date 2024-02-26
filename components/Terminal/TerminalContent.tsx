@@ -15,7 +15,7 @@ import TerminalModal from './TerminalModal';
 const TerminalContent: FC = observer(() => {
 
 
-	const { loader, attention, web3, provider, congratsText, congratsTitle, connectWallet, checkNetwork, pausedMint, warningModal, mint, disabledInput } = useInjection(Web3Store)
+	const { loader, attention, web3, provider, congratsText, congratsTitle, pausedMint, warningModal, mint, disabledInput } = useInjection(Web3Store)
 
 	const [inputValue, setInputValue] = useState('');
 	const [hover, setHover] = useState(false);
@@ -23,27 +23,16 @@ const TerminalContent: FC = observer(() => {
 
 	//@ts-ignore
 	useEffect(async () => {
-		await checkNetwork()
+		// await checkNetwork()
 		// paused()
 	}, [web3, provider])
 
 
 
-	const mouseEnterHandler = () => {
-		setHover(true)
-	}
-	const mouseLeaveHandler = () => {
-		setHover(false)
-	}
-
-	const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		setInputValue(e.target.value)
-	}
-
 
 	return (
 		<>
-			<form className={styles.terminal__content} onSubmit={mintHandler}>
+			<form className={styles.terminal__content}>
 				{/* {!web3 && <TerminalConnect hover={hover} connectWallet={connectWallet} />}
 				{pausedMint ?
 					<TerminalCongrats /> :

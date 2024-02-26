@@ -2,7 +2,7 @@ import { injectable } from "inversify";
 import { RootStore } from "./RootStore";
 import { action, makeObservable, observable } from "mobx";
 import { ModalsEnum } from "../modals";
-
+import "reflect-metadata";
 
 
 

@@ -19,20 +19,16 @@ interface HeaderProps {
 const HeaderActions: FC<HeaderProps> = observer(
   ({ routerPath, active }) => {
     const router = useRouter();
-    const {
-      address,
-      disconnectWallet,
-      connectWallet,
-    } = useInjection(Web3Store);
+
     console.log(" HeaderActions routerPath", routerPath);
 
-    const clickHandler = () => {
-      if (address) {
-        disconnectWallet();
-      } else {
-        connectWallet();
-      }
-    };
+    // const clickHandler = () => {
+    //   if (address) {
+    //     disconnectWallet();
+    //   } else {
+    //     connectWallet();
+    //   }
+    // };
 
     return (
       <div className={styles.header__actions}>

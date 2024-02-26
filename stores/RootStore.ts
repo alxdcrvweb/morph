@@ -3,7 +3,7 @@ import { ModalStore } from "./ModalStore";
 import { useMemo } from "react";
 import { Web3Store } from "./Web3Store";
 // import {WalletStore} from "./WalletStore";
-
+import "reflect-metadata";
 // @ts-ignore
 export class HistoryStore implements History {}
 export class RootStore {

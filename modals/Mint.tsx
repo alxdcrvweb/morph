@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { fromWeiToEth } from "../utils/utilities";
 import classNames from "classnames";
 import { toast } from "react-toastify";
+import ConnectButtonCustom from "../components/Header/connectButtonCustom";
 
 interface modalProps {
   data?: any;
@@ -180,12 +181,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 Mint
               </button>
             ) : (
-              <button
-                className={styles.modal__mint__button}
-                onClick={() => web3Store.connectWallet()}
-              >
-                Connect Wallet
-              </button>
+              <ConnectButtonCustom/>
             )}
             <div className={styles.modal__mint__roadmap}>
               Learn more about our Roadmap

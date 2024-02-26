@@ -1,13 +1,13 @@
 import { injectable } from "inversify";
-import { makeObservable, observable } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import "reflect-metadata";
 import Web3 from "web3";
 import { RootStore } from "./RootStore";
 import Web3Modal from "web3modal";
 import { chainId, netId, netName } from "../config/config";
-import axios from "axios";
+import { WalletClient } from "wagmi";
 import { mintAbi, mintContract } from "../utils/contracts/mint";
-import { Contract } from "web3-eth-contract";
+
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { isMobile } from "react-device-detect";
 interface User {
@@ -35,73 +35,62 @@ export class Web3Store {
   @observable warpcasterUser?: any = undefined;
   @observable congratsText: string = "";
   @observable congratsTitle: string = "";
-  @observable contract?: Contract = undefined;
+  @observable signer?: WalletClient | null = undefined;
+  @observable contract?: any = undefined;
+  @observable connected: boolean = false;
+  @observable unsupported?: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-
-  connectWallet = async () => {
-    console.log("button1");
-    // if (this.disabledConnectBtn) return;
-    // this.disabledConnectBtn = true;
-    if (!this.web3Modal) {
-      console.log("button2");
-      this.web3Modal = new Web3Modal({
-        cacheProvider: true,
-        providerOptions: {
-          walletconnect: {
-            package: WalletConnectProvider, // required
-            options: isMobile
-              ? {
-                  chainId: 97,
-                  rpc: {
-                    97: "https://bsc-testnet.publicnode.com",
-                  },
-                }
-              : {},
-          },
-        },
-      });
-      console.log("button3");
-      try {
-        const prov = await this.web3Modal.connect();
-        console.log("connectWallet", prov);
-        const w3 = new Web3(prov);
-        console.log("button4");
-        this.address = prov.selectedAddress || prov.address;
-        this.web3 = w3;
-        this.disabledConnectBtn = false;
-        this.disabledInput = false;
-        this.contract = new this.web3.eth.Contract(
-          mintAbi as any,
-          mintContract
-        );
-        console.log("button5");
-        prov.on("chainChanged", () => {
-          this.checkNetwork();
-        });
-        // this.getTokens()
-      } catch (e) {
-        console.log("Could not get a wallet connection", e);
-        this.congratsText = "Something went wrong, please try again";
-        this.congratsTitle = "";
-        this.attention = true;
-        this.disabledConnectBtn = false;
-        return;
-      }
+  setSigner = (signer?: WalletClient | null, unsupported?: boolean) => {
+    this.signer = signer;
+    this.unsupported = unsupported;
+    console.log(signer, "CONNECT");
+    if (signer) {
+      // this.checked = true;
+      console.log("CONNECT");
+      this.signer && console.log(this.signer.transport);
+      this.web3 = new Web3(
+        window.ethereum || "https://bsc-testnet.publicnode.com" 
+      );
+      this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
   };
-  disableMintScreen = (status: boolean) => {
-    this.disableScreen = status;
-  };
-  initialConnect = () => {
+
+  @action getBalance = async () => {
     try {
-      const w3 = new Web3("https://bsc-testnet.publicnode.com");
-      this.contract = new w3.eth.Contract(mintAbi as any, mintContract);
+      
     } catch (e) {
       console.log(e);
     }
+
+    // this.getAllowance();
   };
+  setConnected = (connected: boolean) => {
+    this.connected = connected;
+    console.log("INITTTTTTT");
+    this.web3 = new Web3(window.ethereum || "https://bsc-testnet.publicnode.com");
+    this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
+  };
+  @action setAddress = (user: any) => {
+    this.address = user.address;
+  };
+
+  disconnected = () => {
+    this.address = null;
+  };
+  
+  disableMintScreen = (status: boolean) => {
+    this.disableScreen = status;
+  };
+  // initialConnect = () => {
+  //   try {
+  //     const w3 = new Web3("https://bsc-testnet.publicnode.com");
+  //     this.contract = new w3.eth.Contract(mintAbi as any, mintContract);
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
   setWarpcasterUser = (user: any) => {
     // console.log(user);
     if (user?.users?.length > 0) {
@@ -114,36 +103,6 @@ export class Web3Store {
     this.address = null;
     this.web3 = null;
     this.disabledInput = true;
-  };
-
-  checkNetwork = async () => {
-    if (!this?.provider) {
-      return;
-    }
-    if (this?.provider?.chainId === chainId) {
-      console.log(
-        "this?.provider && this?.provider?.chainId === chainId",
-        this?.provider && this?.provider?.chainId === chainId
-      );
-      this.disabledInput = false;
-      return;
-    }
-    this.disabledInput = true;
-    this.congratsText = "Please change the network to " + netName;
-    this.congratsTitle = "";
-    this.attention = true;
-    try {
-      const res = await window.ethereum.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId: chainId }], // chainId must be in hexadecimal numbers
-      });
-      console.log("checkNetwork res res");
-      this.disabledInput = false;
-      return true;
-    } catch (err) {
-      console.error("swith net error", err);
-      return false;
-    }
   };
 
   mint = async (amount: number, price: number) => {
