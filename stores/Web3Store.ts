@@ -45,6 +45,7 @@ export class Web3Store {
     // if (this.disabledConnectBtn) return;
     // this.disabledConnectBtn = true;
     if (!this.web3Modal) {
+      console.log("button2");
       this.web3Modal = new Web3Modal({
         cacheProvider: true,
         providerOptions: {
@@ -63,10 +64,12 @@ export class Web3Store {
           },
         },
       });
+      console.log("button3");
       try {
         const prov = await this.web3Modal.connect();
         console.log("connectWallet", prov);
         const w3 = new Web3(prov);
+        console.log("button4");
         this.address = prov.selectedAddress || prov.address;
         this.web3 = w3;
         this.disabledConnectBtn = false;
@@ -75,6 +78,7 @@ export class Web3Store {
           mintAbi as any,
           mintContract
         );
+        console.log("button5");
         prov.on("chainChanged", () => {
           this.checkNetwork();
         });
