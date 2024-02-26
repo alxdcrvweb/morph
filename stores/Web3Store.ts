@@ -8,7 +8,8 @@ import { chainId, netId, netName } from "../config/config";
 import axios from "axios";
 import { mintAbi, mintContract } from "../utils/contracts/mint";
 import { Contract } from "web3-eth-contract";
-import { fromWeiToEth } from "../utils/utilities";
+import WalletConnectProvider from "@walletconnect/mobile-registry";
+import { isMobile } from "react-device-detect";
 interface User {
   login: string;
   email: string;
@@ -40,42 +41,52 @@ export class Web3Store {
   }
 
   connectWallet = async () => {
-    if (this.disabledConnectBtn) return;
-    this.disabledConnectBtn = true;
-    const web3Modal = new Web3Modal({
-      cacheProvider: false, // optional
-      // providerOptions: {
-      // 	walletconnect: {
-      // 		package: WalletConnectProvider,
-      // 		options: {
-      // 			infuraId: INFURA_ID,
-      // 			chainId: 56,
-      // 		},
-      // 	},
-      // },
-      disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
-    });
-    this.web3Modal = web3Modal;
-    try {
-      const prov = await web3Modal.connect();
-      console.log("connectWallet", prov);
-      const w3 = new Web3(prov);
-      this.address = prov.selectedAddress || prov.address;
-      this.web3 = w3;
-      this.disabledConnectBtn = false;
-      this.disabledInput = false;
-      this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
-      prov.on("chainChanged", () => {
-        this.checkNetwork();
+    console.log("button1");
+    // if (this.disabledConnectBtn) return;
+    // this.disabledConnectBtn = true;
+    if (!this.web3Modal) {
+      this.web3Modal = new Web3Modal({
+        cacheProvider: true,
+        providerOptions: {
+          walletconnect: {
+            package: WalletConnectProvider, // required
+            options: isMobile
+              ? {
+                  infuraId: "f2a1029edc25430fa0aef509b40e099b",
+                  chainId: 137,
+                  rpc: {
+                    137: "https://polygon-rpc.com/",
+                    80001: "https://rpc-mumbai.matic.today",
+                  },
+                }
+              : {},
+          },
+        },
       });
-      // this.getTokens()
-    } catch (e) {
-      console.log("Could not get a wallet connection", e);
-      this.congratsText = "Something went wrong, please try again";
-      this.congratsTitle = "";
-      this.attention = true;
-      this.disabledConnectBtn = false;
-      return;
+      try {
+        const prov = await this.web3Modal.connect();
+        console.log("connectWallet", prov);
+        const w3 = new Web3(prov);
+        this.address = prov.selectedAddress || prov.address;
+        this.web3 = w3;
+        this.disabledConnectBtn = false;
+        this.disabledInput = false;
+        this.contract = new this.web3.eth.Contract(
+          mintAbi as any,
+          mintContract
+        );
+        prov.on("chainChanged", () => {
+          this.checkNetwork();
+        });
+        // this.getTokens()
+      } catch (e) {
+        console.log("Could not get a wallet connection", e);
+        this.congratsText = "Something went wrong, please try again";
+        this.congratsTitle = "";
+        this.attention = true;
+        this.disabledConnectBtn = false;
+        return;
+      }
     }
   };
   disableMintScreen = (status: boolean) => {
