@@ -27,13 +27,6 @@ const TerminalContent: FC = observer(() => {
 		// paused()
 	}, [web3, provider])
 
-	const mintHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		if (web3 && !disabledInput && inputValue !== '') {
-			mint(inputValue)
-			setInputValue('')
-		}
-	}
 
 
 	const mouseEnterHandler = () => {

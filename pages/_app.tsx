@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		  <ModalsContainer />
         </Provider>
       </AppLoader>
-      <ToastContainer theme="colored" />
+      <ToastContainer style={{zIndex:10000000}} theme="colored" />
     </>
   );
 }

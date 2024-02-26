@@ -137,8 +137,10 @@ export class Web3Store {
         value: price,
       });
       console.log(res);
+      return true
     } catch (error) {
       console.log(error);
+      return false
     }
   };
 }

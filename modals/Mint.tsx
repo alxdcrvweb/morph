@@ -9,6 +9,7 @@ import { Web3Store } from "../stores/Web3Store";
 import { useEffect, useState } from "react";
 import { fromWeiToEth } from "../utils/utilities";
 import classNames from "classnames";
+import { toast } from "react-toastify";
 
 interface modalProps {
   data?: any;
@@ -19,9 +20,10 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
   const web3Store = useInjection(Web3Store);
   const [amount, setAmount] = useState(1);
-  const [phase, setPhase] = useState('0');
+  const [phase, setPhase] = useState("0");
   const [price, setPrice] = useState(0);
   const [limit, setLimit] = useState(0);
+  const [available, setAvailable] = useState<any>(false);
   const getPhase = (phase: number) => {
     if (phase == 1) {
       return "First Phase";
@@ -32,13 +34,14 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
     if (phase == 3) {
       return "Third Phase";
     } else return "Phase 0";
-  }
+  };
   const checkInfo = async () => {
     try {
       const pr = await web3Store.contract!.methods.currentMintPrice().call();
       const mnt = await web3Store
         .contract!.methods.maxMintsForCurrentPhase()
         .call();
+
       const phase = await web3Store.contract!.methods.currentPhase().call();
       console.log(phase);
       setPhase(getPhase(phase));
@@ -53,12 +56,56 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
     checkInfo();
   }, []);
   const mint = () => {
-    web3Store.connectWallet().then(async () => {
-      await web3Store.mint(amount, price * amount * 10 ** 18).then(() => {
-        modalStore.hideAllModals();
-        modalStore.showModal(ModalsEnum.MintFinish);
+    web3Store
+      .connectWallet()
+      .then(async () => {
+        let limit = await web3Store
+          .contract!.methods.maxMintsForCurrentPhase()
+          .call();
+        let minted = await web3Store
+          .contract!.methods.amountMinted(web3Store.address)
+          .call();
+
+        let phase = await web3Store.contract!.methods.currentPhase().call();
+        if (minted == limit) {
+          toast.error(`You can't mint more than ${limit} in this phase`);
+          setAvailable("");
+          return;
+        }
+        if (amount > limit - minted) {
+          setAvailable("");
+          toast.error(`You can't mint more than ${limit} in this phase`);
+          return 
+        }
+        if (phase == 1) {
+          console.log("PHASE 1 VALIDATION");
+          let wlCheck = await web3Store
+            .contract!.methods.isWhitelisted(web3Store.address)
+            .call();
+          setAvailable(wlCheck);
+        } else if (phase == 2) {
+          console.log("PHASE 2 VALIDATION");
+          let phaseTwoCheck = await web3Store
+            .contract!.methods.isValidPhaseTwoMinter(web3Store.address)
+            .call();
+          setAvailable(phaseTwoCheck);
+        } else if (phase == 3) {
+          console.log("PHASE 3 VALIDATION");
+          setAvailable(true);
+        }
+      })
+      .then(async () => {
+        console.log("Available: ", available);
+        if (available == "") return;
+        if (!available)
+          return toast.error("You are not allowed to mint in this phase.");
+        
+        await web3Store.mint(amount, price * amount * 10 ** 18).then((res) => {
+          if (!res) return toast.error("Minting failed");
+          modalStore.hideAllModals();
+          modalStore.showModal(ModalsEnum.MintFinish);
+        });
       });
-    });
   };
   return (
     <ModalContainer heading="MINT NFT" idx={idx}>

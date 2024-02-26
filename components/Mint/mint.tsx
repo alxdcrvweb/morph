@@ -6,19 +6,27 @@ import { useInjection } from "inversify-react";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import Timer from "./timer";
-export const timeToMint = Date.parse("2024-02-27 19:20:00 GMT+0100");
+
+export const timeToMint = Date.parse("2024-02-26 19:20:00 GMT+0100");
 const Mint = observer(() => {
-  const [timerEnd, setTimerEnd] = useState<number>(0);
-  const mintStore = useInjection(ModalStore);
+  const [opacity, setOpacity] = useState<boolean>(false); 
+  const [timerEnd, setTimerEnd] = useState<number>(1);
+  const modalStore = useInjection(ModalStore);
+
   const openMintModal = () => {
-    mintStore.showModal(ModalsEnum.Mint);
+    modalStore.showModal(ModalsEnum.Mint);
   };
+
   useEffect(() => {
     let interval = setInterval(() => {
       setTimerEnd(timeToMint - Date.parse(new Date().toString()));
     }, 1000);
+    let tt = setTimeout(() => {
+      setOpacity(true);
+    }, 1000);
     return () => {
       clearInterval(interval);
+      clearTimeout(tt);
     };
   }, []);
   return (
@@ -40,7 +48,7 @@ const Mint = observer(() => {
           />
         </svg>
 
-        {timerEnd > 0 ? <Timer /> : <StepTitle />}
+        <div style={{opacity: opacity ? 1 : 0, transition: '500ms ease all'}}>{timerEnd > 0 ? <Timer /> : <StepTitle />}</div>
       </div>
       <div
         style={{
