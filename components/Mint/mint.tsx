@@ -6,13 +6,14 @@ import { useInjection } from "inversify-react";
 import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import Timer from "./timer";
+import { Web3Store } from "../../stores/Web3Store";
 
 export const timeToMint = Date.parse("2024-02-26 19:20:00 GMT+0100");
 const Mint = observer(() => {
   const [opacity, setOpacity] = useState<boolean>(false); 
   const [timerEnd, setTimerEnd] = useState<number>(1);
   const modalStore = useInjection(ModalStore);
-
+  const web3Store = useInjection(Web3Store);
   const openMintModal = () => {
     modalStore.showModal(ModalsEnum.Mint);
   };
@@ -48,7 +49,7 @@ const Mint = observer(() => {
           />
         </svg>
 
-        <div style={{opacity: opacity ? 1 : 0, transition: '500ms ease all'}}>{timerEnd > 0 ? <Timer /> : <StepTitle />}</div>
+        {!web3Store.disableScreen && <div style={{opacity: opacity ? 1 : 0, transition: '500ms ease all'}}>{timerEnd > 0 ? <Timer /> : <StepTitle />}</div>}
       </div>
       <div
         style={{
@@ -57,7 +58,7 @@ const Mint = observer(() => {
           alignItems: "center",
         }}
       >
-        {timerEnd < 0 && (
+        {!web3Store.disableScreen && timerEnd < 0 && (
           <button className={style.mint__button} onClick={openMintModal}>
             Mint
           </button>

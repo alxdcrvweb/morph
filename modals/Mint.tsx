@@ -24,6 +24,12 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [price, setPrice] = useState(0);
   const [limit, setLimit] = useState(0);
   const [available, setAvailable] = useState<any>(false);
+  useEffect(() => {
+    web3Store.disableMintScreen(true);
+    return () => {
+      web3Store.disableMintScreen(false);
+    };
+  }, []);
   const getPhase = (phase: number) => {
     if (phase == 1) {
       return "First Phase";
@@ -55,57 +61,54 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
     console.log(web3Store.contract);
     checkInfo();
   }, []);
-  const mint = () => {
-    web3Store
-      .connectWallet()
-      .then(async () => {
-        let limit = await web3Store
-          .contract!.methods.maxMintsForCurrentPhase()
-          .call();
-        let minted = await web3Store
-          .contract!.methods.amountMinted(web3Store.address)
-          .call();
+  const mintCheck = async () => {
+    let limit = await web3Store
+      .contract!.methods.maxMintsForCurrentPhase()
+      .call();
+    let minted = await web3Store
+      .contract!.methods.amountMinted(web3Store.address)
+      .call();
 
-        let phase = await web3Store.contract!.methods.currentPhase().call();
-        if (minted == limit) {
-          toast.error(`You can't mint more than ${limit} in this phase`);
-          setAvailable("");
-          return;
-        }
-        if (amount > limit - minted) {
-          setAvailable("");
-          toast.error(`You can't mint more than ${limit} in this phase`);
-          return 
-        }
-        if (phase == 1) {
-          console.log("PHASE 1 VALIDATION");
-          let wlCheck = await web3Store
-            .contract!.methods.isWhitelisted(web3Store.address)
-            .call();
-          setAvailable(wlCheck);
-        } else if (phase == 2) {
-          console.log("PHASE 2 VALIDATION");
-          let phaseTwoCheck = await web3Store
-            .contract!.methods.isValidPhaseTwoMinter(web3Store.address)
-            .call();
-          setAvailable(phaseTwoCheck);
-        } else if (phase == 3) {
-          console.log("PHASE 3 VALIDATION");
-          setAvailable(true);
-        }
-      })
-      .then(async () => {
-        console.log("Available: ", available);
-        if (available == "") return;
-        if (!available)
-          return toast.error("You are not allowed to mint in this phase.");
-        
-        await web3Store.mint(amount, price * amount * 10 ** 18).then((res) => {
-          if (!res) return toast.error("Minting failed");
-          modalStore.hideAllModals();
-          modalStore.showModal(ModalsEnum.MintFinish);
-        });
-      });
+    let phase = await web3Store.contract!.methods.currentPhase().call();
+    if (minted == limit) {
+      toast.error(`You can't mint more than ${limit} in this phase`);
+      setAvailable("");
+      return;
+    }
+    if (amount > limit - minted) {
+      setAvailable("");
+      toast.error(`You can't mint more than ${limit} in this phase`);
+      return;
+    }
+    if (phase == 1) {
+      console.log("PHASE 1 VALIDATION");
+      let wlCheck = await web3Store
+        .contract!.methods.isWhitelisted(web3Store.address)
+        .call();
+      setAvailable(wlCheck);
+    } else if (phase == 2) {
+      console.log("PHASE 2 VALIDATION");
+      let phaseTwoCheck = await web3Store
+        .contract!.methods.isValidPhaseTwoMinter(web3Store.address)
+        .call();
+      setAvailable(phaseTwoCheck);
+    } else if (phase == 3) {
+      console.log("PHASE 3 VALIDATION");
+      setAvailable(true);
+    }
+  };
+
+  const mint = async () => {
+    console.log("Available: ", available);
+    if (available == "") return;
+    if (!available)
+      return toast.error("You are not allowed to mint in this phase.");
+
+    await web3Store.mint(amount, price * amount * 10 ** 18).then((res) => {
+      if (!res) return toast.error("Minting failed");
+      modalStore.hideAllModals();
+      modalStore.showModal(ModalsEnum.MintFinish);
+    });
   };
   return (
     <ModalContainer heading="MINT NFT" idx={idx}>
@@ -166,9 +169,25 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               <div className={styles.modal__mint__line}></div>
               <div>{price * amount} ETH</div>
             </div>
-            <button className={styles.modal__mint__button} onClick={mint}>
-              Mint
-            </button>
+            {web3Store.address ? (
+              <button
+                className={styles.modal__mint__button}
+                onClick={() =>
+                  mintCheck().then((el) => {
+                    mint();
+                  })
+                }
+              >
+                Mint
+              </button>
+            ) : (
+              <button
+                className={styles.modal__mint__button}
+                onClick={() => web3Store.connectWallet()}
+              >
+                Connect Wallet
+              </button>
+            )}
             <div className={styles.modal__mint__roadmap}>
               Learn more about our Roadmap
             </div>

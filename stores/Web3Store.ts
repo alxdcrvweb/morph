@@ -26,6 +26,7 @@ export class Web3Store {
   @observable disabledConnectBtn: boolean = false;
   @observable disabledInput: boolean = true;
   @observable warningModal: boolean = false;
+  @observable disableScreen: boolean = false;
   @observable pausedMint: boolean = false;
   @observable loader: boolean = false;
   @observable attention: boolean = false;
@@ -76,6 +77,9 @@ export class Web3Store {
       this.disabledConnectBtn = false;
       return;
     }
+  };
+  disableMintScreen = (status: boolean) => {
+    this.disableScreen = status;
   };
   initialConnect = () => {
     try {
@@ -129,7 +133,7 @@ export class Web3Store {
     }
   };
 
-  mint = async (amount: number, price:number) => {
+  mint = async (amount: number, price: number) => {
     try {
       console.log(this.address);
       const res = await this.contract?.methods.mint(amount).send({
@@ -137,10 +141,10 @@ export class Web3Store {
         value: price,
       });
       console.log(res);
-      return true
+      return true;
     } catch (error) {
       console.log(error);
-      return false
+      return false;
     }
   };
 }

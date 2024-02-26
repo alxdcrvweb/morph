@@ -6,6 +6,8 @@ import SmallTitle from "../components/Mint/smallTitle";
 import { ModalStore } from "../stores/ModalStore";
 import { useInjection } from "inversify-react";
 import classNames from "classnames";
+import { useEffect } from "react";
+import { Web3Store } from "../stores/Web3Store";
 
 interface modalProps {
   data?: any;
@@ -14,6 +16,13 @@ interface modalProps {
 
 export const MintFinish = observer(({ data, idx }: modalProps) => {
   const modalStore = useInjection(ModalStore);
+  const web3Store = useInjection(Web3Store);
+  useEffect(() => {
+    web3Store.disableMintScreen(true);
+    return () => {
+      web3Store.disableMintScreen(false);
+    };
+  }, []);
   return (
     <ModalContainer heading="MINT FINISH" idx={idx}>
       <div
@@ -57,11 +66,19 @@ export const MintFinish = observer(({ data, idx }: modalProps) => {
 
             <span className={styles.modal__text}>
               You can view your character on Marketplaces like{" "}
-              <a href="https://zora.co/" className={styles.modal__link} target="_blank">
+              <a
+                href="https://zora.co/"
+                className={styles.modal__link}
+                target="_blank"
+              >
                 Zora
               </a>{" "}
               or{" "}
-              <a href="https://opensea.io/" className={styles.modal__link} target="_blank">
+              <a
+                href="https://opensea.io/"
+                className={styles.modal__link}
+                target="_blank"
+              >
                 Opensea
               </a>
             </span>
