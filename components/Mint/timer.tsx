@@ -28,7 +28,7 @@ const Timer = () => {
       }:${seconds < 10 ? "0" + seconds : seconds}`
     );
   }
-  console.log(timer);
+  // console.log(timer);
   return <div className={styles.firstStep__timer}>{timer}</div>;
 };
 
