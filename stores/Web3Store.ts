@@ -8,7 +8,7 @@ import { chainId, netId, netName } from "../config/config";
 import axios from "axios";
 import { mintAbi, mintContract } from "../utils/contracts/mint";
 import { Contract } from "web3-eth-contract";
-import WalletConnectProvider from "@walletconnect/mobile-registry";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import { isMobile } from "react-device-detect";
 interface User {
   login: string;
