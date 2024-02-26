@@ -18,7 +18,7 @@ const Terminal: FC = observer(() => {
 				<source src={terminalWebm} type="video/webm" />
 				<source src={terminalMP4} type="video/mp4" />
 			</video>
-			<TerminalContent />
+			{/* <TerminalContent /> */}
 		</section>
 	);
 })

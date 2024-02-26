@@ -21,7 +21,6 @@ const Mint = observer(() => {
       clearInterval(interval);
     };
   }, []);
-  console.log(timerEnd);
   return (
     <div className={style.mint__main}>
       <img className={style.mint__second__layer} src="/mintSecondLayer.png" />

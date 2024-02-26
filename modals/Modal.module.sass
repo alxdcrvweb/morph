@@ -9,7 +9,49 @@
     align-items: center
     justify-content: center
     z-index: 99999
-
+.modal__link
+    color: black
+    text-decoration: underline
+.modal__amount
+    font-family: "ApocLCLight"
+    font-size: 24px
+    font-weight: bold
+    font-style: italic
+    user-select: none
+.modal__disable
+    opacity: 0.3
+    pointer-events: none
+.modal__count
+    border: 1px solid #747474
+    color: #747474
+    border-radius: 10px
+    padding-left: 5px
+    padding-right: 5px
+    padding-top: 2px
+    padding-bottom: 2px
+    user-select: none
+    cursor: pointer
+    &:first-child
+        margin-right: 20px
+        margin-left: 5px
+    &:last-child
+        margin-left: 20px
+.modal__text
+    margin-top: 100px
+    text-align: center
+    @media screen and (max-width: 768px)
+        margin-top: 40px
+        padding-left: 20px
+        padding-right: 20px
+.modal__container__finish
+    .modal__mint__finish
+        img
+            height: 376px!important
+            object-fit: cover
+        @media screen and (max-width: 768px)
+            height: 690px!important
+    @media screen and (max-width: 768px)
+        height: 690px!important
 .modal__mint__container
     z-index: 999999
     filter: drop-shadow(0px 0px 38px #000)
@@ -23,6 +65,11 @@
     height: 443px
     flex-direction: column
     overflow: hidden
+    @media screen and (max-width: 768px)
+        padding: 0px
+        width: 389px
+        height: 780px
+        max-height: 100vh
     .modal__mint__roadmap
         font-size: 12px
         color: #616161
@@ -37,6 +84,11 @@
         border-radius: 100px
         margin-top: 20px
         height: 42px
+        border: 1px solid transparent
+        &:hover
+            background-color: white
+            color: black
+            border: 1px solid #000000
     .modal__mint__row
         height: 25px
         font-size: 18px
@@ -54,6 +106,14 @@
         flex-direction: column
         justify-content: center
         align-items: center
+    .modal__mint__sub
+        font-size: 18px
+    .mint__close
+        position: absolute
+        top: 10px
+        right: 10px
+        cursor: pointer
+
     .modal__mint
         background-color: white
         width: 100%
@@ -64,6 +124,19 @@
         overflow: hidden
         img
             height: 102%
+            object-fit: cover
+        @media screen and (max-width: 768px)
+            display: flex
+            flex-direction: column
+            width: 389px
+            height: 780px
+            img
+                height: 432px
+        @media screen and (max-height: 700px) and (max-width: 768px)
+            img
+                object-fit: cover
+                height: 332px
+
     .heading
         display: flex
         justify-content: space-between

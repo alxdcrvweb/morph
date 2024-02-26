@@ -3,6 +3,12 @@ import { ModalsEnum } from ".";
 import styles from "./Modal.module.sass";
 import ModalContainer from "./ModalContainer";
 import SmallTitle from "../components/Mint/smallTitle";
+import { ModalStore } from "../stores/ModalStore";
+import { useInjection } from "inversify-react";
+import { Web3Store } from "../stores/Web3Store";
+import { useEffect, useState } from "react";
+import { fromWeiToEth } from "../utils/utilities";
+import classNames from "classnames";
 
 interface modalProps {
   data?: any;
@@ -10,9 +16,60 @@ interface modalProps {
 }
 
 export const MintModal = observer(({ data, idx }: modalProps) => {
+  const modalStore = useInjection(ModalStore);
+  const web3Store = useInjection(Web3Store);
+  const [amount, setAmount] = useState(1);
+  const [phase, setPhase] = useState('0');
+  const [price, setPrice] = useState(0);
+  const [limit, setLimit] = useState(0);
+  const getPhase = (phase: number) => {
+    if (phase == 1) {
+      return "First Phase";
+    }
+    if (phase == 2) {
+      return "Second Phase";
+    }
+    if (phase == 3) {
+      return "Third Phase";
+    } else return "Phase 0";
+  }
+  const checkInfo = async () => {
+    try {
+      const pr = await web3Store.contract!.methods.currentMintPrice().call();
+      const mnt = await web3Store
+        .contract!.methods.maxMintsForCurrentPhase()
+        .call();
+      const phase = await web3Store.contract!.methods.currentPhase().call();
+      console.log(phase);
+      setPhase(getPhase(phase));
+      setLimit(mnt);
+      setPrice(fromWeiToEth(pr));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  useEffect(() => {
+    console.log(web3Store.contract);
+    checkInfo();
+  }, []);
+  const mint = () => {
+    web3Store.connectWallet().then(async () => {
+      await web3Store.mint(amount, price * amount * 10 ** 18).then(() => {
+        modalStore.hideAllModals();
+        modalStore.showModal(ModalsEnum.MintFinish);
+      });
+    });
+  };
   return (
     <ModalContainer heading="MINT NFT" idx={idx}>
       <div className={styles.modal__mint__container}>
+        <img
+          className={styles.mint__close}
+          onClick={() => {
+            modalStore.hideAllModals();
+          }}
+          src="/close.svg"
+        />
         <div className={styles.modal__mint}>
           <img src="/myth.png" />
           <div className={styles.modal__mint__text}>
@@ -20,10 +77,10 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             <div className={styles.modal__mint__row}>
               <div>Current Phase</div>
               <div className={styles.modal__mint__line}></div>
-              <div>First Phase</div>
+              <div>{phase}</div>
             </div>
             <div className={styles.modal__mint__row}>
-              <div>TotalSupply</div>
+              <div>Total Supply</div>
               <div className={styles.modal__mint__line}></div>
               <div>1800</div>
             </div>
@@ -35,15 +92,39 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             <div className={styles.modal__mint__row}>
               <div>Amount</div>
               <div className={styles.modal__mint__line}></div>
-              <div>1 / 2 / 3</div>
+              <div style={{ userSelect: "none" }}>
+                <span
+                  className={classNames(
+                    styles.modal__count,
+                    amount == 1 && styles.modal__disable
+                  )}
+                  onClick={() => setAmount(amount - 1)}
+                >
+                  less
+                </span>{" "}
+                <span className={styles.modal__amount}>{amount}</span>{" "}
+                <span
+                  className={classNames(
+                    styles.modal__count,
+                    amount == limit && styles.modal__disable
+                  )}
+                  onClick={() => setAmount(amount + 1)}
+                >
+                  more
+                </span>
+              </div>
             </div>
             <div className={styles.modal__mint__row}>
               <div>Price</div>
               <div className={styles.modal__mint__line}></div>
-              <div>0,01 ETH</div>
+              <div>{price * amount} ETH</div>
             </div>
-            <button className={styles.modal__mint__button}>Mint</button>
-            <div className={styles.modal__mint__roadmap}>Learn more about our Roadmap</div>
+            <button className={styles.modal__mint__button} onClick={mint}>
+              Mint
+            </button>
+            <div className={styles.modal__mint__roadmap}>
+              Learn more about our Roadmap
+            </div>
           </div>
         </div>
       </div>

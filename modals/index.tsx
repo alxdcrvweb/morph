@@ -2,13 +2,16 @@ import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { ModalStore } from "../stores/ModalStore";
 import { MintModal } from "./Mint";
+import { MintFinish } from "./MintFinish";
 
 export enum ModalsEnum {
   Mint,
+  MintFinish,
 }
 
 const MODAL_REGISTRY = {
   [ModalsEnum.Mint]: MintModal,
+  [ModalsEnum.MintFinish]: MintFinish,
 };
 
 export const ModalsContainer = observer(() => {

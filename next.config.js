@@ -16,13 +16,7 @@
 module.exports = {
   // async redirects() {
   // 	return [
-  // 		{
-  // 			source: '/',
-  // 			destination: '/sleeping',
-  // 			permanent: true,
-  // 		},
-  // 	]
-  // },
+  // 		{S
   images: {
     domains: ["ipfs.io"],
   },

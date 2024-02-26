@@ -9,8 +9,8 @@ const StepTitle = () => {
   const [secondDigi, setSecondDigi] = useState<number | null>(null);
 
   useEffect(() => {
-    setFirstDigi(getRandomIntInclusive(0, "MORPHEUS".length - 1));
-    setSecondDigi(getRandomIntInclusive(0, "MORPHEUS".length - 1));
+    setFirstDigi(1);
+    setSecondDigi(4);
   }, []);
 
   return (

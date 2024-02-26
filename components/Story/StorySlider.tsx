@@ -11,7 +11,7 @@ import styles from '../../styles/story.module.scss';
 import { IMAGES } from '../images';
 import { useMediaQuery } from 'react-responsive'
 import { useInjection } from 'inversify-react';
-import { UserStore } from '../../stores/UserStore';
+import { Web3Store } from '../../stores/Web3Store';
 import StorySliderList from './StorySliderList';
 
 
@@ -23,7 +23,7 @@ const {
 const StorySlider: FC = observer(() => {
 
 	const [swiperRef, setSwiperRef] = useState<SwiperCore | null>(null);
-	const { tokensList, getTokens, web3 } = useInjection(UserStore)
+	const { tokensList, getTokens, web3 } = useInjection(Web3Store)
 	const router = useRouter()
 	const isMobile = useMediaQuery({ maxWidth: 767.98 })
 

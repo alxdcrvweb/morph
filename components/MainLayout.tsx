@@ -11,9 +11,9 @@ import decor2 from "../public/showdown/decor2.svg";
 import AboutPageLink from "./AboutPageLink";
 import Header from "./Header";
 import BackLink from "./StoryBackLink";
-import { UserStore } from "../stores/UserStore";
 import { useInjection } from "inversify-react";
 import axios from "axios";
+import { Web3Store } from "../stores/Web3Store";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
@@ -26,7 +26,12 @@ export default function MainLayout({ children }: MyHead) {
   const [prevPath, setPrevPath] = useState("");
   const routerPathName = router.asPath.split("/")[1];
   const mainRef = useRef(null);
-  const userStore = useInjection(UserStore);
+  const userStore = useInjection(Web3Store);
+  useEffect(() => {
+    if (userStore) {
+      userStore.initialConnect();
+    }
+  }, [userStore]);
   const getUserById = async (id: string | null) => {
     try {
       const response = await axios.get(

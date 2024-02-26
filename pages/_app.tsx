@@ -9,11 +9,13 @@ import * as gtag from "../lib/gtag";
 import { RootStore } from "../stores/RootStore";
 import "../styles/style.scss";
 import { ModalsContainer } from "../modals";
+import { useEffect } from "react";
 
 const rootStore = new RootStore();
 const container = rootStore.container;
 
 function MyApp({ Component, pageProps }: AppProps) {
+
   return (
     <>
       <Script

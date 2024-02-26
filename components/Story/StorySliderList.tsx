@@ -12,8 +12,6 @@ interface StorySliderListProps {
 
 const StorySliderList: FC<StorySliderListProps> = observer(({ tokensList }) => {
 
-	// const { tokensList, getTokens } = useInjection(UserStore)
-
 	return (
 		<div className={styles.story__nfts}>
 			{tokensList.map((image: string, index: number) => (

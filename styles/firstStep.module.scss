@@ -2,70 +2,74 @@
 @import "./variables";
 @import "./keyframes";
 .small__title {
-	@include adaptiv-value("font-size", 56, 20, 1);
-	line-height: 136%;
-	letter-spacing: 0.2em;
-	text-transform: uppercase;
-	font-weight: 400;
-	text-shadow: rgb(176, 176, 176) 1px 0 10px;
-	margin-bottom: 20px;
+  font-size: 56px;
+  line-height: 136%;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  text-shadow: rgb(176, 176, 176) 1px 0 10px;
+  margin-bottom: 20px;
+  @media (max-width: 885px) {
+    font-size: 36px;
+	margin-top: 20px;
+  }
 }
 .firstStep {
-	pointer-events: none;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	//  .firstStep__body
-	&__body {
-		transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
-		position: absolute;
-		z-index: 1;
-		top: 25%;
-		opacity: 1;
-		left: 50%;
-		transform: translateX(-50%);
-		text-align: center;
-		letter-spacing: 0.06em;
-		@media (max-width: ($md2+px)) {
-			top: 33%;
-		}
-	}
-	//  .firstStep__title
-	&__title {
-		@include adaptiv-value("font-size", 102, 40, 1);
-		line-height: 136%;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
-		font-weight: 400;
-		text-shadow: rgb(176, 176, 176) 1px 0 10px;
-	}
-	&__timer {
-		font-size: 95px;
-		line-height: 136%;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		font-weight: 400;
-		text-shadow: rgb(176, 176, 176) 1px 0 1px;
-		font-style: italic;
-		font-family: "ApocLCLight";
-		width: 500px;
-		line-height: 130px;
-		@media (max-width:600px) {
-			font-size: 64.2px;
-			width: 345px;
-			margin-top: 15px;
-			line-height: 90px;
-		}
-	}
-	//  .firstStep__subtitle
-	&__subtitle {
-		letter-spacing: 0.06em;
-		font-size: 22px;
-		line-height: 127%;
-		@media (max-width: ($md2+px)) {
-			font-size: 16px;
-		}
-	}
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  //  .firstStep__body
+  &__body {
+    transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+    position: absolute;
+    z-index: 1;
+    top: 25%;
+    opacity: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    letter-spacing: 0.06em;
+    @media (max-width: ($md2+px)) {
+      top: 33%;
+    }
+  }
+  //  .firstStep__title
+  &__title {
+    @include adaptiv-value("font-size", 102, 40, 1);
+    line-height: 136%;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-shadow: rgb(176, 176, 176) 1px 0 10px;
+  }
+  &__timer {
+    font-size: 95px;
+    line-height: 136%;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-shadow: rgb(176, 176, 176) 1px 0 1px;
+    font-style: italic;
+    font-family: "ApocLCLight";
+    width: 520px;
+    line-height: 130px;
+    @media (max-width: 600px) {
+      font-size: 64.2px;
+      width: 345px;
+      margin-top: 15px;
+      line-height: 90px;
+    }
+  }
+  //  .firstStep__subtitle
+  &__subtitle {
+    letter-spacing: 0.06em;
+    font-size: 22px;
+    line-height: 127%;
+    @media (max-width: ($md2+px)) {
+      font-size: 16px;
+    }
+  }
 }

@@ -4,13 +4,13 @@ import { observer } from 'mobx-react';
 import Image from 'next/image';
 import { FC } from 'react';
 import metamask from '../../public//metamask.png';
-import { UserStore } from '../../stores/UserStore';
 import styles from '../../styles/story.module.scss';
+import { Web3Store } from '../../stores/Web3Store';
 
 
 const StoryConnect: FC = observer(() => {
 
-	const { connectWallet } = useInjection(UserStore)
+	const { connectWallet } = useInjection(Web3Store)
 
 	const connectHandler = () => { connectWallet() }
 

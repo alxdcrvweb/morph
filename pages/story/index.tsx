@@ -5,14 +5,10 @@ import { NextPage } from 'next';
 import { useEffect } from 'react';
 import StoryConnect from '../../components/Story/StoryConnect';
 import StorySlider from '../../components/Story/StorySlider';
-import { UserStore } from '../../stores/UserStore';
 import styles from '../../styles/story.module.scss';
 
 
 const Story: NextPage = observer(() => {
-
-	const { address, web3, connectWallet } = useInjection(UserStore)
-
 	// useEffect(() => {
 	// 	if (!address || !web3) {
 	// 		connectWallet()

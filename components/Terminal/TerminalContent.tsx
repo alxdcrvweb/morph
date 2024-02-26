@@ -3,7 +3,7 @@ import { useInjection } from 'inversify-react';
 import { observer } from 'mobx-react';
 import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
-import { UserStore } from '../../stores/UserStore';
+import { Web3Store } from '../../stores/Web3Store';
 import styles from '../../styles/terminal.module.scss';
 import CongratulationModal from '../CongratulationModal';
 import TerminalCongrats from './TerminalCongrats';
@@ -15,7 +15,7 @@ import TerminalModal from './TerminalModal';
 const TerminalContent: FC = observer(() => {
 
 
-	const { loader, attention, setAttentionModal, web3, provider, congratsText, congratsTitle, connectWallet, checkNetwork, paused, pausedMint, warningModal, setWarningModal, mint, disabledInput } = useInjection(UserStore)
+	const { loader, attention, web3, provider, congratsText, congratsTitle, connectWallet, checkNetwork, pausedMint, warningModal, mint, disabledInput } = useInjection(Web3Store)
 
 	const [inputValue, setInputValue] = useState('');
 	const [hover, setHover] = useState(false);
@@ -24,7 +24,7 @@ const TerminalContent: FC = observer(() => {
 	//@ts-ignore
 	useEffect(async () => {
 		await checkNetwork()
-		paused()
+		// paused()
 	}, [web3, provider])
 
 	const mintHandler = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,12 +42,7 @@ const TerminalContent: FC = observer(() => {
 	const mouseLeaveHandler = () => {
 		setHover(false)
 	}
-	const focusHandler = () => {
-		setWarningModal(true)
-	}
-	const blurHandler = () => {
-		setWarningModal(false)
-	}
+
 	const inputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputValue(e.target.value)
 	}
@@ -56,7 +51,7 @@ const TerminalContent: FC = observer(() => {
 	return (
 		<>
 			<form className={styles.terminal__content} onSubmit={mintHandler}>
-				{!web3 && <TerminalConnect hover={hover} connectWallet={connectWallet} />}
+				{/* {!web3 && <TerminalConnect hover={hover} connectWallet={connectWallet} />}
 				{pausedMint ?
 					<TerminalCongrats /> :
 					<TerminalInput
@@ -70,7 +65,7 @@ const TerminalContent: FC = observer(() => {
 						loader={loader}
 						inputValue={inputValue}
 					/>
-				}
+				} */}
 			</form>
 			<CSSTransition
 				in={warningModal}

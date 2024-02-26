@@ -2,7 +2,6 @@ import cn from "classnames";
 import { useInjection } from "inversify-react";
 import { observer } from "mobx-react";
 import { FC, useEffect, useState } from "react";
-import { UserStore } from "../../stores/UserStore";
 import styles from "../../styles/header.module.scss";
 import { maskAddress } from "../../utils/utilities";
 import Social from "../Social";
@@ -10,6 +9,7 @@ import eye from "../../public/icons/eye.svg";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Web3Store } from "../../stores/Web3Store";
 
 interface HeaderProps {
   routerPath: string;
@@ -22,10 +22,8 @@ const HeaderActions: FC<HeaderProps> = observer(
     const {
       address,
       disconnectWallet,
-      disabledConnectBtn,
       connectWallet,
-      warpcasterUser,
-    } = useInjection(UserStore);
+    } = useInjection(Web3Store);
     console.log(" HeaderActions routerPath", routerPath);
 
     const clickHandler = () => {

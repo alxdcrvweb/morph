@@ -6,9 +6,9 @@ import HeaderMenu from "./HeaderMenu";
 import cn from "classnames";
 import { useRouter } from "next/router";
 import { useInjection } from "inversify-react";
-import { UserStore } from "../../stores/UserStore";
 import Social from "../Social";
 import { observer } from "mobx-react";
+import { Web3Store } from "../../stores/Web3Store";
 
 interface HeaderProps {
   routerPath: string;
@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = observer(({ routerPath }) => {
   const closeMenuHandler = () => {
     setOpenMenu(false);
   };
-  const { warpcasterUser } = useInjection(UserStore);
+  const { warpcasterUser } = useInjection(Web3Store);
   return (
     <header className={styles.header}>
       <div className={styles.header__line}>
