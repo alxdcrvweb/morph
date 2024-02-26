@@ -53,11 +53,9 @@ export class Web3Store {
             package: WalletConnectProvider, // required
             options: isMobile
               ? {
-                  infuraId: "f2a1029edc25430fa0aef509b40e099b",
-                  chainId: 137,
+                  chainId: 97,
                   rpc: {
-                    137: "https://polygon-rpc.com/",
-                    80001: "https://rpc-mumbai.matic.today",
+                    97: "https://bsc-testnet.publicnode.com",
                   },
                 }
               : {},
