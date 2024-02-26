@@ -97,7 +97,6 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       setAvailable(true);
     }
   };
-
   const mint = async () => {
     console.log("Available: ", available);
     if (available == "") return;
