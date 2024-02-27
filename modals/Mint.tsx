@@ -115,7 +115,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       return toast.error("You are not allowed to mint in this phase.");
 
     await web3Store.mint(amount, price * amount * 10 ** 18).then((res) => {
-      if (!res) return toast.error("Minting failed");
+      if (!res) return
       modalStore.hideAllModals();
       modalStore.showModal(ModalsEnum.MintFinish);
     });

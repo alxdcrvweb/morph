@@ -67,7 +67,7 @@ export class Web3Store {
       this.connected = connected;
       console.log("INITTTTTTT");
       this.web3 = new Web3(
-        "https://bsc-testnet.publicnode.com"
+        "https://eth-sepolia.public.blastapi.io"
       );
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);

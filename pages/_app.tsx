@@ -20,7 +20,7 @@ import {
   getDefaultWallets,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
 import { bscTestnet, base, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { ToastContainer } from "react-toastify";
@@ -30,7 +30,7 @@ import MainLayout from "../components/MainLayout";
 import AppLoader from "../components/loader";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [bscTestnet],
+  [sepolia],
   [publicProvider()]
 );
 
