@@ -42,17 +42,12 @@ export class Web3Store {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  setSigner = (signer?: WalletClient | null, unsupported?: boolean) => {
-    this.signer = signer;
-    this.unsupported = unsupported;
-    console.log("CONNECT",window.ethereum, this.signer);
-    if (signer) {
+  setProvider = (provider?: any) => {
+    console.log("CONNECT", provider);
+    if (provider) {
       // this.checked = true;
       console.log("CONNECT");
-      this.signer && console.log(this.signer.transport);
-      this.web3 = new Web3(
-        Web3.givenProvider || "https://bsc-testnet.publicnode.com"
-      );
+      this.web3 = new Web3(provider);
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
     }

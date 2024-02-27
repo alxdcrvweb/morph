@@ -9,9 +9,10 @@ import classNames from "classnames";
 import Link from "next/link";
 import { Router, useRouter } from "next/router";
 import { Web3Store } from "../../stores/Web3Store";
+import { useAccount } from "wagmi";
 const ConnectButtonCustom = observer(
   ({ isHeader, isAuth }: { isHeader?: boolean; isAuth?: boolean }) => {
-    const { setConnected, setSigner, disconnected, setAddress } =
+    const { setConnected, setProvider, disconnected, setAddress } =
       useInjection(Web3Store);
     const router = useRouter();
     return (
@@ -25,6 +26,17 @@ const ConnectButtonCustom = observer(
         }) => {
           // const connect = useConnect()
           // console.log(connect, window.ethereum);
+          const { connector } = useAccount();
+          const getProvider = async () => {
+            const res =  await connector?.getProvider();
+            setProvider(res)
+          };
+          useEffect(() => {
+            if (connector) {
+              console.log("connector", connector);
+              getProvider();
+            }
+          }, [connector]);
           const ready = mounted && authenticationStatus !== "loading";
           const connected =
             ready &&
@@ -75,18 +87,14 @@ const ConnectButtonCustom = observer(
                     <button
                       onClick={openChainModal}
                       type="button"
-                      className={classNames(
-                        style.modal__mint__button
-                      )}
+                      className={classNames(style.modal__mint__button)}
                     >
                       Change Network
                     </button>
                   );
                 }
 
-                return (
-                  <SeparatedConnect/>
-                );
+                return <SeparatedConnect />;
               })()}
             </div>
           );
