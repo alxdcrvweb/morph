@@ -190,7 +190,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            {phase == "First phase" && <div className={styles.modal__mint__row}>
+            {phase == "First Phase" && <div className={styles.modal__mint__row}>
               <div>Tokens left for WL</div>
               <div className={styles.modal__mint__line}></div>
               <div>{presaleCap - supply}</div>
