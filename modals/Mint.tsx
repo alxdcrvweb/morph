@@ -24,6 +24,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [phase, setPhase] = useState("0");
   const [price, setPrice] = useState(0);
   const [limit, setLimit] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [available, setAvailable] = useState<any>(true);
   useEffect(() => {
     web3Store.disableMintScreen(true);
@@ -43,14 +44,17 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
     } else return "Phase 0";
   };
   const checkInfo = async () => {
+    setLoading(true)
     try {
-      const pr = await web3Store.contract!.methods.getPrices().call();
-      const mnt = await web3Store
-        .contract!.methods.maxMintsForCurrentPhase()
-        .call();
-
-      const phase = await web3Store.contract!.methods.currentPhase().call();
-
+      let callContract = await Promise.all([
+        web3Store.contract?.methods.maxMintsForCurrentPhase().call(),
+        web3Store.contract?.methods.currentPhase().call(),
+        web3Store.contract!.methods.getPrices().call(),
+      ]); 
+      const mnt = Number(callContract[0])
+      const phase = Number(callContract[1]);
+      const pr = callContract[2];
+     
       setPhase(getPhase(phase));
       setLimit(Number(mnt));
       if (phase == 1) {
@@ -58,7 +62,9 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       } else if (phase == 2) {
         setPrice(fromWeiToEth(pr[2]));
       }
+      setLoading(false)
     } catch (e) {
+      setLoading(false)
       console.log(e);
     }
   };
@@ -74,16 +80,21 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   }, [web3Store.address, web3Store.contract]);
 
   const mintCheck = async () => {
+    setLoading(true);
     try {
-      let limit = await web3Store.contract?.methods
-        .maxMintsForCurrentPhase()
-        .call();
-      let minted = await web3Store.contract?.methods
-        .amountMinted(web3Store.address)
-        .call();
-      const pr = await web3Store.contract!.methods.getPrices().call();
-      let phase = await web3Store.contract!.methods.currentPhase().call();
-      if (minted == limit) {
+      let callContract = await Promise.all([
+        web3Store.contract?.methods.maxMintsForCurrentPhase().call(),
+        web3Store.contract?.methods.amountMinted(web3Store.address).call(),
+        web3Store.contract?.methods.currentPhase().call(),
+        web3Store.contract!.methods.getPrices().call(),
+      ]);
+      console.log("hu", callContract);
+      const limit = Number(callContract[0]);
+      const minted = Number(callContract[1]);
+      const phase = Number(callContract[2]);
+      const pr = callContract[3];
+      setLoading(false);
+      if (limit == minted) {
         // toast.error(`You can't mint more than ${limit} in this phase`);
         setAvailable("limit");
         return;
@@ -108,7 +119,9 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
         }
         setAvailable(true);
       }
+      setLoading(false);
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
   };
@@ -190,7 +203,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             {web3Store.address ? (
               <button
-                className={styles.modal__mint__button}
+                className={classNames(styles.modal__mint__button, loading && styles.modal__disable)}
                 style={{
                   display:
                     available && available !== "limit" ? "block" : "none",
@@ -208,7 +221,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             )}
             {available == "limit" && (
               <div className={styles.modal__mint__wl}>
-                You can't mint more than {limit} in this phase. Follow the updates on Farcaster{" "}
+                You can't mint more than {limit} in this phase. Follow the
+                updates on Farcaster{" "}
                 <a
                   href="https://warpcast.com/~/channel/morpheus"
                   target="_blank"
