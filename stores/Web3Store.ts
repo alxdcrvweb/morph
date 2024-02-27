@@ -54,6 +54,7 @@ export class Web3Store {
         window.ethereum || "https://bsc-testnet.publicnode.com"
       );
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
+      this.subscribeProvider();
     }
   };
 
@@ -66,13 +67,15 @@ export class Web3Store {
     // this.getAllowance();
   };
   setConnected = (connected: boolean) => {
-    this.connected = connected;
-    console.log("INITTTTTTT");
-    this.web3 = new Web3(
-      window.ethereum || "https://bsc-testnet.publicnode.com"
-    );
-    this.subscribeProvider()
-    this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
+    if (!this.signer) {
+      this.connected = connected;
+      console.log("INITTTTTTT");
+      this.web3 = new Web3(
+        window.ethereum || "https://bsc-testnet.publicnode.com"
+      );
+
+      this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
+    }
   };
   @action setAddress = (user: any) => {
     this.address = user.address;
