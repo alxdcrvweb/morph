@@ -98,12 +98,12 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       const phase = Number(callContract[1]);
       const pr = callContract[2];
       setLoading(false);
-      if (limit == minted) {
+      if (limit == Number(minted)) {
         // toast.error(`You can't mint more than ${limit} in this phase`);
         setAvailable("limit");
         return;
       }
-      if (amount > limit - minted) {
+      if (amount > limit - Number(minted)) {
         setAvailable("limit");
         // toast.error(`You can't mint more than ${limit} in this phase`);
         return;
