@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
 import style from "../../modals/Modal.module.sass";
 import { SeparatedConnect } from "./separatedConnect";
-import { useWalletClient } from "wagmi";
+// import { useConnect, useWalletClient } from "wagmi";
 import classNames from "classnames";
 import Link from "next/link";
 import { Router, useRouter } from "next/router";
@@ -23,13 +23,8 @@ const ConnectButtonCustom = observer(
           authenticationStatus,
           mounted,
         }) => {
-          const { data: walletClient } = useWalletClient({
-            onSuccess(data) {
-              // console.log("Success", data);
-              setSigner(data, chain?.unsupported);
-            },
-          });
-
+          // const connect = useConnect()
+          // console.log(connect, window.ethereum);
           const ready = mounted && authenticationStatus !== "loading";
           const connected =
             ready &&

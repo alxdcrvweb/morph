@@ -45,13 +45,13 @@ export class Web3Store {
   setSigner = (signer?: WalletClient | null, unsupported?: boolean) => {
     this.signer = signer;
     this.unsupported = unsupported;
-    console.log(signer, "CONNECT");
+    console.log("CONNECT",window.ethereum, this.signer);
     if (signer) {
       // this.checked = true;
       console.log("CONNECT");
       this.signer && console.log(this.signer.transport);
       this.web3 = new Web3(
-        window.ethereum || "https://bsc-testnet.publicnode.com"
+        Web3.givenProvider || "https://bsc-testnet.publicnode.com"
       );
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
@@ -71,7 +71,7 @@ export class Web3Store {
       this.connected = connected;
       console.log("INITTTTTTT");
       this.web3 = new Web3(
-        window.ethereum || "https://bsc-testnet.publicnode.com"
+        Web3.givenProvider || "https://bsc-testnet.publicnode.com"
       );
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
