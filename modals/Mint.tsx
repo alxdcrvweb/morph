@@ -52,7 +52,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       const phase = await web3Store.contract!.methods.currentPhase().call();
 
       setPhase(getPhase(phase));
-      setLimit(mnt);
+      setLimit(Number(mnt));
       if (phase == 1) {
         setPrice(fromWeiToEth(pr[0]));
       } else if (phase == 2) {
