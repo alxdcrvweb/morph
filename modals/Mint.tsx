@@ -55,7 +55,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       const mnt = Number(cc[0]);
       const phase = Number(cc[1]);
       const pr = cc[2];
-      setCallContract(cc)
+      setCallContract(cc);
       setPhase(getPhase(phase));
       setLimit(Number(mnt));
       if (phase == 1) {
@@ -71,8 +71,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   };
   useEffect(() => {
     if (web3Store.contract) {
-      console.log('check 1'); 
-      checkInfo()
+      console.log("check 1");
+      checkInfo();
     }
   }, [web3Store.contract]);
   // const check = () => {
@@ -84,7 +84,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   // };
   useEffect(() => {
     if (web3Store.address && web3Store.contract && callContract.length > 0) {
-      console.log('check 2'); 
+      console.log("check 2");
       mintCheck();
     }
   }, [web3Store.address, callContract]);
@@ -92,7 +92,9 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const mintCheck = async () => {
     setLoading(true);
     try {
-      let minted = await web3Store.contract?.methods.amountMinted(web3Store.address).call();
+      let minted = await web3Store.contract?.methods
+        .amountMinted(web3Store.address)
+        .call();
       console.log(" check 2 hu", callContract);
       const limit = Number(callContract[0]);
       const phase = Number(callContract[1]);
@@ -208,12 +210,13 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             {web3Store.address ? (
               <button
                 className={classNames(
-                  styles.modal__mint__button,
-                  loading && styles.modal__off
+                  styles.modal__mint__button
                 )}
                 style={{
                   display:
-                    available && available !== "limit" ? "block" : "none",
+                    available && available !== "limit" && !loading
+                      ? "block"
+                      : "none",
                 }}
                 onClick={() =>
                   mintCheck().then((el) => {
