@@ -17,8 +17,8 @@ const Timer = () => {
   }, []);
 
   function getTimeRemaining() {
-    const timeToMint = 1709035200000
-    // const timeToMint = 1709060400000
+    // const timeToMint = 1709035200000
+    const timeToMint = 1709060400000
     const total = timeToMint - Date.now();
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);

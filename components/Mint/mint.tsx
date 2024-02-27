@@ -18,8 +18,8 @@ const Mint = observer(() => {
   const openMintModal = () => {
     modalStore.showModal(ModalsEnum.Mint);
   }
-  const timeToMint = 1709035200000
-  // const timeToMint = 1709060400000
+  // const timeToMint = 1709035200000
+  const timeToMint = 1709060400000
   useEffect(() => {
     let interval = setInterval(() => {
       setTimerEnd(
