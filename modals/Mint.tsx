@@ -6,7 +6,7 @@ import SmallTitle from "../components/Mint/smallTitle";
 import { ModalStore } from "../stores/ModalStore";
 import { useInjection } from "inversify-react";
 import { Web3Store } from "../stores/Web3Store";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fromWeiToEth } from "../utils/utilities";
 import classNames from "classnames";
 import { toast } from "react-toastify";
@@ -26,8 +26,18 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [price, setPrice] = useState(0);
   const [limit, setLimit] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [supply, setSupply] = useState(0);
+  const [presaleCap, setPresaleCap] = useState(0);
   const [available, setAvailable] = useState<any>(true);
   const [callContract, setCallContract] = useState<any>([]);
+  const noTokens = useMemo(
+    () => presaleCap == supply && phase == "First Phase",
+    [presaleCap, supply, phase]
+  );
+  const noAmount = useMemo(
+    () => amount >= presaleCap - supply && phase == "First Phase",
+    [amount, presaleCap, supply, phase]
+  );
   useEffect(() => {
     web3Store.disableMintScreen(true);
     return () => {
@@ -52,6 +62,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
         web3Store.contract?.methods.maxMintsForCurrentPhase().call(),
         web3Store.contract?.methods.currentPhase().call(),
         web3Store.contract?.methods.getPrices().call(),
+        web3Store.contract?.methods.presaleCap().call(),
+        web3Store.contract?.methods.supply().call(),
       ]);
       const mnt = Number(cc[0]);
       const phase = Number(cc[1]);
@@ -59,6 +71,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       setCallContract(cc);
       setPhase(getPhase(phase));
       setLimit(Number(mnt));
+      setSupply(Number(cc[4]));
+      setPresaleCap(Number(cc[3]));
       if (phase == 1) {
         setPrice(fromWeiToEth(pr[0]));
       } else if (phase == 2) {
@@ -177,13 +191,18 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               <div>Base</div>
             </div>
             <div className={styles.modal__mint__row}>
+              <div>Tokens left for WL</div>
+              <div className={styles.modal__mint__line}></div>
+              <div>{presaleCap - supply}</div>
+            </div>
+            <div className={styles.modal__mint__row}>
               <div>Amount</div>
               <div className={styles.modal__mint__line}></div>
               <div style={{ userSelect: "none" }}>
                 <span
                   className={classNames(
                     styles.modal__count,
-                    amount == 1 && styles.modal__disable
+                    amount == 1 && amount == 1 && styles.modal__disable
                   )}
                   onClick={() => setAmount(amount - 1)}
                 >
@@ -193,7 +212,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 <span
                   className={classNames(
                     styles.modal__count,
-                    amount == limit && styles.modal__disable
+                    (amount == limit || noAmount) && styles.modal__disable
                   )}
                   onClick={() => setAmount(amount + 1)}
                 >
@@ -211,7 +230,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 className={classNames(styles.modal__mint__button)}
                 style={{
                   display:
-                    available && available !== "limit" && !loading
+                    !noTokens && available && available !== "limit" && !loading
                       ? "block"
                       : "none",
                 }}
@@ -238,7 +257,18 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </a>
               </div>
             )}
-            {/* <div className={styles.modal__mint__wl}>{web3Store?.address}</div> */}
+            {noTokens && (
+              <div className={styles.modal__mint__wl}>
+                The second phase will begin soon. Follow the updates on
+                Farcaster{" "}
+                <a
+                  href="https://warpcast.com/~/channel/morpheus"
+                  target="_blank"
+                >
+                  /morpheus
+                </a>
+              </div>
+            )}
             {!available && (
               <div className={styles.modal__mint__wl}>
                 You are not in WL in current phase. Come back on Phase 2 of the
