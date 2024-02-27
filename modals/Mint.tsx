@@ -26,6 +26,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [limit, setLimit] = useState(0);
   const [loading, setLoading] = useState(false);
   const [available, setAvailable] = useState<any>(true);
+  const [callContract, setCallContract] = useState<any>([]);
   useEffect(() => {
     web3Store.disableMintScreen(true);
     return () => {
@@ -44,17 +45,17 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
     } else return "Phase 0";
   };
   const checkInfo = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      let callContract = await Promise.all([
+      let cc = await Promise.all([
         web3Store.contract?.methods.maxMintsForCurrentPhase().call(),
         web3Store.contract?.methods.currentPhase().call(),
-        web3Store.contract!.methods.getPrices().call(),
-      ]); 
-      const mnt = Number(callContract[0])
-      const phase = Number(callContract[1]);
-      const pr = callContract[2];
-     
+        web3Store.contract?.methods.getPrices().call(),
+      ]);
+      const mnt = Number(cc[0]);
+      const phase = Number(cc[1]);
+      const pr = cc[2];
+      setCallContract(cc)
       setPhase(getPhase(phase));
       setLimit(Number(mnt));
       if (phase == 1) {
@@ -62,37 +63,40 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       } else if (phase == 2) {
         setPrice(fromWeiToEth(pr[2]));
       }
-      setLoading(false)
+      setLoading(false);
     } catch (e) {
-      setLoading(false)
+      setLoading(false);
       console.log(e);
     }
   };
   useEffect(() => {
-    if (web3Store.contract) checkInfo();
+    if (web3Store.contract) {
+      console.log('check 1'); 
+      checkInfo()
+    }
   }, [web3Store.contract]);
+  // const check = () => {
+  //   if (web3Store.address && web3Store.contract) {
+  //     mintCheck();
+  //   } else if (!web3Store.address && web3Store.contract) {
+  //     checkInfo();
+  //   }
+  // };
   useEffect(() => {
-    console.log(web3Store.address, web3Store.contract);
-    if (web3Store.address && web3Store.contract) {
-      console.log(web3Store.address, web3Store.contract);
+    if (web3Store.address && web3Store.contract && callContract.length > 0) {
+      console.log('check 2'); 
       mintCheck();
     }
-  }, [web3Store.address, web3Store.contract]);
+  }, [web3Store.address, callContract]);
 
   const mintCheck = async () => {
     setLoading(true);
     try {
-      let callContract = await Promise.all([
-        web3Store.contract?.methods.maxMintsForCurrentPhase().call(),
-        web3Store.contract?.methods.amountMinted(web3Store.address).call(),
-        web3Store.contract?.methods.currentPhase().call(),
-        web3Store.contract!.methods.getPrices().call(),
-      ]);
-      console.log("hu", callContract);
+      let minted = await web3Store.contract?.methods.amountMinted(web3Store.address).call();
+      console.log(" check 2 hu", callContract);
       const limit = Number(callContract[0]);
-      const minted = Number(callContract[1]);
-      const phase = Number(callContract[2]);
-      const pr = callContract[3];
+      const phase = Number(callContract[1]);
+      const pr = callContract[2];
       setLoading(false);
       if (limit == minted) {
         // toast.error(`You can't mint more than ${limit} in this phase`);
@@ -203,7 +207,10 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             {web3Store.address ? (
               <button
-                className={classNames(styles.modal__mint__button, loading && styles.modal__disable)}
+                className={classNames(
+                  styles.modal__mint__button,
+                  loading && styles.modal__off
+                )}
                 style={{
                   display:
                     available && available !== "limit" ? "block" : "none",

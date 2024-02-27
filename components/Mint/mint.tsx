@@ -72,10 +72,10 @@ const Mint = observer(() => {
             Mint
           </button>
         )}
-        {"timeToMint: " + timeToMint}
+        {/* {"timeToMint: " + timeToMint}
         {"Date.parse(new Date().toString()): " +
           Date.parse(new Date().toString())}
-        {"test:" + timerEnd}
+        {"test:" + timerEnd} */}
         <div className={style.mint__text}>
           Hand drawn, Farcaster native collection focused on world building and
           immersive experience
