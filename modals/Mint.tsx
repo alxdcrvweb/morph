@@ -63,9 +63,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       } else if (phase == 2) {
         setPrice(fromWeiToEth(pr[2]));
       }
-      setLoading(false);
     } catch (e) {
-      setLoading(false);
       console.log(e);
     }
   };
@@ -99,7 +97,6 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       const limit = Number(callContract[0]);
       const phase = Number(callContract[1]);
       const pr = callContract[2];
-      setLoading(false);
       if (limit == Number(minted)) {
         // toast.error(`You can't mint more than ${limit} in this phase`);
         setAvailable("limit");
@@ -209,9 +206,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             {web3Store.address ? (
               <button
-                className={classNames(
-                  styles.modal__mint__button
-                )}
+                className={classNames(styles.modal__mint__button)}
                 style={{
                   display:
                     available && available !== "limit" && !loading
