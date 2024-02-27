@@ -117,7 +117,7 @@ export class Web3Store {
   };
 
   mint = async (amount: number, price: number) => {
-    this.disableMintModal = true;
+    // this.disableMintModal = true;
     try {
       console.log(this.address);
       const res = await this.contract?.methods.mint(amount).send({
@@ -125,10 +125,10 @@ export class Web3Store {
         value: price,
       });
       console.log(res);
-      this.disableMintModal = false;
+      // this.disableMintModal = false;
       return true;
     } catch (error) {
-      this.disableMintModal = false;
+      // this.disableMintModal = false;
       console.log(error);
       return false;
     }
