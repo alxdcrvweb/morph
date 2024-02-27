@@ -20,7 +20,7 @@ const Mint = observer(() => {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      setTimerEnd(timeToMint - Date.parse(new Date().toString()));
+      setTimerEnd(Number(timeToMint) - Number(Date.parse(new Date().toString())));
     }, 1000);
     let tt = setTimeout(() => {
       setOpacity(true);
