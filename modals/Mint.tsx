@@ -69,7 +69,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
     console.log(web3Store.address, web3Store.contract);
     if (web3Store.address && web3Store.contract) {
       console.log(web3Store.address, web3Store.contract);
-      // mintCheck();
+      mintCheck();
     }
   }, [web3Store.address, web3Store.contract]);
 
