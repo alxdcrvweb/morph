@@ -112,7 +112,7 @@ export class Web3Store {
     setTimeout(() => {
       console.log("HIII????");
       this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
-    }, 10000);
+    }, 20000);
     try {
       // this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
       const res = await this.contract?.methods.mint(amount).send({
