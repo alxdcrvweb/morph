@@ -206,7 +206,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             ) : (
               <ConnectButtonCustom />
             )}
-            {!available && (
+            {available == "limit" && (
               <div className={styles.modal__mint__wl}>
                 You can't mint more than {limit} in this phase. Follow the updates on Farcaster{" "}
                 <a
@@ -217,7 +217,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </a>
               </div>
             )}
-            {available == "limit" && (
+            {!available && (
               <div className={styles.modal__mint__wl}>
                 You are not in WL in current phase. Come back on Phase 2 of the
                 mint. Follow the updates on Farcaster{" "}
