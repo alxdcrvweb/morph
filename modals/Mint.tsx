@@ -74,38 +74,42 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   }, [web3Store.address, web3Store.contract]);
 
   const mintCheck = async () => {
-    let limit = await web3Store.contract?.methods
-      .maxMintsForCurrentPhase()
-      .call();
-    let minted = await web3Store.contract?.methods
-      .amountMinted(web3Store.address)
-      .call();
-    const pr = await web3Store.contract!.methods.getPrices().call();
-    let phase = await web3Store.contract!.methods.currentPhase().call();
-    if (minted == limit) {
-      toast.error(`You can't mint more than ${limit} in this phase`);
-      setAvailable("");
-      return;
-    }
-    if (amount > limit - minted) {
-      setAvailable("");
-      toast.error(`You can't mint more than ${limit} in this phase`);
-      return;
-    }
-    if (phase == 1) {
-      console.log("PHASE 1 VALIDATION");
-      let wlCheck = await web3Store
-        .contract!.methods.isWhitelisted(web3Store.address)
+    try {
+      let limit = await web3Store.contract?.methods
+        .maxMintsForCurrentPhase()
         .call();
-      setAvailable(wlCheck);
-    } else if (phase == 2) {
-      let wlCheck = await web3Store
-        .contract!.methods.isWhitelisted(web3Store.address)
+      let minted = await web3Store.contract?.methods
+        .amountMinted(web3Store.address)
         .call();
-      if (wlCheck) {
-        setPrice(pr[1]);
+      const pr = await web3Store.contract!.methods.getPrices().call();
+      let phase = await web3Store.contract!.methods.currentPhase().call();
+      if (minted == limit) {
+        toast.error(`You can't mint more than ${limit} in this phase`);
+        setAvailable("");
+        return;
       }
-      setAvailable(true);
+      if (amount > limit - minted) {
+        setAvailable("");
+        toast.error(`You can't mint more than ${limit} in this phase`);
+        return;
+      }
+      if (phase == 1) {
+        console.log("PHASE 1 VALIDATION");
+        let wlCheck = await web3Store
+          .contract!.methods.isWhitelisted(web3Store.address)
+          .call();
+        setAvailable(wlCheck);
+      } else if (phase == 2) {
+        let wlCheck = await web3Store
+          .contract!.methods.isWhitelisted(web3Store.address)
+          .call();
+        if (wlCheck) {
+          setPrice(pr[1]);
+        }
+        setAvailable(true);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
   const mint = async () => {
@@ -115,14 +119,19 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       return toast.error("You are not allowed to mint in this phase.");
 
     await web3Store.mint(amount, price * amount * 10 ** 18).then((res) => {
-      if (!res) return
+      if (!res) return;
       modalStore.hideAllModals();
       modalStore.showModal(ModalsEnum.MintFinish);
     });
   };
   return (
     <ModalContainer heading="MINT NFT" idx={idx}>
-      <div className={classNames(styles.modal__mint__container,web3Store.disableMintModal && styles.modal__disable)}>
+      <div
+        className={classNames(
+          styles.modal__mint__container,
+          web3Store.disableMintModal && styles.modal__disable
+        )}
+      >
         <img
           className={styles.mint__close}
           onClick={() => {

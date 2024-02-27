@@ -57,14 +57,6 @@ export class Web3Store {
     }
   };
 
-  @action getBalance = async () => {
-    try {
-    } catch (e) {
-      console.log(e);
-    }
-
-    // this.getAllowance();
-  };
   setConnected = (connected: boolean, address?:string) => {
     if (!this.contract) {
       this.connected = connected;
