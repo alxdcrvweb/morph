@@ -8,7 +8,7 @@ import { ModalsEnum } from "../../modals";
 import Timer from "./timer";
 import { Web3Store } from "../../stores/Web3Store";
 
-export const timeToMint = Date.parse("2024-02-26 19:20:00 GMT+0100");
+
 const Mint = observer(() => {
   const [opacity, setOpacity] = useState<boolean>(false);
   const [timerEnd, setTimerEnd] = useState<number>(1);
@@ -16,11 +16,14 @@ const Mint = observer(() => {
   const web3Store = useInjection(Web3Store);
   const openMintModal = () => {
     modalStore.showModal(ModalsEnum.Mint);
-  };
-
+  }
+  const timeToMint = 1709035200000
+  // const timeToMint = 1709060400000
   useEffect(() => {
     let interval = setInterval(() => {
-      setTimerEnd(Number(timeToMint) - Number(Date.parse(new Date().toString())));
+      setTimerEnd(
+        timeToMint - Date.now()
+      );
     }, 1000);
     let tt = setTimeout(() => {
       setOpacity(true);
@@ -70,7 +73,8 @@ const Mint = observer(() => {
           </button>
         )}
         {"timeToMint: " + timeToMint}
-        {"Date.parse(new Date().toString()): " + Date.parse(new Date().toString())}
+        {"Date.parse(new Date().toString()): " +
+          Date.parse(new Date().toString())}
         {"test:" + timerEnd}
         <div className={style.mint__text}>
           Hand drawn, Farcaster native collection focused on world building and

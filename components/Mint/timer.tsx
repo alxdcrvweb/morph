@@ -2,7 +2,7 @@ import { FC, RefObject, useEffect, useState } from "react";
 // styles
 import styles from "../../styles/firstStep.module.scss";
 import { getRandomIntInclusive } from "../../utils/utilities";
-import { timeToMint } from "./mint";
+
 
 const Timer = () => {
   const [timer, setTimer] = useState<string>("");
@@ -17,7 +17,9 @@ const Timer = () => {
   }, []);
 
   function getTimeRemaining() {
-    const total = timeToMint - Date.parse(new Date().toString())
+    const timeToMint = 1709035200000
+    // const timeToMint = 1709060400000
+    const total = timeToMint - Date.now();
     const seconds = Math.floor((total / 1000) % 60);
     const minutes = Math.floor((total / 1000 / 60) % 60);
     const hours = Math.floor(total / (1000 * 60 * 60));
