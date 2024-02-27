@@ -10,6 +10,7 @@ import { mintAbi, mintContract } from "../utils/contracts/mint";
 
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { isMobile } from "react-device-detect";
+import { ModalsEnum } from "../modals";
 interface User {
   login: string;
   email: string;
@@ -57,7 +58,7 @@ export class Web3Store {
     }
   };
 
-  setConnected = (connected: boolean, address?:string) => {
+  setConnected = (connected: boolean) => {
     if (!this.contract) {
       this.connected = connected;
       console.log("INITTTTTTT");
@@ -111,7 +112,10 @@ export class Web3Store {
   mint = async (amount: number, price: number) => {
     // this.disableMintModal = true;
     try {
-      console.log(this.address);
+      setTimeout(()=>{
+        this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
+      },10000)
+      this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
       const res = await this.contract?.methods.mint(amount).send({
         from: this.address,
         value: price,
