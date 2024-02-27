@@ -28,6 +28,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [loading, setLoading] = useState(false);
   const [supply, setSupply] = useState(0);
   const [presaleCap, setPresaleCap] = useState(0);
+  const [mintCap, setMintCap] = useState(0);
+
   const [available, setAvailable] = useState<any>(true);
   const [callContract, setCallContract] = useState<any>([]);
   const noTokens = useMemo(
@@ -52,7 +54,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       return "Second Phase";
     }
     if (phase == 3) {
-      return "Third Phase";
+      return "Minting Closed";
     } else return "Phase 0";
   };
   const checkInfo = async () => {
@@ -64,6 +66,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
         web3Store.contract?.methods.getPrices().call(),
         web3Store.contract?.methods.presaleCap().call(),
         web3Store.contract?.methods.supply().call(),
+        web3Store.contract?.methods.mintCap().call(),
       ]);
       const mnt = Number(cc[0]);
       const phase = Number(cc[1]);
@@ -73,6 +76,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       setLimit(Number(mnt));
       setSupply(Number(cc[4]));
       setPresaleCap(Number(cc[3]));
+      setMintCap(Number(cc[5]));
+
       if (phase == 1) {
         setPrice(fromWeiToEth(pr[0]));
       } else if (phase == 2) {
@@ -130,7 +135,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
         setAvailable(wlCheck);
       } else if (phase == 2) {
         let wlCheck = await web3Store
-          .contract!.methods.isWhitelisted(web3Store.address)
+          .contract!.methods.isValidPhaseTwoMinter(web3Store.address)
           .call();
         if (wlCheck) {
           setPrice(fromWeiToEth(pr[1]));
@@ -175,27 +180,57 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
           <img src={IMAGES.mint.myth} />
           <div className={styles.modal__mint__text}>
             <SmallTitle />
-            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
+            <div
+              className={classNames(
+                styles.modal__mint__row,
+                // phase == "Second Phase" && styles.mint__row__two
+              )}
+            >
               <div>Current Phase</div>
               <div className={styles.modal__mint__line}></div>
               <div>{phase}</div>
             </div>
-            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
+            <div
+              className={classNames(
+                styles.modal__mint__row,
+                // phase == "Second Phase" && styles.mint__row__two
+              )}
+            >
               <div>Total Supply</div>
               <div className={styles.modal__mint__line}></div>
-              <div>1800</div>
+              <div>{mintCap}</div>
             </div>
-            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
+            <div
+              className={classNames(
+                styles.modal__mint__row,
+                // phase == "Second Phase" && styles.mint__row__two
+              )}
+            >
               <div>Chain</div>
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            {phase == "First Phase" && <div className={styles.modal__mint__row}>
-              <div>Tokens left for WL</div>
-              <div className={styles.modal__mint__line}></div>
-              <div>{presaleCap - supply}</div>
-            </div>}
-            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
+            {phase == "First Phase" ? (
+              <div className={styles.modal__mint__row}>
+                <div>Tokens left for WL</div>
+                <div className={styles.modal__mint__line}></div>
+                <div>{presaleCap - supply}</div>
+              </div>
+            ) : phase == "Second Phase" ? (
+              <div className={styles.modal__mint__row}>
+                <div>Tokens left</div>
+                <div className={styles.modal__mint__line}></div>
+                <div>{mintCap - supply}</div>
+              </div>
+            ) : (
+              <></>
+            )}
+            <div
+              className={classNames(
+                styles.modal__mint__row,
+                // phase == "Second Phase" && styles.mint__row__two
+              )}
+            >
               <div>Amount</div>
               <div className={styles.modal__mint__line}></div>
               <div style={{ userSelect: "none" }}>
@@ -220,7 +255,12 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </span>
               </div>
             </div>
-            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
+            <div
+              className={classNames(
+                styles.modal__mint__row,
+                // phase == "Second Phase" && styles.mint__row__two
+              )}
+            >
               <div>Price</div>
               <div className={styles.modal__mint__line}></div>
               <div>{price * amount} ETH</div>
@@ -230,7 +270,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 className={classNames(styles.modal__mint__button)}
                 style={{
                   display:
-                    !noTokens && available && available !== "limit" && !loading
+                    !noTokens && available && available !== "limit" && !loading && phase !== "Minting Closed"
                       ? "block"
                       : "none",
                 }}
