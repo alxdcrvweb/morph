@@ -210,7 +210,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            {!noTokens && (phase == "First Phase" ? (
+            {/* {!noTokens && (phase == "First Phase" ? (
               <div className={styles.modal__mint__row}>
                 <div>Tokens left for WL</div>
                 <div className={styles.modal__mint__line}></div>
@@ -224,7 +224,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               </div>
             ) : (
               <></>
-            ))}
+            ))} */}
             <div
               className={classNames(
                 styles.modal__mint__row,
