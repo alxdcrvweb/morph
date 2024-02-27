@@ -44,14 +44,14 @@ export class Web3Store {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  setProvider = (provider?: any,address?:string) => {
-    if(address) {
+  setProvider = (provider?: any, address?: string) => {
+    if (address) {
       this.address = address;
     }
     console.log("CONNECT", provider);
     if (provider) {
       // this.checked = true;
-      console.log("CONNECT");
+      // console.log("CONNECT");
       this.web3 = new Web3(provider);
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
       this.subscribeProvider();
@@ -61,10 +61,8 @@ export class Web3Store {
   setConnected = (connected: boolean) => {
     if (!this.contract) {
       this.connected = connected;
-      console.log("INITTTTTTT");
-      this.web3 = new Web3(
-        "https://eth-sepolia.public.blastapi.io"
-      );
+      // console.log("INITTTTTTT");
+      this.web3 = new Web3("https://eth-sepolia.public.blastapi.io");
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
@@ -111,11 +109,12 @@ export class Web3Store {
 
   mint = async (amount: number, price: number) => {
     // this.disableMintModal = true;
-    try {
-      setTimeout(()=>{
-        this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
-      },10000)
+    setTimeout(() => {
+      console.log("HIII????");
       this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
+    }, 10000);
+    try {
+      // this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
       const res = await this.contract?.methods.mint(amount).send({
         from: this.address,
         value: price,

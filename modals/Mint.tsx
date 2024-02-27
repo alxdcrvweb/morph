@@ -136,6 +136,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
 
     await web3Store.mint(amount, price * amount * 10 ** 18).then((res) => {
       if (!res) return;
+      // console.log("CLOSSEE?");
       modalStore.hideAllModals();
       modalStore.showModal(ModalsEnum.MintFinish);
     });
