@@ -133,7 +133,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
           .contract!.methods.isWhitelisted(web3Store.address)
           .call();
         if (wlCheck) {
-          setPrice(pr[1]);
+          setPrice(fromWeiToEth(pr[1]));
         }
         setAvailable(true);
       }
@@ -175,27 +175,27 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
           <img src={IMAGES.mint.myth} />
           <div className={styles.modal__mint__text}>
             <SmallTitle />
-            <div className={styles.modal__mint__row}>
+            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
               <div>Current Phase</div>
               <div className={styles.modal__mint__line}></div>
               <div>{phase}</div>
             </div>
-            <div className={styles.modal__mint__row}>
+            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
               <div>Total Supply</div>
               <div className={styles.modal__mint__line}></div>
               <div>1800</div>
             </div>
-            <div className={styles.modal__mint__row}>
+            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
               <div>Chain</div>
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            <div className={styles.modal__mint__row}>
+            {phase == "First phase" && <div className={styles.modal__mint__row}>
               <div>Tokens left for WL</div>
               <div className={styles.modal__mint__line}></div>
               <div>{presaleCap - supply}</div>
-            </div>
-            <div className={styles.modal__mint__row}>
+            </div>}
+            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
               <div>Amount</div>
               <div className={styles.modal__mint__line}></div>
               <div style={{ userSelect: "none" }}>
@@ -220,7 +220,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </span>
               </div>
             </div>
-            <div className={styles.modal__mint__row}>
+            <div className={classNames(styles.modal__mint__row, phase == "Second Phase" && styles.mint__row__two)}>
               <div>Price</div>
               <div className={styles.modal__mint__line}></div>
               <div>{price * amount} ETH</div>
