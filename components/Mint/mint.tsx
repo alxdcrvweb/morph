@@ -67,7 +67,7 @@ const Mint = observer(() => {
           alignItems: "center",
         }}
       >
-        {timerEnd < 0 && (
+        {!web3Store.disableScreen && timerEnd < 0 && (
           <button className={style.mint__button} onClick={openMintModal}>
             Mint
           </button>
