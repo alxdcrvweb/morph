@@ -84,13 +84,13 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       const pr = await web3Store.contract!.methods.getPrices().call();
       let phase = await web3Store.contract!.methods.currentPhase().call();
       if (minted == limit) {
-        toast.error(`You can't mint more than ${limit} in this phase`);
-        setAvailable("");
+        // toast.error(`You can't mint more than ${limit} in this phase`);
+        setAvailable("limit");
         return;
       }
       if (amount > limit - minted) {
-        setAvailable("");
-        toast.error(`You can't mint more than ${limit} in this phase`);
+        setAvailable("limit");
+        // toast.error(`You can't mint more than ${limit} in this phase`);
         return;
       }
       if (phase == 1) {
@@ -114,7 +114,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   };
   const mint = async () => {
     console.log("Available: ", available);
-    if (available == "") return;
+    if (available == "limit") return;
     if (!available)
       return toast.error("You are not allowed to mint in this phase.");
 
@@ -191,7 +191,10 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             {web3Store.address ? (
               <button
                 className={styles.modal__mint__button}
-                style={{ display: available ? "block" : "none" }}
+                style={{
+                  display:
+                    available && available !== "limit" ? "block" : "none",
+                }}
                 onClick={() =>
                   mintCheck().then((el) => {
                     mint();
@@ -205,6 +208,17 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             )}
             {!available && (
               <div className={styles.modal__mint__wl}>
+                You can't mint more than {limit} in this phase. Follow the updates on Farcaster{" "}
+                <a
+                  href="https://warpcast.com/~/channel/morpheus"
+                  target="_blank"
+                >
+                  /morpheus
+                </a>
+              </div>
+            )}
+            {available == "limit" && (
+              <div className={styles.modal__mint__wl}>
                 You are not in WL in current phase. Come back on Phase 2 of the
                 mint. Follow the updates on Farcaster{" "}
                 <a
@@ -215,7 +229,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </a>
               </div>
             )}
-            {available && (
+            {available && available !== "limit" && (
               <div className={styles.modal__mint__roadmap}>
                 Learn more about our Roadmap
               </div>
