@@ -43,6 +43,7 @@ export class Web3Store {
     makeObservable(this);
   }
   setProvider = (provider?: any) => {
+    
     console.log("CONNECT", provider);
     if (provider) {
       // this.checked = true;
@@ -62,11 +63,11 @@ export class Web3Store {
     // this.getAllowance();
   };
   setConnected = (connected: boolean) => {
-    if (!this.signer) {
+    if (!this.contract) {
       this.connected = connected;
       console.log("INITTTTTTT");
       this.web3 = new Web3(
-        Web3.givenProvider || "https://bsc-testnet.publicnode.com"
+        "https://bsc-testnet.publicnode.com"
       );
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);

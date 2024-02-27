@@ -28,8 +28,8 @@ const ConnectButtonCustom = observer(
           // console.log(connect, window.ethereum);
           const { connector } = useAccount();
           const getProvider = async () => {
-            const res =  await connector?.getProvider();
-            setProvider(res)
+            const res = await connector?.getProvider();
+            setProvider(res);
           };
           useEffect(() => {
             if (connector) {
@@ -50,21 +50,23 @@ const ConnectButtonCustom = observer(
           // },[claim])
 
           useEffect(() => {
-            setConnected(connected as boolean);
-            console.log("account:", account);
-            // if (
-            //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
-            // ) {
-            //   setNeedChangeWallet(true);
-            // } else {
-            //   setNeedChangeWallet(false);
-            // }
             if (connected) {
-              setAddress(account);
-            } else {
-              disconnected();
+              setConnected(connected as boolean);
+              console.log("account:", account);
+              // if (
+              //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
+              // ) {
+              //   setNeedChangeWallet(true);
+              // } else {
+              //   setNeedChangeWallet(false);
+              // }
+              if (connected) {
+                setAddress(account);
+              } else {
+                disconnected();
+              }
             }
-          }, [connected, account?.address]);
+          }, [connected]);
           // useEffect(() => {
           //   if (account?.address ) {
           //     setAddress(walletClient?.transport, account?.address);
