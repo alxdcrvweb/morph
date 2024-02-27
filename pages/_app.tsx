@@ -30,7 +30,7 @@ import MainLayout from "../components/MainLayout";
 import AppLoader from "../components/loader";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [sepolia],
+  [base],
   [publicProvider()]
 );
 

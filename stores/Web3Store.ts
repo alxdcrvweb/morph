@@ -62,7 +62,7 @@ export class Web3Store {
     if (!this.contract) {
       this.connected = connected;
       // console.log("INITTTTTTT");
-      this.web3 = new Web3("https://eth-sepolia.public.blastapi.io");
+      this.web3 = new Web3("https://endpoints.omniatech.io/v1/base/mainnet/public");
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
