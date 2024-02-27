@@ -236,6 +236,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </a>
               </div>
             )}
+            <div className={styles.modal__mint__wl}>{web3Store?.address}</div>
             {!available && (
               <div className={styles.modal__mint__wl}>
                 You are not in WL in current phase. Come back on Phase 2 of the
