@@ -10,7 +10,7 @@ import { Web3Store } from "../../stores/Web3Store";
 
 export const timeToMint = Date.parse("2024-02-26 19:20:00 GMT+0100");
 const Mint = observer(() => {
-  const [opacity, setOpacity] = useState<boolean>(false); 
+  const [opacity, setOpacity] = useState<boolean>(false);
   const [timerEnd, setTimerEnd] = useState<number>(1);
   const modalStore = useInjection(ModalStore);
   const web3Store = useInjection(Web3Store);
@@ -49,7 +49,13 @@ const Mint = observer(() => {
           />
         </svg>
 
-        {!web3Store.disableScreen && <div style={{opacity: opacity ? 1 : 0, transition: '500ms ease all'}}>{timerEnd > 0 ? <Timer /> : <StepTitle />}</div>}
+        {!web3Store.disableScreen && (
+          <div
+            style={{ opacity: opacity ? 1 : 0, transition: "500ms ease all" }}
+          >
+            {timerEnd > 0 ? <Timer /> : <StepTitle />}
+          </div>
+        )}
       </div>
       <div
         style={{
@@ -63,6 +69,7 @@ const Mint = observer(() => {
             Mint
           </button>
         )}
+        {"test:" + timerEnd}
         <div className={style.mint__text}>
           Hand drawn, Farcaster native collection focused on world building and
           immersive experience
