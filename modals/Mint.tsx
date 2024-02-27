@@ -11,6 +11,7 @@ import { fromWeiToEth } from "../utils/utilities";
 import classNames from "classnames";
 import { toast } from "react-toastify";
 import ConnectButtonCustom from "../components/Header/connectButtonCustom";
+import { IMAGES } from "../components/images";
 
 interface modalProps {
   data?: any;
@@ -157,7 +158,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
           src="/close.svg"
         />
         <div className={styles.modal__mint}>
-          <img src="/myth.png" />
+          <img src={IMAGES.mint.myth} />
           <div className={styles.modal__mint__text}>
             <SmallTitle />
             <div className={styles.modal__mint__row}>

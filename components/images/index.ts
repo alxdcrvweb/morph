@@ -103,11 +103,17 @@ export const IMAGES = {
     gatherer: "/showdown/gatherer.jpg",
     rider: "/showdown/rider.jpg",
   },
+  mint: {
+    mintbg: "/mintbg.png",
+    mintFinish: "/mintFinish.png",
+    mintSecondLayer: "/mintSecondLayer.png",
+    myth: "/myth.png",
+  },
 };
 
 export const VIDEOS = {
-  terminalMP4: "/videos/terminal/TerminalEye2.mp4",
-  terminalWebm: "/videos/terminal/TerminalEye2.webm",
+  // terminalMP4: "/videos/terminal/TerminalEye2.mp4",
+  // terminalWebm: "/videos/terminal/TerminalEye2.webm",
   sleepingSecondPageMP4: "/videos/sleeping/SleepingSecondPageVideo.mp4",
   sleepingSecondPageWebm: "/videos/sleeping/SleepingSecondPageVideo.webm",
   awakeSecondPageMP4: "/videos/awake/AwakeSecondPageVideo.mp4",

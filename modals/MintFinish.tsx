@@ -8,6 +8,7 @@ import { useInjection } from "inversify-react";
 import classNames from "classnames";
 import { useEffect } from "react";
 import { Web3Store } from "../stores/Web3Store";
+import { IMAGES } from "../components/images";
 
 interface modalProps {
   data?: any;
@@ -41,7 +42,7 @@ export const MintFinish = observer(({ data, idx }: modalProps) => {
         <div
           className={classNames(styles.modal__mint, styles.modal__mint__finish)}
         >
-          <img src="/mintFinish.png" />
+          <img src={IMAGES.mint.mintFinish} />
           <div className={styles.modal__mint__text}>
             <svg
               width="57"

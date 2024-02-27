@@ -7,6 +7,7 @@ import { ModalStore } from "../../stores/ModalStore";
 import { ModalsEnum } from "../../modals";
 import Timer from "./timer";
 import { Web3Store } from "../../stores/Web3Store";
+import { IMAGES } from "../images";
 
 
 const Mint = observer(() => {
@@ -35,7 +36,7 @@ const Mint = observer(() => {
   }, []);
   return (
     <div className={style.mint__main}>
-      <img className={style.mint__second__layer} src="/mintSecondLayer.png" />
+      <img className={style.mint__second__layer} src={IMAGES.mint.mintSecondLayer} />
       <div className={style.mint__top}>
         <svg
           width="57"
