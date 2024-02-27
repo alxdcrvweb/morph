@@ -27,16 +27,8 @@ const ConnectButtonCustom = observer(
           // const connect = useConnect()
           // console.log(connect, window.ethereum);
           const { connector } = useAccount();
-          const getProvider = async () => {
-            const res = await connector?.getProvider();
-            setProvider(res);
-          };
-          useEffect(() => {
-            if (connector) {
-              console.log("connector", connector);
-              getProvider();
-            }
-          }, [connector]);
+          
+
           const ready = mounted && authenticationStatus !== "loading";
           const connected =
             ready &&
@@ -48,25 +40,32 @@ const ConnectButtonCustom = observer(
           //     setReward(Number(Number(fromWei(claim.toString())).toFixed(2)))
           //   }
           // },[claim])
-
           useEffect(() => {
-            if (connected) {
-              setConnected(connected as boolean);
-              console.log("account:", account);
-              // if (
-              //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
-              // ) {
-              //   setNeedChangeWallet(true);
-              // } else {
-              //   setNeedChangeWallet(false);
-              // }
-              if (connected) {
-                setAddress(account);
-              } else {
-                disconnected();
-              }
+            if (connector) {
+              console.log("connector", connector, account);
+              getProvider();
             }
-          }, [connected]);
+          }, [connector]);
+          const getProvider = async () => {
+            const res = await connector?.getProvider();
+            setProvider(res, account?.address);
+          };
+          useEffect(() => {
+            setConnected(connected as boolean);
+            console.log("account:", account);
+            // if (
+            //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
+            // ) {
+            //   setNeedChangeWallet(true);
+            // } else {
+            //   setNeedChangeWallet(false);
+            // }
+            if (connected) {
+              setAddress(account);
+            } else {
+              disconnected();
+            }
+          }, []);
           // useEffect(() => {
           //   if (account?.address ) {
           //     setAddress(walletClient?.transport, account?.address);

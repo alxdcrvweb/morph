@@ -39,11 +39,14 @@ export class Web3Store {
   @observable contract?: any = undefined;
   @observable connected: boolean = false;
   @observable unsupported?: boolean = false;
+  @observable disableMintModal?: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  setProvider = (provider?: any) => {
-    
+  setProvider = (provider?: any,address?:string) => {
+    if(address) {
+      this.address = address;
+    }
     console.log("CONNECT", provider);
     if (provider) {
       // this.checked = true;
@@ -62,7 +65,7 @@ export class Web3Store {
 
     // this.getAllowance();
   };
-  setConnected = (connected: boolean) => {
+  setConnected = (connected: boolean, address?:string) => {
     if (!this.contract) {
       this.connected = connected;
       console.log("INITTTTTTT");
@@ -114,6 +117,7 @@ export class Web3Store {
   };
 
   mint = async (amount: number, price: number) => {
+    this.disableMintModal = true;
     try {
       console.log(this.address);
       const res = await this.contract?.methods.mint(amount).send({
@@ -121,8 +125,10 @@ export class Web3Store {
         value: price,
       });
       console.log(res);
+      this.disableMintModal = false;
       return true;
     } catch (error) {
+      this.disableMintModal = false;
       console.log(error);
       return false;
     }

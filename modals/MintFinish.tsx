@@ -75,7 +75,7 @@ export const MintFinish = observer(({ data, idx }: modalProps) => {
               </a>{" "}
               or{" "}
               <a
-                href="https://opensea.io/"
+                href="https://testnets.opensea.io/collection/name-1648"
                 className={styles.modal__link}
                 target="_blank"
               >

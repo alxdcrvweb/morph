@@ -122,7 +122,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   };
   return (
     <ModalContainer heading="MINT NFT" idx={idx}>
-      <div className={styles.modal__mint__container}>
+      <div className={classNames(styles.modal__mint__container,web3Store.disableMintModal && styles.modal__disable)}>
         <img
           className={styles.mint__close}
           onClick={() => {
