@@ -24,7 +24,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [phase, setPhase] = useState("0");
   const [price, setPrice] = useState(0);
   const [limit, setLimit] = useState(0);
-  const [available, setAvailable] = useState<any>(false);
+  const [available, setAvailable] = useState<any>(true);
   useEffect(() => {
     web3Store.disableMintScreen(true);
     return () => {
@@ -44,32 +44,43 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   };
   const checkInfo = async () => {
     try {
-      const pr = await web3Store.contract!.methods.currentMintPrice().call();
+      const pr = await web3Store.contract!.methods.getPrices().call();
       const mnt = await web3Store
         .contract!.methods.maxMintsForCurrentPhase()
         .call();
 
       const phase = await web3Store.contract!.methods.currentPhase().call();
-      console.log(phase);
+
       setPhase(getPhase(phase));
       setLimit(mnt);
-      setPrice(fromWeiToEth(pr));
+      if (phase == 1) {
+        setPrice(fromWeiToEth(pr[0]));
+      } else if (phase == 2) {
+        setPrice(fromWeiToEth(pr[2]));
+      }
     } catch (e) {
       console.log(e);
     }
   };
   useEffect(() => {
-    console.log(web3Store.contract);
-    checkInfo();
-  }, []);
-  const mintCheck = async () => {
-    let limit = await web3Store
-      .contract!.methods.maxMintsForCurrentPhase()
-      .call();
-    let minted = await web3Store
-      .contract!.methods.amountMinted(web3Store.address)
-      .call();
+    if (web3Store.contract) checkInfo();
+  }, [web3Store.contract]);
+  useEffect(() => {
+    console.log(web3Store.address, web3Store.contract);
+    if (web3Store.address && web3Store.contract) {
+      console.log(web3Store.address, web3Store.contract);
+      mintCheck();
+    }
+  }, [web3Store.address, web3Store.contract]);
 
+  const mintCheck = async () => {
+    let limit = await web3Store.contract?.methods
+      .maxMintsForCurrentPhase()
+      .call();
+    let minted = await web3Store.contract?.methods
+      .amountMinted(web3Store.address)
+      .call();
+    const pr = await web3Store.contract!.methods.getPrices().call();
     let phase = await web3Store.contract!.methods.currentPhase().call();
     if (minted == limit) {
       toast.error(`You can't mint more than ${limit} in this phase`);
@@ -88,13 +99,12 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
         .call();
       setAvailable(wlCheck);
     } else if (phase == 2) {
-      console.log("PHASE 2 VALIDATION");
-      let phaseTwoCheck = await web3Store
-        .contract!.methods.isValidPhaseTwoMinter(web3Store.address)
+      let wlCheck = await web3Store
+        .contract!.methods.isWhitelisted(web3Store.address)
         .call();
-      setAvailable(phaseTwoCheck);
-    } else if (phase == 3) {
-      console.log("PHASE 3 VALIDATION");
+      if (wlCheck) {
+        setPrice(pr[1]);
+      }
       setAvailable(true);
     }
   };
@@ -172,6 +182,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             {web3Store.address ? (
               <button
                 className={styles.modal__mint__button}
+                style={{ display: available ? "block" : "none" }}
                 onClick={() =>
                   mintCheck().then((el) => {
                     mint();
@@ -181,11 +192,25 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 Mint
               </button>
             ) : (
-              <ConnectButtonCustom/>
+              <ConnectButtonCustom />
             )}
-            <div className={styles.modal__mint__roadmap}>
-              Learn more about our Roadmap
-            </div>
+            {!available && (
+              <div className={styles.modal__mint__wl}>
+                You are not in WL in current phase. Come back on Phase 2 of the
+                mint. Follow the updates on Farcaster{" "}
+                <a
+                  href="https://warpcast.com/~/channel/morpheus"
+                  target="_blank"
+                >
+                  /morpheus
+                </a>
+              </div>
+            )}
+            {available && (
+              <div className={styles.modal__mint__roadmap}>
+                Learn more about our Roadmap
+              </div>
+            )}
           </div>
         </div>
       </div>

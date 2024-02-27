@@ -51,7 +51,7 @@ export class Web3Store {
       console.log("CONNECT");
       this.signer && console.log(this.signer.transport);
       this.web3 = new Web3(
-        window.ethereum || "https://bsc-testnet.publicnode.com" 
+        window.ethereum || "https://bsc-testnet.publicnode.com"
       );
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
@@ -59,7 +59,6 @@ export class Web3Store {
 
   @action getBalance = async () => {
     try {
-      
     } catch (e) {
       console.log(e);
     }
@@ -69,17 +68,27 @@ export class Web3Store {
   setConnected = (connected: boolean) => {
     this.connected = connected;
     console.log("INITTTTTTT");
-    this.web3 = new Web3(window.ethereum || "https://bsc-testnet.publicnode.com");
+    this.web3 = new Web3(
+      window.ethereum || "https://bsc-testnet.publicnode.com"
+    );
+    this.subscribeProvider()
     this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
   };
   @action setAddress = (user: any) => {
     this.address = user.address;
   };
+  @action subscribeProvider = () => {
+    console.log("subscribeProvider");
+    this.web3?.currentProvider?.on("accountsChanged", (account) => {
+      console.log("account", account);
+      this.setAddress({ address: account[0] });
+    });
+  };
 
   disconnected = () => {
     this.address = null;
   };
-  
+
   disableMintScreen = (status: boolean) => {
     this.disableScreen = status;
   };
