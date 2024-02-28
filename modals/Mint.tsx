@@ -210,7 +210,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            {/* {!noTokens && (phase == "First Phase" ? (
+            {!noTokens && (phase == "First Phase" ? (
               <div className={styles.modal__mint__row}>
                 <div>Tokens left for WL</div>
                 <div className={styles.modal__mint__line}></div>
@@ -224,7 +224,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               </div>
             ) : (
               <></>
-            ))} */}
+            ))}
             <div
               className={classNames(
                 styles.modal__mint__row,
@@ -285,7 +285,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             ) : (
               <ConnectButtonCustom />
             )}
-            {available == "limit" && (
+            {!noTokens && available == "limit" && (
               <div className={styles.modal__mint__wl}>
                 You can't mint more than {limit} in this phase. Follow the
                 updates on Farcaster{" "}
@@ -309,7 +309,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </a>
               </div>
             )}
-            {!available && (
+            {!noTokens && !available && (
               <div className={styles.modal__mint__wl}>
                 You are not in WL in current phase. Come back on Phase 2 of the
                 mint. Follow the updates on Farcaster{" "}
