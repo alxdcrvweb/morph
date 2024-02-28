@@ -183,8 +183,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             <SmallTitle />
             <div
               className={classNames(
-                styles.modal__mint__row
-                // phase == "Second Phase" && styles.mint__row__two
+                styles.modal__mint__row,
+                phase == "Second Phase" && styles.mint__row__two
               )}
             >
               <div>Current Phase</div>
@@ -193,25 +193,25 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             <div
               className={classNames(
-                styles.modal__mint__row
-                // phase == "Second Phase" && styles.mint__row__two
+                styles.modal__mint__row,
+                phase == "Second Phase" && styles.mint__row__two
               )}
             >
               <div>Total Supply</div>
               <div className={styles.modal__mint__line}></div>
-              <div>{mintCap}</div>
+              <div>900</div>
             </div>
             <div
               className={classNames(
-                styles.modal__mint__row
-                // phase == "Second Phase" && styles.mint__row__two
+                styles.modal__mint__row,
+                phase == "Second Phase" && styles.mint__row__two
               )}
             >
               <div>Chain</div>
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            {!noTokens &&
+            {/* {!noTokens &&
               (phase == "First Phase" ? (
                 <div className={styles.modal__mint__row}>
                   <div>Tokens left for WL</div>
@@ -226,11 +226,11 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 </div>
               ) : (
                 <></>
-              ))}
+              ))} */}
             <div
               className={classNames(
-                styles.modal__mint__row
-                // phase == "Second Phase" && styles.mint__row__two
+                styles.modal__mint__row,
+                phase == "Second Phase" && styles.mint__row__two
               )}
             >
               <div>Amount</div>
