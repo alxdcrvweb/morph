@@ -68,11 +68,11 @@ const Mint = observer(() => {
           alignItems: "center",
         }}
       >
-        {!web3Store.disableScreen && timerEnd < 0 && (
+        {/* {!web3Store.disableScreen && timerEnd < 0 && (
           <button className={style.mint__button} onClick={openMintModal}>
             Mint
           </button>
-        )}
+        )} */}
         {/* {"timeToMint: " + timeToMint}
         {"Date.parse(new Date().toString()): " +
           Date.parse(new Date().toString())}
