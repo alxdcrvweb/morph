@@ -29,7 +29,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
   const [supply, setSupply] = useState(0);
   const [presaleCap, setPresaleCap] = useState(0);
   const [mintCap, setMintCap] = useState(0);
-
+  const [minted, setMinted] = useState(0);
   const [available, setAvailable] = useState<any>(true);
   const [callContract, setCallContract] = useState<any>([]);
   const noTokens = useMemo(
@@ -117,6 +117,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
       const limit = Number(callContract[0]);
       const phase = Number(callContract[1]);
       const pr = callContract[2];
+      setMinted(Number(minted));
       if (limit == Number(minted)) {
         // toast.error(`You can't mint more than ${limit} in this phase`);
         setAvailable("limit");
@@ -182,7 +183,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             <SmallTitle />
             <div
               className={classNames(
-                styles.modal__mint__row,
+                styles.modal__mint__row
                 // phase == "Second Phase" && styles.mint__row__two
               )}
             >
@@ -192,7 +193,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             <div
               className={classNames(
-                styles.modal__mint__row,
+                styles.modal__mint__row
                 // phase == "Second Phase" && styles.mint__row__two
               )}
             >
@@ -202,7 +203,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             <div
               className={classNames(
-                styles.modal__mint__row,
+                styles.modal__mint__row
                 // phase == "Second Phase" && styles.mint__row__two
               )}
             >
@@ -210,24 +211,25 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
               <div className={styles.modal__mint__line}></div>
               <div>Base</div>
             </div>
-            {!noTokens && (phase == "First Phase" ? (
-              <div className={styles.modal__mint__row}>
-                <div>Tokens left for WL</div>
-                <div className={styles.modal__mint__line}></div>
-                <div>{presaleCap - supply}</div>
-              </div>
-            ) : phase == "Second Phase" ? (
-              <div className={styles.modal__mint__row}>
-                <div>Tokens left</div>
-                <div className={styles.modal__mint__line}></div>
-                <div>{mintCap - supply}</div>
-              </div>
-            ) : (
-              <></>
-            ))}
+            {!noTokens &&
+              (phase == "First Phase" ? (
+                <div className={styles.modal__mint__row}>
+                  <div>Tokens left for WL</div>
+                  <div className={styles.modal__mint__line}></div>
+                  <div>{presaleCap - supply}</div>
+                </div>
+              ) : phase == "Second Phase" ? (
+                <div className={styles.modal__mint__row}>
+                  <div>Tokens left</div>
+                  <div className={styles.modal__mint__line}></div>
+                  <div>{mintCap - supply}</div>
+                </div>
+              ) : (
+                <></>
+              ))}
             <div
               className={classNames(
-                styles.modal__mint__row,
+                styles.modal__mint__row
                 // phase == "Second Phase" && styles.mint__row__two
               )}
             >
@@ -247,7 +249,8 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 <span
                   className={classNames(
                     styles.modal__count,
-                    (amount == limit || noAmount) && styles.modal__disable
+                    (amount == limit || noAmount) && styles.modal__disable,
+                    limit == minted + amount && styles.modal__disable
                   )}
                   onClick={() => setAmount(amount + 1)}
                 >
@@ -257,7 +260,7 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
             </div>
             <div
               className={classNames(
-                styles.modal__mint__row,
+                styles.modal__mint__row
                 // phase == "Second Phase" && styles.mint__row__two
               )}
             >
@@ -270,7 +273,11 @@ export const MintModal = observer(({ data, idx }: modalProps) => {
                 className={classNames(styles.modal__mint__button)}
                 style={{
                   display:
-                    !noTokens && available && available !== "limit" && !loading && phase !== "Minting Closed"
+                    !noTokens &&
+                    available &&
+                    available !== "limit" &&
+                    !loading &&
+                    phase !== "Minting Closed"
                       ? "block"
                       : "none",
                 }}
