@@ -9,27 +9,47 @@ interface SocialProps {
 const Social: FC<SocialProps> = ({ routerPath }) => {
   return (
     <nav className={styles.social}>
-      <ul className={styles.social__list}>
-        <li>
-          <a
-            href="https://opensea.io/collection/morpheus-pfp"
-            target={"_blank"}
-            rel="noreferrer"
-            className={cn(
-              styles.social__link,
-              routerPath === "sleeping"
-                ? styles.social__link_sleeping
-                : routerPath === "story"
-                ? styles.social__link_story
-                : routerPath === "awake"
-                ? styles.social__link_awake
-                : styles.social__link_terminal
-            )}
-          >
-            <img src="/OpenSea.svg" style={{ width: "25px", height: "25px" }} />
-          </a>
-        </li>
-        {/* <li>
+      <a
+        href="https://opensea.io/collection/morpheus-pfp"
+        target={"_blank"}
+        rel="noreferrer"
+        className={cn(
+          styles.social__link,
+          routerPath === "sleeping"
+            ? styles.social__link_sleeping
+            : routerPath === "story"
+            ? styles.social__link_story
+            : routerPath === "awake"
+            ? styles.social__link_awake
+            : styles.social__link_terminal
+        )}
+      >
+        <img
+          src="/OpenSea.svg"
+          style={{ cursor: "pointer", width: "25px", height: "25px" }}
+        />
+      </a>
+      <a
+        href="https://warpcast.com/~/channel/morpheus"
+        target={"_blank"}
+        rel="noreferrer"
+        className={cn(
+          styles.social__link,
+          routerPath === "sleeping"
+            ? styles.social__link_sleeping
+            : routerPath === "story"
+            ? styles.social__link_story
+            : routerPath === "awake"
+            ? styles.social__link_awake
+            : styles.social__link_terminal
+        )}
+      >
+        <img
+          src="/frcaster.svg"
+          style={{ cursor: "pointer", width: "25px", height: "25px" }}
+        />
+      </a>
+      {/* <li>
 					<a
 						href="https://discord.gg/WukVVsAqTy"
 						target={'_blank'}
@@ -47,7 +67,7 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
 						</svg>
 					</a>
 				</li> */}
-        {/* <li>
+      {/* <li>
 					<a
 						href="https://www.instagram.com/mrphsnft/"
 						target={'_blank'}
@@ -65,7 +85,6 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
 						</svg>
 					</a>
 				</li> */}
-      </ul>
     </nav>
   );
 };
