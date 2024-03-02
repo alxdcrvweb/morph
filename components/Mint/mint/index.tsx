@@ -1,4 +1,4 @@
-import Mint from "../../components/Mint/mint";
+import Mint from "../mint";
 
 const MintPage = () => {
   return (
