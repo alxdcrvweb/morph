@@ -13,6 +13,7 @@ import "@farcaster/auth-kit/styles.css";
 
 import story from "../../styles/story.module.scss";
 import { signIn, signOut } from "next-auth/react";
+import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
   csrfToken: string;
@@ -33,20 +34,7 @@ const Header: FC<HeaderProps> = observer((props) => {
       setActive("mint");
     }
   }, [router.asPath]);
-  const [error, setError] = useState(false);
 
-  const handleSuccess = useCallback(
-    (res: StatusAPIResponse) => {
-      signIn("credentials", {
-        message: res.message,
-        signature: res.signature,
-        name: res.username,
-        pfp: res.pfpUrl,
-        redirect: false,
-      });
-    },
-    [signIn]
-  );
 
   const closeMenuHandler = () => {
     setOpenMenu(false);
@@ -76,7 +64,9 @@ const Header: FC<HeaderProps> = observer((props) => {
               {warpcasterUser?.display_name}
             </div>
           )} */}
-
+          <div style={{opacity:0}}>
+            <SignInButton />
+            </div>
          {/* {props.csrfToken ? (
             <div style={{opacity:0}}>
             <SignInButton

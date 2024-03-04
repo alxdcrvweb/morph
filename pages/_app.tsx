@@ -18,7 +18,12 @@ import "../components/polyfills";
 import Head from "next/head";
 import MainLayout from "../components/MainLayout";
 import AppLoader from "../components/loader";
-import { AuthKitProvider } from "@farcaster/auth-kit";
+import {
+  AuthKitProvider,
+  SignInButton,
+  useProfile,
+  useSignInMessage,
+} from "@farcaster/auth-kit";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -43,12 +48,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     setLoading(true);
   }, []);
   const config = {
-    // For a production app, replace this with an Optimism Mainnet
-    // RPC URL from a provider like Alchemy or Infura.
-    relay: "https://relay.farcaster.xyz",
     rpcUrl: "https://mainnet.optimism.io",
-    siweUri: "https://mrphs.io/",
-    domain: "mrphs.io",
   };
   return (
     <>
