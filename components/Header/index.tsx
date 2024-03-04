@@ -13,7 +13,7 @@ import "@farcaster/auth-kit/styles.css";
 
 import story from "../../styles/story.module.scss";
 import { signIn, signOut } from "next-auth/react";
-import { SignInButton } from "@farcaster/auth-kit";
+// import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
   csrfToken: string;
@@ -64,8 +64,8 @@ const Header: FC<HeaderProps> = observer((props) => {
               {warpcasterUser?.display_name}
             </div>
           )} */}
-          <div style={{opacity:0}}>
-            <SignInButton />
+          <div style={{opacity:1}}>
+            {/* <SignInButton /> */}
             </div>
          {/* {props.csrfToken ? (
             <div style={{opacity:0}}>

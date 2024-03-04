@@ -53,8 +53,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <>
       {loading ? (
-        // <SessionProvider session={session}>
-         <AuthKitProvider config={config}>
             <AppLoader>
               <Provider container={container}>
                 <WagmiProvider config={wagmiConfig}>
@@ -81,8 +79,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
                 </WagmiProvider>
               </Provider>
             </AppLoader>
-         </AuthKitProvider>
-        //  </SessionProvider>
+     
       ) : (
         <></>
       )}
