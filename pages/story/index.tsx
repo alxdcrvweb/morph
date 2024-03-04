@@ -6,10 +6,10 @@ import StoryConnect from "../../components/Story/StoryConnect";
 import StorySlider from "../../components/Story/StorySlider";
 import styles from "../../styles/story.module.scss";
 import { getCsrfToken } from "next-auth/react";
-// export async function getServerSideProps(context: any) {
-//   const csrfToken = await getCsrfToken(context);
-//   return { props: { csrfToken } };
-// }
+export async function getServerSideProps(context: any) {
+  const csrfToken = await getCsrfToken(context);
+  return { props: { csrfToken } };
+}
 
 const Story: NextPage = observer(() => {
   // useEffect(() => {
