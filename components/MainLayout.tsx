@@ -4,7 +4,7 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { LocomotiveScrollProvider, Scroll } from "react-locomotive-scroll";
 import decor1 from "../public/showdown/decor1.svg";
 import decor2 from "../public/showdown/decor2.svg";
@@ -14,19 +14,28 @@ import BackLink from "./StoryBackLink";
 import { useInjection } from "inversify-react";
 import axios from "axios";
 import { Web3Store } from "../stores/Web3Store";
+// import { getCsrfToken } from "next-auth/react";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
 interface MyHead {
+  props: { csrfToken: string };
   children: ReactElement;
 }
 
-export default function MainLayout({ children }: MyHead) {
+export default function MainLayout({ children, props }: MyHead) {
+  console.log(props);
   const router = useRouter();
   const [prevPath, setPrevPath] = useState("");
   const routerPathName = router.asPath.split("/")[1];
   const mainRef = useRef(null);
   const userStore = useInjection(Web3Store);
+  
+  // const getNonce = useCallback(async () => {
+  //   const nonce = await getCsrfToken();
+  //   if (!nonce) throw new Error("Unable to generate nonce");
+  //   return nonce;
+  // }, []);
   const getUserById = async (id: string | null) => {
     try {
       const response = await axios.get(
@@ -139,7 +148,7 @@ export default function MainLayout({ children }: MyHead) {
         // location={router.asPath}
         // onLocationChange={locationChangeHandler}
       >
-        <Header routerPath={routerPathName} />
+        <Header routerPath={routerPathName} csrfToken={props.csrfToken}/>
         <main data-scroll-container ref={mainRef}>
           {children}
         </main>

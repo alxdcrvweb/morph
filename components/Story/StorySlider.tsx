@@ -23,13 +23,13 @@ const {
 const StorySlider: FC = observer(() => {
 
 	const [swiperRef, setSwiperRef] = useState<SwiperCore | null>(null);
-	const { tokensList, getTokens, web3 } = useInjection(Web3Store)
+	const { tokensList, web3 } = useInjection(Web3Store)
 	const router = useRouter()
 	const isMobile = useMediaQuery({ maxWidth: 767.98 })
 
-	useEffect(() => {
-		if (web3) getTokens()
-	}, [web3])
+	// useEffect(() => {
+	// 	if (web3) getTokens()
+	// }, [web3])
 
 	const slideTo = (index: number) => { swiperRef!.slideTo(index, 0) };
 	const slideToPrev = () => { swiperRef!.slidePrev(1000, false) };

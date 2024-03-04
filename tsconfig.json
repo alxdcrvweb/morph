@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-	"skipDefaultLibCheck": true,
+    "skipDefaultLibCheck": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
@@ -16,7 +16,10 @@
     "jsx": "preserve",
     "incremental": true,
     "experimentalDecorators": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "paths": {
+      "react/jsx-runtime": ["./node_modules/react/jsx-runtime"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -24,5 +27,6 @@
     "**/*.tsx",
     "components/wallet/connectors.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -3,7 +3,6 @@ import { action, makeObservable, observable } from "mobx";
 import "reflect-metadata";
 import Web3 from "web3";
 import { RootStore } from "./RootStore";
-import Web3Modal from "web3modal";
 import { chainId, netId, netName } from "../config/config";
 import { WalletClient } from "wagmi";
 import { mintAbi, mintContract } from "../utils/contracts/mint";
@@ -23,7 +22,6 @@ export class Web3Store {
   @observable address: string | null = null;
   @observable isConnecting: boolean = false;
   @observable provider: any = null;
-  @observable web3Modal: any = null;
   @observable web3: Web3 | null = null;
   @observable disabledConnectBtn: boolean = false;
   @observable disabledInput: boolean = true;
@@ -61,8 +59,7 @@ export class Web3Store {
   setConnected = (connected: boolean) => {
     if (!this.contract) {
       this.connected = connected;
-      // console.log("INITTTTTTT");
-      this.web3 = new Web3("https://eth-sepolia.public.blastapi.io");
+      this.web3 = new Web3("https://endpoints.omniatech.io/v1/base/mainnet/public");
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
@@ -100,7 +97,6 @@ export class Web3Store {
     }
   };
   disconnectWallet = async () => {
-    this.web3Modal?.clearCachedProvider();
     this.provider = null;
     this.address = null;
     this.web3 = null;
@@ -112,7 +108,7 @@ export class Web3Store {
     setTimeout(() => {
       console.log("HIII????");
       this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
-    }, 10000);
+    }, 20000);
     try {
       // this.rootStore.modalStore.hideModal(ModalsEnum.Mint);
       const res = await this.contract?.methods.mint(amount).send({

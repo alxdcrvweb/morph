@@ -1,4 +1,4 @@
-export const mintContract = "0xF19Fd4Ed4BF14687B455908Ab885882E5EBBA1b2";
+export const mintContract = "0x670971dCB8e1a510253511427593007e074954b7";
 export const mintAbi = [
   {
     inputs: [

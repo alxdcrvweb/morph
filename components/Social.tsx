@@ -9,38 +9,47 @@ interface SocialProps {
 const Social: FC<SocialProps> = ({ routerPath }) => {
   return (
     <nav className={styles.social}>
-      <ul className={styles.social__list}>
-        <li>
-          <a
-            href="https://twitter.com/mrphsnft?s=21"
-            target={"_blank"}
-            rel="noreferrer"
-            className={cn(
-              styles.social__link,
-              routerPath === "sleeping"
-                ? styles.social__link_sleeping
-                : routerPath === "story"
-                ? styles.social__link_story
-                : routerPath === "awake"
-                ? styles.social__link_awake
-                : styles.social__link_terminal
-            )}
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13.7142 10.6226L20.4162 3H18.8286L13.0068 9.61729L8.3604 3H3L10.0278 13.0075L3 21H4.5876L10.7316 14.0104L15.6396 21H21M5.1606 4.17142H7.5996L18.8274 19.8861H16.3878"
-                fill="#B4B4B3"
-              />
-            </svg>
-          </a>
-        </li>
-        {/* <li>
+      <a
+        href="https://opensea.io/collection/morpheus-pfp"
+        target={"_blank"}
+        rel="noreferrer"
+        className={cn(
+          styles.social__link,
+          routerPath === "sleeping"
+            ? styles.social__link_sleeping
+            : routerPath === "story"
+            ? styles.social__link_story
+            : routerPath === "awake"
+            ? styles.social__link_awake
+            : styles.social__link_terminal
+        )}
+      >
+        <img
+          src="/OpenSea.svg"
+          style={{ cursor: "pointer", width: "25px", height: "25px" }}
+        />
+      </a>
+      <a
+        href="https://warpcast.com/~/channel/morpheus"
+        target={"_blank"}
+        rel="noreferrer"
+        className={cn(
+          styles.social__link,
+          routerPath === "sleeping"
+            ? styles.social__link_sleeping
+            : routerPath === "story"
+            ? styles.social__link_story
+            : routerPath === "awake"
+            ? styles.social__link_awake
+            : styles.social__link_terminal
+        )}
+      >
+        <img
+          src="/frcaster.svg"
+          style={{ cursor: "pointer", width: "25px", height: "25px" }}
+        />
+      </a>
+      {/* <li>
 					<a
 						href="https://discord.gg/WukVVsAqTy"
 						target={'_blank'}
@@ -58,7 +67,7 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
 						</svg>
 					</a>
 				</li> */}
-        {/* <li>
+      {/* <li>
 					<a
 						href="https://www.instagram.com/mrphsnft/"
 						target={'_blank'}
@@ -76,7 +85,6 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
 						</svg>
 					</a>
 				</li> */}
-      </ul>
     </nav>
   );
 };
