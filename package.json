@@ -44,6 +44,7 @@
     "react-css-modules": "^4.7.11",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
     "react-locomotive-scroll": "^0.2.0",
     "react-responsive": "^9.0.0-beta.8",
     "react-toastify": "^8.1.0",
