@@ -13,6 +13,7 @@ import "@farcaster/auth-kit/styles.css";
 
 import story from "../../styles/story.module.scss";
 import { signIn, signOut } from "next-auth/react";
+import { SignInButton } from "@farcaster/auth-kit";
 // import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
@@ -65,7 +66,7 @@ const Header: FC<HeaderProps> = observer((props) => {
             </div>
           )} */}
           <div style={{opacity:1}}>
-            {/* <SignInButton /> */}
+            <SignInButton />
             </div>
          {/* {props.csrfToken ? (
             <div style={{opacity:0}}>
