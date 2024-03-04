@@ -36,7 +36,6 @@ const Header: FC<HeaderProps> = observer((props) => {
     }
   }, [router.asPath]);
 
-
   const closeMenuHandler = () => {
     setOpenMenu(false);
   };
@@ -65,10 +64,10 @@ const Header: FC<HeaderProps> = observer((props) => {
               {warpcasterUser?.display_name}
             </div>
           )} */}
-          <div style={{opacity:1}}>
+          <div style={{ opacity: 1, color: "white" }}>
             <SignInButton />
-            </div>
-         {/* {props.csrfToken ? (
+          </div>
+          {/* {props.csrfToken ? (
             <div style={{opacity:0}}>
             <SignInButton
               nonce={props.csrfToken}
