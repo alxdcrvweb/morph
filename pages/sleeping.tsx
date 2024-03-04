@@ -9,15 +9,15 @@ import SecondSection from "../components/SecondSection";
 import FirstSleepingArt from "../components/Sleeping/FirstSection/FirstSleepingArt";
 import SecondSleepingArt from "../components/Sleeping/SecondSection/SecondSleepingArt";
 import ThirdSection from "../components/ThirdSection";
-import { getCsrfToken } from "next-auth/react";
+// import { getCsrfToken } from "next-auth/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const { pif, zlo, sophie, kollab } = IMAGES.ourTeam;
-export async function getServerSideProps(context:any) {
-  const csrfToken = await getCsrfToken(context);
-  return { props: { csrfToken } };
-}
+// export async function getServerSideProps(context:any) {
+//   const csrfToken = await getCsrfToken(context);
+//   return { props: { csrfToken } };
+// }
 interface SleepingProps {}
 
 const Sleeping: NextPage<SleepingProps> = observer(({}) => {

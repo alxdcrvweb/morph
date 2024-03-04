@@ -9,13 +9,13 @@ import SecondAwakeArt from '../components/Awake/SecondSection/SecondAwakeArt'
 import ThirdSection from '../components/ThirdSection'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { getCsrfToken } from 'next-auth/react'
+// import { getCsrfToken } from 'next-auth/react'
 
 gsap.registerPlugin(ScrollTrigger)
-export async function getServerSideProps(context:any) {
-	const csrfToken = await getCsrfToken(context);
-	return { props: { csrfToken } };
-  }
+// export async function getServerSideProps(context:any) {
+// 	const csrfToken = await getCsrfToken(context);
+// 	return { props: { csrfToken } };
+//   }
 
 const {
 	cinemarcle,
