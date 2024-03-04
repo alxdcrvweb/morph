@@ -14,7 +14,7 @@ import BackLink from "./StoryBackLink";
 import { useInjection } from "inversify-react";
 import axios from "axios";
 import { Web3Store } from "../stores/Web3Store";
-import { getCsrfToken } from "next-auth/react";
+// import { getCsrfToken } from "next-auth/react";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
@@ -31,11 +31,11 @@ export default function MainLayout({ children, props }: MyHead) {
   const mainRef = useRef(null);
   const userStore = useInjection(Web3Store);
   
-  const getNonce = useCallback(async () => {
-    const nonce = await getCsrfToken();
-    if (!nonce) throw new Error("Unable to generate nonce");
-    return nonce;
-  }, []);
+  // const getNonce = useCallback(async () => {
+  //   const nonce = await getCsrfToken();
+  //   if (!nonce) throw new Error("Unable to generate nonce");
+  //   return nonce;
+  // }, []);
   const getUserById = async (id: string | null) => {
     try {
       const response = await axios.get(

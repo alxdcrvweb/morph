@@ -11,10 +11,10 @@ import decor1 from '../../public/showdown/decor1.svg';
 import decor2 from '../../public/showdown/decor2.svg';
 import Image from 'next/image';
 import { getCsrfToken } from 'next-auth/react';
-export async function getServerSideProps(context:any) {
-	const csrfToken = await getCsrfToken(context);
-	return { props: { csrfToken } };
-  }
+// export async function getServerSideProps(context:any) {
+// 	const csrfToken = await getCsrfToken(context);
+// 	return { props: { csrfToken } };
+//   }
 
 const {
 	art, gatherer, rider

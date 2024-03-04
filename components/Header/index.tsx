@@ -77,7 +77,7 @@ const Header: FC<HeaderProps> = observer((props) => {
             </div>
           )} */}
 
-          {props.csrfToken ? (
+          {/* {props.csrfToken ? (
             <div style={{opacity:0}}>
             <SignInButton
               nonce={props.csrfToken}
@@ -88,7 +88,7 @@ const Header: FC<HeaderProps> = observer((props) => {
             </div>
           ) : (
             "error"
-          )}
+          )} */}
 
           {/* <div className={story.story__explore}>Connect Farcaster</div> */}
         </div>

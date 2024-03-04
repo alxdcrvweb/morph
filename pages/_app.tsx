@@ -22,17 +22,17 @@ import { AuthKitProvider } from "@farcaster/auth-kit";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { SessionProvider, getCsrfToken } from "next-auth/react";
+// import { SessionProvider, getCsrfToken } from "next-auth/react";
 const wagmiConfig = createConfig({
   chains: [base],
   transports: {
     [base.id]: http(),
   },
 });
-export async function getServerSideProps(context: any) {
-  const csrfToken = await getCsrfToken(context);
-  return { props: { csrfToken } };
-}
+// export async function getServerSideProps(context: any) {
+//   const csrfToken = await getCsrfToken(context);
+//   return { props: { csrfToken } };
+// }
 const queryClient = new QueryClient();
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const AnyComponent = Component as any;
