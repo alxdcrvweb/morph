@@ -9,7 +9,7 @@ import { useInjection } from "inversify-react";
 import Social from "../Social";
 import { observer } from "mobx-react";
 import "@farcaster/auth-kit/styles.css";
-import { SignInButton, StatusAPIResponse } from "@farcaster/auth-kit";
+// import { SignInButton, StatusAPIResponse } from "@farcaster/auth-kit";
 
 import story from "../../styles/story.module.scss";
 import { signIn, signOut } from "next-auth/react";
@@ -77,7 +77,7 @@ const Header: FC<HeaderProps> = observer((props) => {
             </div>
           )} */}
 
-         {props.csrfToken ? (
+         {/* {props.csrfToken ? (
             <div style={{opacity:0}}>
             <SignInButton
               nonce={props.csrfToken}
@@ -88,7 +88,7 @@ const Header: FC<HeaderProps> = observer((props) => {
             </div>
           ) : (
             "error"
-          )} 
+          )}  */}
 
           {/* <div className={story.story__explore}>Connect Farcaster</div> */}
         </div>

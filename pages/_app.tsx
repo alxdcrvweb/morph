@@ -18,7 +18,7 @@ import "../components/polyfills";
 import Head from "next/head";
 import MainLayout from "../components/MainLayout";
 import AppLoader from "../components/loader";
-import { AuthKitProvider } from "@farcaster/auth-kit";
+// import { AuthKitProvider } from "@farcaster/auth-kit";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
