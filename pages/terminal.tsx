@@ -4,7 +4,11 @@ import { FC } from 'react';
 import { VIDEOS } from '../components/images';
 import TerminalContent from '../components/Terminal/TerminalContent';
 import styles from '../styles/terminal.module.scss';
-
+import { getCsrfToken } from 'next-auth/react';
+export async function getServerSideProps(context:any) {
+	const csrfToken = await getCsrfToken(context);
+	return { props: { csrfToken } };
+  }
 const {
 	terminalMP4, // /videos/terminal/TerminalEye.mp4
 	terminalWebm, // /videos/terminal/TerminalEye.webm

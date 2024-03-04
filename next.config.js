@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 // module.exports = {
 // 	reactStrictMode: true,
 // 	future: {
@@ -14,12 +15,11 @@
 // module.exports = withTM()
 
 module.exports = {
-  // async redirects() {
-  // 	return [
-  // 		{S
+  // plugins: [new NodePolyfillPlugin()],
   images: {
     domains: ["ipfs.io"],
   },
+  reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
