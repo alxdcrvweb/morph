@@ -4,7 +4,7 @@ import "reflect-metadata";
 import Web3 from "web3";
 import { RootStore } from "./RootStore";
 import { chainId, netId, netName } from "../config/config";
-import { WalletClient } from "wagmi";
+
 import { mintAbi, mintContract } from "../utils/contracts/mint";
 
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -17,28 +17,27 @@ interface User {
   id?: string;
 }
 
-@injectable()
 export class Web3Store {
-  @observable address: string | null = null;
-  @observable isConnecting: boolean = false;
-  @observable provider: any = null;
-  @observable web3: Web3 | null = null;
-  @observable disabledConnectBtn: boolean = false;
-  @observable disabledInput: boolean = true;
-  @observable warningModal: boolean = false;
-  @observable disableScreen: boolean = false;
-  @observable pausedMint: boolean = false;
-  @observable loader: boolean = false;
-  @observable attention: boolean = false;
-  @observable tokensList: any[] = [];
-  @observable warpcasterUser?: any = undefined;
-  @observable congratsText: string = "";
-  @observable congratsTitle: string = "";
-  @observable signer?: WalletClient | null = undefined;
-  @observable contract?: any = undefined;
-  @observable connected: boolean = false;
-  @observable unsupported?: boolean = false;
-  @observable disableMintModal?: boolean = false;
+   address: string | null = null;
+   isConnecting: boolean = false;
+   provider: any = null;
+   web3: Web3 | null = null;
+   disabledConnectBtn: boolean = false;
+   disabledInput: boolean = true;
+   warningModal: boolean = false;
+   disableScreen: boolean = false;
+   pausedMint: boolean = false;
+   loader: boolean = false;
+   attention: boolean = false;
+   tokensList: any[] = [];
+   warpcasterUser?: any = undefined;
+   congratsText: string = "";
+   congratsTitle: string = "";
+   signer?: any | null = undefined;
+   contract?: any = undefined;
+   connected: boolean = false;
+   unsupported?: boolean = false;
+   disableMintModal?: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -64,10 +63,10 @@ export class Web3Store {
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
   };
-  @action setAddress = (user: any) => {
+   setAddress = (user: any) => {
     this.address = user.address;
   };
-  @action subscribeProvider = () => {
+   subscribeProvider = () => {
     console.log("subscribeProvider");
     this.web3?.currentProvider?.on("accountsChanged", (account) => {
       console.log("account", account);

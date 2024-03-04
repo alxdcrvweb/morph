@@ -12,17 +12,15 @@ export interface ModalEntry {
 }
 
 
-
-@injectable()
 export class ModalStore {
-    @observable activeModals: ModalEntry[] = [];
+    activeModals: ModalEntry[] = [];
 
     constructor(private readonly rootStore: RootStore) {
         makeObservable(this);
     }
 
 
-    @action showModal = (key: ModalsEnum, data?: any) => {
+    showModal = (key: ModalsEnum, data?: any) => {
         console.log('key', key);
         this.activeModals.push({ key, data });
         console.log(this.activeModals)
@@ -32,11 +30,11 @@ export class ModalStore {
         return this.activeModals.some(m => m.key === key);
     }
 
-    @action hideModal = (idx: number) => {
+    hideModal = (idx: number) => {
         this.activeModals = this.activeModals.filter((m, i) => i !== idx);
     }
 
-    @action hideAllModals = () => {
+    hideAllModals = () => {
         this.activeModals = [];
     }
 }
