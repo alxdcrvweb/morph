@@ -12,8 +12,8 @@ import "@farcaster/auth-kit/styles.css";
 // import { SignInButton, StatusAPIResponse } from "@farcaster/auth-kit";
 
 import story from "../../styles/story.module.scss";
-import { signIn, signOut } from "next-auth/react";
-import { SignInButton } from "@farcaster/auth-kit";
+import { SignInButton, useProfile, useSignIn } from "@farcaster/auth-kit";
+import { Web3Store } from "../../stores/Web3Store";
 // import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
@@ -24,6 +24,25 @@ const Header: FC<HeaderProps> = observer((props) => {
   console.log(props.csrfToken);
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
+  const web3store = useInjection(Web3Store);
+  const { isAuthenticated, profile } = useProfile();
+  const sign = useSignIn({
+    onSuccess: ({ fid }) => console.log("Your fid:", fid),
+  });
+  console.log(sign);
+  console.log(isAuthenticated, profile);
+  useEffect(() => {
+    if (isAuthenticated) {
+      localStorage.setItem("farcasterProfile", JSON.stringify(profile));
+    }
+  }, [isAuthenticated]);
+  useEffect(() => {
+    let profile = localStorage.getItem("farcasterProfile");
+    if (profile) {
+      web3store.setFarcasterUser(JSON.parse(profile));
+      console.log(JSON.parse(localStorage.getItem("farcasterProfile")));
+    }
+  }, []);
   const [active, setActive] = useState("");
   useEffect(() => {
     console.log(router.asPath);
@@ -42,8 +61,8 @@ const Header: FC<HeaderProps> = observer((props) => {
   return (
     <header className={styles.header}>
       <div className={styles.header__line}>
+        {<AudioPlayer routerPath={props.routerPath} />}
         <div style={{ display: "flex", alignItems: "center" }}>
-          {active == "active" && <AudioPlayer routerPath={props.routerPath} />}
           <HeaderActions
             active={active}
             routerPath={props.routerPath}
@@ -57,16 +76,24 @@ const Header: FC<HeaderProps> = observer((props) => {
             pointerEvents: "auto",
           }}
         >
-          {active !== "mint" && <Social routerPath={props.routerPath} />}
+          {/* {active == "" && <Social routerPath={props.routerPath} />} */}
           {/* {warpcasterUser && active !== "" && (
             <div className={styles.wrapcast}>
               <img src={warpcasterUser?.pfp_url} />@
               {warpcasterUser?.display_name}
             </div>
           )} */}
-          <div style={{ opacity: 1, color: "white" }}>
-            <SignInButton />
-          </div>
+          {console.log(web3store.farcasterUser)}
+          {!web3store.farcasterUser ? (
+            <div style={{ opacity: 1, color: "white" }}>
+              <SignInButton />
+            </div>
+          ) : (
+            <div className={styles.wrapcast}>
+              <img src={web3store.farcasterUser?.pfpUrl} />@
+              {web3store.farcasterUser?.username}
+            </div>
+          )}
           {/* {props.csrfToken ? (
             <div style={{opacity:0}}>
             <SignInButton

@@ -16,78 +16,86 @@ interface HeaderProps {
   active: string;
 }
 
-const HeaderActions: FC<HeaderProps> = observer(
-  ({ routerPath, active }) => {
-    const router = useRouter();
+const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
+  const router = useRouter();
 
-    console.log(" HeaderActions routerPath", routerPath);
+  console.log(" HeaderActions routerPath", routerPath);
 
-    // const clickHandler = () => {
-    //   if (address) {
-    //     disconnectWallet();
-    //   } else {
-    //     connectWallet();
-    //   }
-    // };
+  // const clickHandler = () => {
+  //   if (address) {
+  //     disconnectWallet();
+  //   } else {
+  //     connectWallet();
+  //   }
+  // };
 
-    return (
-      <div className={styles.header__actions}>
-        {active !== "" && (
-          <a href="https://warpcast.com/~/channel/morpheus" target="_blank" >
-            <div
-              className={cn(
-                styles.header__menu,
-              )}
-            >
-              {/* <span>Journey</span>
+  return (
+    <div className={styles.header__actions}>
+      {
+        <a href="https://warpcast.com/~/channel/morpheus" target="_blank">
+          <div className={cn(styles.header__menu, styles.first)}>
+            {/* <span>Journey</span>
 				<span>Journey</span> */}
-              Warpcast
-            </div>
-          </a>
-        )}
-        {active !== "" && (
-          <Link href="/sleeping">
-            <div
-              className={cn(
-                styles.header__menu,
-                active == "active" && styles.header__active
-              )}
-            >
-              {/* <span>Journey</span>
+            Warpcast
+          </div>
+        </a>
+      }
+      {
+        <Link href="/sleeping">
+          <div
+            className={cn(
+              styles.header__menu,
+              active == "active" && styles.header__active
+            )}
+          >
+            {/* <span>Journey</span>
 				<span>Journey</span> */}
-              Journey
-            </div>
-          </Link>
-        )}
-        {active !== "" && (
-          <Link href="/story">
-            <div
-              className={cn(
-                styles.header__menu,
-                active == "story" && styles.header__active
-              )}
-            >
-              {/* <span>Menu</span>
+            Journey
+          </div>
+        </Link>
+      }
+      {
+        <Link href="/story">
+          <div
+            className={cn(
+              styles.header__menu,
+              active == "story" && styles.header__active
+            )}
+          >
+            {/* <span>Menu</span>
 				<span>Menu</span> */}
-              Story
-            </div>
-          </Link>
-        )}
-        {/* {active !== "" && (
-          <Link href="/mint">
-            <div
-              className={cn(
-                styles.header__menu,
-                active == "mint" && styles.header__active
-              )}
-            >
-           
-              Mint
-            </div>
-          </Link>
-        )}
-         */}
-        {/* {active !== "" && (
+            Story
+          </div>
+        </Link>
+      }
+      {
+        // <Link href="/mint">
+        <div
+          className={cn(
+            styles.header__menu,
+            active == "mint" && styles.header__active,
+            styles.header__disabled
+          )}
+        >
+          Gallery
+        </div>
+        // </Link>
+      }
+      {
+        // <Link href="/">
+        <div
+          className={cn(
+            styles.header__menu,
+            active == "mint" && styles.header__active,
+            styles.header__disabled,
+            styles.last
+          )}
+        >
+          Community
+        </div>
+        // </Link>
+      }
+      {/* {active !== "" && (
           <div
             className={cn(
               styles.header__connect,
@@ -115,11 +123,9 @@ const HeaderActions: FC<HeaderProps> = observer(
             )}
           </div>
         )} */}
-       
-      </div>
-    );
-  }
-);
+    </div>
+  );
+});
 
 export default HeaderActions;
 

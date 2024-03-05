@@ -1,0 +1,43 @@
+.main__page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-image: url("../public/mintbg.png");
+  color: white;
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+.main__second__layer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  top: 0;
+  z-index: -1;
+  opacity: 0.6;
+}
+.main__bottom {
+  display: flex;
+  height: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.main__text {
+  font-size: 18px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  max-width: 568px;
+  text-align: center;
+  line-height: 24.37px;
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 25px;
+    max-width: 268px;
+  }
+}

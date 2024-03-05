@@ -36,30 +36,30 @@ export default function MainLayout({ children, props }: MyHead) {
   //   if (!nonce) throw new Error("Unable to generate nonce");
   //   return nonce;
   // }, []);
-  const getUserById = async (id: string | null) => {
-    try {
-      const response = await axios.get(
-        `https://api.neynar.com/v2/farcaster/user/bulk?fids=${id}&viewer_fid=${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            api_key: process.env.NEYNAR_API_KEY as string,
-          },
-        }
-      );
-      userStore.setWarpcasterUser(response.data);
-    } catch (error) {
-      console.error("error", error);
-    }
+  // const getUserById = async (id: string | null) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://api.neynar.com/v2/farcaster/user/bulk?fids=${id}&viewer_fid=${id}`,
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           api_key: process.env.NEYNAR_API_KEY as string,
+  //         },
+  //       }
+  //     );
+  //     userStore.setFarcasterUser(response.data);
+  //   } catch (error) {
+  //     console.error("error", error);
+  //   }
 
-    // console.log("HIIIII", response);
-  };
-  useEffect(() => {
-    if (localStorage.getItem("id") && !userStore.warpcasterUser) {
-      let id = localStorage.getItem("id");
-      getUserById(id);
-    }
-  }, [localStorage.getItem("id")]);
+  //   // console.log("HIIIII", response);
+  // };
+  // useEffect(() => {
+  //   if (localStorage.getItem("id") && !userStore.farcasterUser) {
+  //     let id = localStorage.getItem("id");
+  //     getUserById(id);
+  //   }
+  // }, [localStorage.getItem("id")]);
   // const [locoScroll, setLocoScroll] = useState<Scroll>()
 
   // useEffect(() => {

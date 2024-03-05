@@ -3,94 +3,104 @@
 @import "./keyframes";
 
 .audio {
-	pointer-events: auto;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 32px;
-	height: 32px;
-	flex: 0 0 32px;
-	margin-right: 20px;
-	path {
-		transition: stroke 0.3s ease 0s;
-	}
-	// .audio_sleeping
-	&_sleeping {
-		svg {
-			@media (any-hover: hover) {
-				&:hover {
-					path {
-						stroke: #88f4f4;
-					}
-				}
-			}
-		}
-		&.audio_active {
-			path {
-				stroke: #88f4f4;
-			}
-			svg {
-				@media (any-hover: hover) {
-					&:hover {
-						path {
-							stroke: #88f4f4;
-						}
-					}
-				}
-			}
-		}
-	}
-	// .audio_awake
-	&_awake {
-		svg {
-			@media (any-hover: hover) {
-				&:hover {
-					path {
-						stroke: white
-					}
-				}
-			}
-		}
-		&.audio_active {
-			path {
-				stroke: white
-			}
-			svg {
-				@media (any-hover: hover) {
-					&:hover {
-						path {
-							stroke: rgb(111, 40, 64);
-						}
-					}
-				}
-			}
-		}
-	}
-	// .audio__terminal
-	&_terminal {
-		svg {
-			@media (any-hover: hover) {
-				&:hover {
-					path {
-						stroke: rgb(111, 40, 64);
-					}
-				}
-			}
-		}
-		&.audio_active {
-			path {
-				stroke: white
-			}
-			svg {
-				@media (any-hover: hover) {
-					&:hover {
-						path {
-							stroke: rgb(111, 40, 64);
-						}
-					}
-				}
-			}
-		}
-	}
+  pointer-events: auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // width: 32px;
+  height: 32px;
+  // flex: 0 0 32px;
+  margin-right: 20px;
+  font-size: 12px;
+  font-family: "DMSans";
+  svg {
+    margin-right: 10px;
+  }
+  span {
+	padding-left: 10px;
+	border-left: 1px solid #EDEDED;
+  }
+  path {
+    transition: stroke 0.3s ease 0s;
+  }
+  // .audio_sleeping
+  &_sleeping {
+    // margin-right: 10px;
+    svg {
+      @media (any-hover: hover) {
+        &:hover {
+          path {
+            stroke: #88f4f4;
+          }
+        }
+      }
+    }
+    &.audio_active {
+      path {
+        stroke: #88f4f4;
+      }
+      svg {
+        @media (any-hover: hover) {
+          &:hover {
+            path {
+              stroke: #88f4f4;
+            }
+          }
+        }
+      }
+    }
+  }
+  // .audio_awake
+  &_awake {
+    svg {
+      @media (any-hover: hover) {
+        &:hover {
+          path {
+            stroke: white;
+          }
+        }
+      }
+    }
+    &.audio_active {
+      path {
+        stroke: white;
+      }
+      svg {
+        @media (any-hover: hover) {
+          &:hover {
+            path {
+              stroke: rgb(111, 40, 64);
+            }
+          }
+        }
+      }
+    }
+  }
+  // .audio__terminal
+  &_terminal {
+    svg {
+      @media (any-hover: hover) {
+        &:hover {
+          path {
+            stroke: rgb(111, 40, 64);
+          }
+        }
+      }
+    }
+    &.audio_active {
+      path {
+        stroke: white;
+      }
+      svg {
+        @media (any-hover: hover) {
+          &:hover {
+            path {
+              stroke: rgb(111, 40, 64);
+            }
+          }
+        }
+      }
+    }
+  }
 }

@@ -3,7 +3,6 @@ import ChoseSection from "../components/Chose/chose";
 import ChoseArt from "../components/Chose/ChoseArt";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import MainSection from "../components/mainSection";
 // import { getCsrfToken } from "next-auth/react";
 gsap.registerPlugin(ScrollTrigger);
 // export async function getServerSideProps(context:any) {
@@ -28,7 +27,7 @@ const Main: FC = (props) => {
   }, []);
   return (
     <div ref={wrapper}>
-      <MainSection />
+      <ChoseSection FirstArt={ChoseArt} />
     </div>
   );
 };

@@ -30,7 +30,7 @@ export class Web3Store {
    loader: boolean = false;
    attention: boolean = false;
    tokensList: any[] = [];
-   warpcasterUser?: any = undefined;
+   farcasterUser?: any = undefined;
    congratsText: string = "";
    congratsTitle: string = "";
    signer?: any | null = undefined;
@@ -89,11 +89,11 @@ export class Web3Store {
   //     console.log(e);
   //   }
   // };
-  setWarpcasterUser = (user: any) => {
+  setFarcasterUser = (user: any) => {
     // console.log(user);
-    if (user?.users?.length > 0) {
-      this.warpcasterUser = user.users[0];
-    }
+    // if (user?.users?.length > 0) {
+      this.farcasterUser = user
+    // }
   };
   disconnectWallet = async () => {
     this.provider = null;
