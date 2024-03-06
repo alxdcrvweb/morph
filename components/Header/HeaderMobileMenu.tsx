@@ -43,6 +43,7 @@ const HeaderMobileMenu: FC<HeaderMobileMenuProps> = ({ routerPath, closeMenuHand
 						return <span key={letter} className={classList}>{letter}</span>
 					})}
 				</div>
+				<img src='/close.svg' onClick={closeMenuHandler}/>
 			</div>
 			<div className={styles.menu__main}>
 				{menuList.map(el => (

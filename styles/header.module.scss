@@ -30,7 +30,7 @@
   // .header__line
   &__line {
     @media (max-width: ($md2+px)) {
-      display: none !important;
+      // display: none !important;
     }
     display: flex;
     justify-content: space-between;
@@ -42,6 +42,9 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    @media (max-width: ($md2+px)) {
+      display: none !important;
+    }
   }
   // .header__active
   &__active {
@@ -109,11 +112,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: "DMSans-Semibold";
+  font-size: 14px;
+  color: #fff;
+  font-family: "Moderat";
+  background-color: #212121;
+  border-radius: 20px;
+  padding: 7px;
+  padding-left: 30px;
   img {
-    margin-right: 15px;
-    width: 32px;
-    height: 32px;
+    margin-left: 15px;
+    width: 21px;
+    height: 21px;
+
     border-radius: 100%;
     object-fit: cover;
   }
@@ -122,37 +132,46 @@
   @media (min-width: ($md2+px)) {
     display: none;
   }
-  margin-left: auto;
   cursor: pointer;
   pointer-events: fill;
   display: block;
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 94px;
+  height: 35px;
   // .headerBurger__box
   &__box {
-    position: absolute;
-    top: calc(50% - 8px);
-    right: calc(50% - 10px);
     width: 20px;
     height: 16px;
     z-index: 5;
-    span {
-      transition: all 0.3s ease 0s;
-      top: calc(50% - 1px);
-      left: 0px;
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background-color: #fff;
-      &:first-child {
-        top: 0px;
-      }
-      &:last-child {
-        top: auto;
-        bottom: 0px;
-      }
+    background-color: #212121;
+    width: 94px;
+    height: 35px;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Moderat";
+    font-size: 12px;
+    &:hover {
+      color: #75fff4;
     }
+    // span {
+    //   transition: all 0.3s ease 0s;
+    //   top: calc(50% - 1px);
+    //   left: 0px;
+    //   position: absolute;
+    //   width: 100%;
+    //   height: 2px;
+    //   background-color: #fff;
+    //   &:first-child {
+    //     top: 0px;
+    //   }
+    //   &:last-child {
+    //     top: auto;
+    //     bottom: 0px;
+    //   }
+    // }
     &_active {
       span {
         transform: scale(0);
@@ -286,8 +305,12 @@
   }
   // .menu__head
   &__head {
-    padding: 16px 0 16px 24px;
+    padding: 16px 24px 16px 24px;
+    cursor: pointer;
     height: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   // .menu__title
   &__title {

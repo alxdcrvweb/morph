@@ -32,13 +32,16 @@ const Header: FC<HeaderProps> = observer((props) => {
   console.log(sign);
   console.log(isAuthenticated, profile);
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && JSON.stringify(profile) !== "{}") {
+      console.log(profile);
       localStorage.setItem("farcasterProfile", JSON.stringify(profile));
+      web3store.setFarcasterUser(profile);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, profile]);
   useEffect(() => {
     let profile = localStorage.getItem("farcasterProfile");
-    if (profile) {
+    console.log(profile);
+    if (profile && profile !== "{}") {
       web3store.setFarcasterUser(JSON.parse(profile));
       console.log(JSON.parse(localStorage.getItem("farcasterProfile")));
     }
@@ -61,7 +64,23 @@ const Header: FC<HeaderProps> = observer((props) => {
   return (
     <header className={styles.header}>
       <div className={styles.header__line}>
+        <div
+          className={styles.headerBurger}
+          onClick={() => {
+            setOpenMenu((prev) => !prev);
+          }}
+        >
+          <div
+            className={cn(
+              styles.headerBurger__box,
+              openMenu && styles.headerBurger__box_active
+            )}
+          >
+            <div>Menu</div>
+          </div>
+        </div>
         {<AudioPlayer routerPath={props.routerPath} />}
+
         <div style={{ display: "flex", alignItems: "center" }}>
           <HeaderActions
             active={active}
@@ -83,15 +102,20 @@ const Header: FC<HeaderProps> = observer((props) => {
               {warpcasterUser?.display_name}
             </div>
           )} */}
-          {console.log(web3store.farcasterUser)}
+          {/* {console.log(web3store.farcasterUser)} */}
           {!web3store.farcasterUser ? (
             <div style={{ opacity: 1, color: "white" }}>
-              <SignInButton />
+              <SignInButton
+                onSuccess={(profile) => {
+                  console.log(profile, "profile");
+                  web3store.setFarcasterUser(profile);
+                }}
+              />
             </div>
           ) : (
             <div className={styles.wrapcast}>
-              <img src={web3store.farcasterUser?.pfpUrl} />@
-              {web3store.farcasterUser?.username}
+              @{web3store.farcasterUser?.username}
+              <img src={web3store.farcasterUser?.pfpUrl} />
             </div>
           )}
           {/* {props.csrfToken ? (
@@ -110,25 +134,7 @@ const Header: FC<HeaderProps> = observer((props) => {
           {/* <div className={story.story__explore}>Connect Farcaster</div> */}
         </div>
       </div>
-      {(
-        <div
-          className={styles.headerBurger}
-          onClick={() => {
-            setOpenMenu((prev) => !prev);
-          }}
-        >
-          <div
-            className={cn(
-              styles.headerBurger__box,
-              openMenu && styles.headerBurger__box_active
-            )}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      )}
+      {}
       <HeaderMenu
         routerPath={props.routerPath}
         openMenu={openMenu}
