@@ -55,6 +55,8 @@ const Header: FC<HeaderProps> = observer((props) => {
       setActive("story");
     } else if (router.asPath.includes("mint")) {
       setActive("mint");
+    } else if (router.asPath == "/") {
+      setActive("");
     }
   }, [router.asPath]);
 

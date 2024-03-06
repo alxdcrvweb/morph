@@ -24,8 +24,9 @@ const HeaderMobileMenu: FC<HeaderMobileMenuProps> = ({ routerPath, closeMenuHand
 	}, [])
 
 	const menuList = [
-		{ id: 1, text: 'Story', pushTo: '/story/1' },
-		{ id: 2, text: 'Journey', pushTo: '/sleeping' },
+		{ id: 1, text: 'Journey', pushTo: '/' },
+		{ id: 2, text: 'Story', pushTo: '/story/1' },
+		{ id: 3, text: 'Factions', pushTo: '/sleeping' },
 	]
 
 	const handleClick = (pushTo: string) => {

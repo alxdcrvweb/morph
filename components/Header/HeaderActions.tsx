@@ -32,20 +32,12 @@ const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
   return (
     <div className={styles.header__actions}>
       {
-        <a href="https://warpcast.com/~/channel/morpheus" target="_blank">
-          <div className={cn(styles.header__menu, styles.first)}>
-            {/* <span>Journey</span>
-				<span>Journey</span> */}
-            Warpcast
-          </div>
-        </a>
-      }
-      {
-        <Link href="/sleeping">
+        <Link href="/">
           <div
             className={cn(
               styles.header__menu,
-              active == "active" && styles.header__active
+              active == "" && styles.header__active,
+              styles.first
             )}
           >
             {/* <span>Journey</span>
@@ -65,6 +57,20 @@ const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
             {/* <span>Menu</span>
 				<span>Menu</span> */}
             Story
+          </div>
+        </Link>
+      }
+      {
+        <Link href="/sleeping">
+          <div
+            className={cn(
+              styles.header__menu,
+              active == "active" && styles.header__active
+            )}
+          >
+            {/* <span>Menu</span>
+				<span>Menu</span> */}
+            Factions
           </div>
         </Link>
       }
