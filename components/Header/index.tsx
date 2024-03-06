@@ -110,7 +110,7 @@ const Header: FC<HeaderProps> = observer((props) => {
           {/* <div className={story.story__explore}>Connect Farcaster</div> */}
         </div>
       </div>
-      {active == "active" && (
+      {(
         <div
           className={styles.headerBurger}
           onClick={() => {

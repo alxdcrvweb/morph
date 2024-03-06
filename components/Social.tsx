@@ -15,13 +15,13 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
         rel="noreferrer"
         className={cn(
           styles.social__link,
-          routerPath === "sleeping"
-            ? styles.social__link_sleeping
-            : routerPath === "story"
-            ? styles.social__link_story
-            : routerPath === "awake"
-            ? styles.social__link_awake
-            : styles.social__link_terminal
+          // routerPath === "sleeping"
+          //   ? styles.social__link_sleeping
+          //   : routerPath === "story"
+          //   ? styles.social__link_story
+          //   : routerPath === "awake"
+          //   ? styles.social__link_awake
+          //   : styles.social__link_terminal
         )}
       >
         <img
@@ -35,13 +35,13 @@ const Social: FC<SocialProps> = ({ routerPath }) => {
         rel="noreferrer"
         className={cn(
           styles.social__link,
-          routerPath === "sleeping"
-            ? styles.social__link_sleeping
-            : routerPath === "story"
-            ? styles.social__link_story
-            : routerPath === "awake"
-            ? styles.social__link_awake
-            : styles.social__link_terminal
+          // routerPath === "sleeping"
+          //   ? styles.social__link_sleeping
+          //   : routerPath === "story"
+          //   ? styles.social__link_story
+          //   : routerPath === "awake"
+          //   ? styles.social__link_awake
+          //   : styles.social__link_terminal
         )}
       >
         <img

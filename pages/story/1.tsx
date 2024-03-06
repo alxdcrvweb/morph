@@ -127,7 +127,7 @@ const FirstStory: NextPage = observer(() => {
                     />
                   </svg>
                 </div>
-                <div className={styles.gatherer__box}>
+                <div className={styles.third__box}>
                   <p className={"_littleText"}>
                     Time staggered from side to side. It was hard to tell
                     whether it was yesterday or tomorrow. City lunatics walked

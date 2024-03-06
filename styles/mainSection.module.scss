@@ -11,6 +11,10 @@
   color: white;
   padding-top: 70px;
   padding-bottom: 30px;
+  @media (max-width: 768px) {
+    padding-top: 120px;
+    justify-content: flex-start;
+  }
 }
 .main__second__layer {
   position: absolute;
@@ -27,6 +31,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
+  @media (max-width: 768px) {
+    height: auto;
+    justify-content: flex-start;
+  }
 }
 .main__text {
   font-size: 18px;
@@ -36,8 +44,9 @@
   text-align: center;
   line-height: 24.37px;
   @media (max-width: 768px) {
-    font-size: 14px;
-    line-height: 25px;
-    max-width: 268px;
+    // display: none;
+    font-size: 12px;
+    line-height: 20px;
+    max-width: 318px;
   }
 }

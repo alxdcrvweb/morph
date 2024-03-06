@@ -14,40 +14,40 @@
 @import "null";
 
 body {
-	// overflow: hidden;
-	background: rgb(0, 0, 0);
-	// background: lightcoral;
-	color: $mainColor;
-	&._lock {
-		overflow: hidden;
-	}
+  // overflow: hidden;
+  background: rgb(0, 0, 0);
+  // background: lightcoral;
+  color: $mainColor;
+  &._lock {
+    overflow: hidden;
+  }
 }
 //</ОБНУЛЕНИЕ, ОБЩИЕ ПАРАМЕТРЫ>===============================================================================================
 
 //<ОБОЛОЧКА>===========================================================================================================
 .wrapper,
 #__next {
-	width: 100vw;
-	height: 100%;
-	overflow: hidden !important;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden !important;
 }
 //</ОБОЛОЧКА>===========================================================================================================
 
 //<ОСНОВНАЯ СЕТКА>===========================================================================================================
 ._container {
-	max-width: $maxWidthContainer + px;
-	margin: 0 auto;
-	width: 100%;
-	// @media (max-width: ($md1+px)) {
-	// 	max-width: 970px;
-	// }
-	// @media (max-width: ($md2+px)) {
-	// 	max-width: 750px;
-	// }
-	@media (max-width: ($md3+px)) {
-		max-width: none;
-		padding: 0 10px;
-	}
+  max-width: $maxWidthContainer + px;
+  margin: 0 auto;
+  width: 100%;
+  // @media (max-width: ($md1+px)) {
+  // 	max-width: 970px;
+  // }
+  // @media (max-width: ($md2+px)) {
+  // 	max-width: 750px;
+  // }
+  @media (max-width: ($md3+px)) {
+    max-width: none;
+    padding: 0 10px;
+  }
 }
 //</ОСНОВНАЯ СЕТКА>======================================================================================================================
 
@@ -69,29 +69,40 @@ body {
 //<ОСНОВНОЙ БЛОК>====================================================================================================
 
 main {
-	// position: fixed;
-	// top: 0;
-	// left: 0;
-	// width: 100%;
-	// margin-right: -17px;
-	// will-change: transform;
-	// @media (any-hover: none) {
-	// 	overflow-x: hidden;
-	// 	height: 100%;
-	// }
-	// overflow: hidden !important;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+  // margin-right: -17px;
+  // will-change: transform;
+  // @media (any-hover: none) {
+  // 	overflow-x: hidden;
+  // 	height: 100%;
+  // }
+  // overflow: hidden !important;
 }
 section {
-	min-height: 100vh;
-	width: 100%;
-	will-change: transform;
-	overflow: hidden;
-	@media (min-width: ($md2+px)) {
-		height: 100vh;
-	}
+  min-height: 100vh;
+  width: 100%;
+  will-change: transform;
+  overflow: hidden;
+  @media (min-width: ($md2+px)) {
+    height: 100vh;
+  }
 }
 ._1sj0tk81 {
-	color: #000;
+  color: #000;
+}
+.social {
+  position: absolute;
+  bottom: 30px;
+  top: auto;
+  left: auto;
+  right: 30px;
+  @media screen and (max-width: 768px) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 //===================================================================================================================================
 

@@ -155,8 +155,8 @@ export default function MainLayout({ children, props }: MyHead) {
         {(router.asPath === "/sleeping" || router.asPath === "/awake") && (
           <AboutPageLink />
         )}
-        {(router.asPath === "/story/1" ||
-          router.asPath.split("/")[1] === "terminal") && <BackLink />}
+        {/* {(router.asPath === "/story/1" ||
+          router.asPath.split("/")[1] === "terminal") && <BackLink />} */}
         <div className={"_decor _decor_1"}>
           <Image
             src={decor1}

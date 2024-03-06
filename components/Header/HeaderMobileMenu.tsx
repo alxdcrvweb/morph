@@ -4,6 +4,7 @@ import { getRandomIntInclusive } from '../../utils/utilities';
 import AudioPlayer from '../AudioPlayer';
 import Social from '../Social';
 import { useLocomotiveScroll } from 'react-locomotive-scroll';
+import { useRouter } from 'next/router';
 
 interface HeaderMobileMenuProps {
 	routerPath: string
@@ -16,20 +17,21 @@ const HeaderMobileMenu: FC<HeaderMobileMenuProps> = ({ routerPath, closeMenuHand
 	const [firstDigi, setFirstDigi] = useState<number | null>(null)
 	const [secondDigi, setSecondDigi] = useState<number | null>(null)
 	const { scroll } = useLocomotiveScroll()
-
+	const router = useRouter()
 	useEffect(() => {
 		setFirstDigi(getRandomIntInclusive(0, 'MORPHEUS'.length - 1))
 		setSecondDigi(getRandomIntInclusive(0, 'MORPHEUS'.length - 1))
 	}, [])
 
 	const menuList = [
-		{ id: 1, text: 'About project', scrollTo: '#second' },
-		{ id: 2, text: 'Our team', scrollTo: '#ourTeam' },
+		{ id: 1, text: 'Story', pushTo: '/story/1' },
+		{ id: 2, text: 'Journey', pushTo: '/sleeping' },
 	]
 
-	const handleClick = (scrollTo: string) => {
+	const handleClick = (pushTo: string) => {
 		closeMenuHandler()
-		scroll.scrollTo(scrollTo, { duration: 1, disableLerp: false })
+		router.push(pushTo) 
+		// scroll.scrollTo(scrollTo, { duration: 1, disableLerp: false })
 	}
 
 	return (
@@ -47,10 +49,10 @@ const HeaderMobileMenu: FC<HeaderMobileMenuProps> = ({ routerPath, closeMenuHand
 					<div
 						key={el.id}
 						className={styles.menu__route}
-						onClick={() => { handleClick(el.scrollTo) }}
+						onClick={() => { handleClick(el.pushTo) }}
 					>{el.text}</div>
 				))}
-				<div className={styles.menu__info}>More features in desktop version</div>
+				{/* <div className={styles.menu__info}>More features in desktop version</div> */}
 			</div>
 			<div className={styles.menu__footer}>
 				<AudioPlayer routerPath={routerPath} />
