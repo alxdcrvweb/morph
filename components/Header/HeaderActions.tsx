@@ -55,7 +55,7 @@ const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
         </Link>
       }
       {
-        <Link href="/story">
+        <Link href="/story/1">
           <div
             className={cn(
               styles.header__menu,

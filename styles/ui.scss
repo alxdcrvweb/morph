@@ -151,15 +151,15 @@
 }
 
 ._bigText {
-  @include adaptiv-value("font-size", 32, 20, 1);
+  @include adaptiv-value("font-size", 28, 20, 1);
   font-family: "Moderat";
   line-height: 125%;
 }
 
 ._littleText {
-  font-family: "Moderat";
-  @include adaptiv-value("font-size", 22, 18, 1);
-  line-height: 127%;
+  font-family: "ApocLC";
+  @include adaptiv-value("font-size", 20, 18, 1);
+  line-height: 113%;
 }
 
 .nostra {

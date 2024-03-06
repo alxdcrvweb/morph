@@ -102,6 +102,8 @@ export const IMAGES = {
     art: "/showdown/art.jpg",
     gatherer: "/showdown/gatherer.jpg",
     rider: "/showdown/rider.jpg",
+    third: '/showdown/third.png',
+    stone: '/showdown/stone.png',
   },
   mint: {
     mintbg: "/mintbg.png",

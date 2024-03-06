@@ -114,9 +114,9 @@ const AudioPlayer: FC<AudioPlayerProps> = ({ routerPath }) => {
     }
   };
 
-  //   if (isIOS() || routerPath === "story") {
-  //     return <div></div>;
-  //   }
+    if (isIOS()) {
+      return <div></div>;
+    }
 
   return (
     <div

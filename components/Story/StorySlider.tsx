@@ -35,7 +35,7 @@ const StorySlider: FC = observer(() => {
 	const slideToPrev = () => { swiperRef!.slidePrev(1000, false) };
 	const slideToNext = () => { swiperRef!.slideNext(1000, false) };
 
-	if (isMobile) router.push('/sleeping')
+	// if (isMobile) router.push('/sleeping')
 
 	return (
 		<Swiper
@@ -60,7 +60,7 @@ const StorySlider: FC = observer(() => {
 							<h2 className={cn(styles.story__title, '_subtitle')}>
 								<span>01</span>
 								<img src="/icons/storyDecor.svg" alt="" />
-								The Showdown
+								Nightmare Fuel
 							</h2>
 							<div className={styles.story__text}>City of Ayyon - the only inhabitated place left on the planet after the Nightmare Fuel also known as Great Conflict. </div>
 							<div className={styles.story__status}>In progress</div>
@@ -101,7 +101,7 @@ const StorySlider: FC = observer(() => {
 					<div className={styles.story__footer}>
 						<div onClick={slideToPrev} className={cn(styles.story__navigation, styles.story__navigation_prev)}>
 							<div className={styles.story__direction}>Prev</div>
-							<div className={styles.story__step}>01 / The Showdown</div>
+							<div className={styles.story__step}>01 / Nightmare Fuel</div>
 							<div className={styles.story__arrow}></div>
 						</div>
 						{/* <div onClick={slideToNext} className={cn(styles.story__navigation, styles.story__navigation_next)}>
