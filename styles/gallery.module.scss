@@ -10,6 +10,7 @@
 .gallery__loader__big {
   position: absolute;
   transform: translateX(190px) translateY(-250px);
+  z-index: 1;
 }
 .gallery {
   display: flex;
