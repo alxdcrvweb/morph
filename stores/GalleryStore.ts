@@ -6,7 +6,7 @@ import "reflect-metadata";
 import axios from "axios";
 import { mintContract } from "../utils/contracts/mint";
 import { moralisUrl } from "../config/config";
-
+observable
 export class GalleryStore {
   characters: any[] = [];
   char: any;
@@ -16,11 +16,8 @@ export class GalleryStore {
   }
   setChar = (id: string) => {
     this.char = this.characters.find((el) => el.id == id);
-  }
-  getCharacters = async (
-    address: string,
-    chain: string
-  ) => {
+  };
+  getCharacters = async (address: string, chain: string) => {
     const params = {
       chain: chain,
       offset: "1",

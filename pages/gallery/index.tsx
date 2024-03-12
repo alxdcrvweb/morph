@@ -11,18 +11,19 @@ const GalleryPage: React.FC = observer(() => {
   const web3store = useInjection(Web3Store);
   const [char, setChar] = useState<any>([]);
   useEffect(() => {
-    if (galleryStore && web3store.farcasterUser.custody) {
+    if (web3store.farcasterUser.custody) {
       galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
     }
-  }, [galleryStore.characters, web3store.farcasterUser]);
+  }, [web3store.farcasterUser]);
   useEffect(() => {
-    if (galleryStore && web3store.farcasterUser.custody) {
+    if (web3store.farcasterUser.custody) {
       galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
     }
   }, []);
   useEffect(() => {
     setChar(galleryStore.characters);
   }, [galleryStore.characters]);
+  console.log(galleryStore.characters);
   return (
     <div className={style.gallery__container}>
       <div className={style.gallery}>

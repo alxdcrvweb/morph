@@ -16,7 +16,7 @@ interface User {
   address?: string;
   id?: string;
 }
-
+observable
 export class Web3Store {
    address: string | null = null;
    isConnecting: boolean = false;
