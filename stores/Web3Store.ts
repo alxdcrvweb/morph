@@ -1,14 +1,8 @@
-import { injectable } from "inversify";
 import { action, makeObservable, observable } from "mobx";
 import "reflect-metadata";
 import Web3 from "web3";
 import { RootStore } from "./RootStore";
-import { chainId, netId, netName } from "../config/config";
-
 import { mintAbi, mintContract } from "../utils/contracts/mint";
-
-import WalletConnectProvider from "@walletconnect/web3-provider";
-import { isMobile } from "react-device-detect";
 import { ModalsEnum } from "../modals";
 interface User {
   login: string;
@@ -16,28 +10,28 @@ interface User {
   address?: string;
   id?: string;
 }
-observable
+
 export class Web3Store {
-   address: string | null = null;
-   isConnecting: boolean = false;
-   provider: any = null;
-   web3: Web3 | null = null;
-   disabledConnectBtn: boolean = false;
-   disabledInput: boolean = true;
-   warningModal: boolean = false;
-   disableScreen: boolean = false;
-   pausedMint: boolean = false;
-   loader: boolean = false;
-   attention: boolean = false;
-   tokensList: any[] = [];
-   farcasterUser?: any = undefined;
-   congratsText: string = "";
-   congratsTitle: string = "";
-   signer?: any | null = undefined;
-   contract?: any = undefined;
-   connected: boolean = false;
-   unsupported?: boolean = false;
-   disableMintModal?: boolean = false;
+  @observable address: string | null = null;
+  @observable isConnecting: boolean = false;
+  @observable provider: any = null;
+  @observable web3: Web3 | null = null;
+  @observable disabledConnectBtn: boolean = false;
+  @observable disabledInput: boolean = true;
+  @observable warningModal: boolean = false;
+  @observable disableScreen: boolean = false;
+  @observable pausedMint: boolean = false;
+  @observable loader: boolean = false;
+  @observable attention: boolean = false;
+  @observable tokensList: any[] = [];
+  @observable farcasterUser?: any = undefined;
+  @observable congratsText: string = "";
+  @observable congratsTitle: string = "";
+  @observable signer?: any | null = undefined;
+  @observable contract?: any = undefined;
+  @observable connected: boolean = false;
+  @observable unsupported?: boolean = false;
+  @observable disableMintModal?: boolean = false;
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
@@ -58,15 +52,17 @@ export class Web3Store {
   setConnected = (connected: boolean) => {
     if (!this.contract) {
       this.connected = connected;
-      this.web3 = new Web3("https://endpoints.omniatech.io/v1/base/mainnet/public");
+      this.web3 = new Web3(
+        "https://endpoints.omniatech.io/v1/base/mainnet/public"
+      );
 
       this.contract = new this.web3.eth.Contract(mintAbi as any, mintContract);
     }
   };
-   setAddress = (user: any) => {
+  setAddress = (user: any) => {
     this.address = user.address;
   };
-   subscribeProvider = () => {
+  subscribeProvider = () => {
     console.log("subscribeProvider");
     this.web3?.currentProvider?.on("accountsChanged", (account) => {
       console.log("account", account);
@@ -92,7 +88,7 @@ export class Web3Store {
   setFarcasterUser = (user: any) => {
     // console.log(user);
     // if (user?.users?.length > 0) {
-      this.farcasterUser = user
+    this.farcasterUser = user;
     // }
   };
   disconnectWallet = async () => {

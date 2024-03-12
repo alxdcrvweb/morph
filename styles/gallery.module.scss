@@ -1,7 +1,26 @@
 .gallery__container {
   display: flex;
   justify-content: center;
+  margin-top: 100px;
   width: 100vw;
+}
+.gallery__container__one {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+.gallery__char {
+  margin-bottom: 15px;
+  color: #d9d9d9;
+  font-family: "ApocLCLight";
+  display: flex;
+  align-items: center;
+  img {
+    margin-left: 10px;
+    width: 15px;
+    opacity: 0.7;
+    height: 15px;
+  }
 }
 .gallery__loader {
   position: absolute;
@@ -16,7 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 100px;
   background-color: #1c1c1c;
   // max-width: 1358px;
   max-width: 910px;
@@ -58,12 +76,9 @@
   border-bottom: 1px dotted #ff6f26;
 }
 .gallery__story {
-  font-size: 16px;
-  font-family: "ApocLC";
-  font-style: italic;
-  font-weight: 600;
+  color: #d9d9d9;
+  font-family: "ApocLCLight";
   margin-bottom: 20px;
-  font-size: 24px;
   margin-top: 30px;
 }
 .gallery__detail {
@@ -81,6 +96,12 @@
   border-radius: 5px;
   margin-top: 30px;
 }
+.gallery__second__row {
+  color: white;
+}
+.gallery__second__dots {
+  border-bottom: 1px dotted white;
+}
 .gallery__stats__row {
   display: grid;
   grid-template-columns: max-content 1fr max-content;
@@ -97,6 +118,7 @@
   div {
     margin-right: 8px;
     border: 1px solid #c4c4c4;
+    cursor: pointer;
     width: 60px;
     height: 16px;
     border-radius: 10px;
@@ -125,6 +147,7 @@
     object-fit: contain;
     object-position: top;
     margin-right: 0px;
+    border-radius: 10px;
   }
   @media (max-width: 1430px) {
     max-width: 910px;
@@ -143,6 +166,14 @@
     width: 320px;
   }
 }
+.gallery__right {
+  @media (max-width: 1430px) {
+    display: none;
+  }
+}
+.gallery__active {
+  background-color: #404040;
+}
 .gallery__others {
   margin-top: 0px !important;
   width: 460px;
@@ -150,8 +181,13 @@
   padding-left: 30px;
   border-left: 1px solid #999999;
   border-radius: 0px;
+  max-height: 600px;
+  overflow-y: scroll;
   @media (max-width: 1430px) {
     display: none;
+  }
+  &::-webkit-scrollbar {
+    width: 5px;
   }
 }
 .gallery__info {
@@ -170,6 +206,7 @@
   img {
     width: 100%;
     height: 228px;
+    border-radius: 5px;
   }
   p {
     font-size: 20px;

@@ -60,6 +60,8 @@ const Header: FC<HeaderProps> = observer((props) => {
       setActive("nft");
     } else if (router.asPath.includes("gallery")) {
       setActive("gallery");
+    } else if (router.asPath.includes("leaderboard")) {
+      setActive("leaderboard");
     } else if (router.asPath == "/") {
       setActive("");
     }

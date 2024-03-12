@@ -19,6 +19,7 @@ const GalleryPage: React.FC = observer(() => {
   const [load, setLoad] = useState(false);
   const [show, setShow] = useState(false);
   const [char, setChar] = useState<any>([]);
+  const [faction, setFaction] = useState("all");
   const [details, setDetails] = useState<any>({});
   const [oneChar, setOneChar] = useState<any>(undefined);
   console.log(oneChar);
@@ -45,7 +46,7 @@ const GalleryPage: React.FC = observer(() => {
   }, [oneChar]);
   // console.log(details);
   return (
-    <div className={style.gallery__container}>
+    <div className={style.gallery__container__one}>
       <BackButton />
       <div className={style.gallery__one}>
         <div>
@@ -162,11 +163,19 @@ const GalleryPage: React.FC = observer(() => {
                   return null;
                 return (
                   <div
-                    className={style.gallery__stats__row}
+                    className={classNames(
+                      style.gallery__stats__row,
+                      style.gallery__second__row
+                    )}
                     key={el.trait_type}
                   >
                     <div>{el.trait_type}</div>
-                    <div className={style.gallery__stats__dots}></div>
+                    <div
+                      className={classNames(
+                        style.gallery__stats__dots,
+                        style.gallery__second__dots
+                      )}
+                    ></div>
                     <div>{el.value}</div>
                   </div>
                 );
@@ -180,11 +189,57 @@ const GalleryPage: React.FC = observer(() => {
           <div className={style.gallery__story}>Story</div>
           <img className={style.gallery__soon} src="/soon.png" />
         </div>
-        <div className={classNames(style.gallery, style.gallery__others)}>
-          {char.map((el: any, i: number) => {
-            return <OneImage el={el} key={i} />;
-          })}
-          {/* Add your gallery content here */}
+        <div className={style.gallery__right}>
+          <div className={style.gallery__char}>
+            Characters
+            <img src="/leaderboard/showdown.svg" />
+          </div>
+          <div className={style.gallery__row}>
+            <div
+              className={classNames(faction == "all" && style.gallery__active)}
+              onClick={() => {
+                setFaction("all");
+              }}
+            >
+              all
+            </div>
+            <div
+              className={classNames(
+                faction == "vigilant" && style.gallery__active
+              )}
+              onClick={() => {
+                setFaction("vigilant");
+              }}
+            >
+              vigilant
+            </div>
+            <div
+              className={classNames(
+                faction == "sleeper" && style.gallery__active
+              )}
+              onClick={() => {
+                setFaction("sleeper");
+              }}
+            >
+              sleeper
+            </div>
+          </div>
+          <div className={classNames(style.gallery, style.gallery__others)}>
+            {char
+              .filter((el) => {
+                if (faction == "all") return true;
+                let fa = el.attributes.filter(
+                  (el) => el.trait_type == "faction"
+                );
+                console.log(fa);
+                return fa[0].value == faction;
+              })
+              .map((el: any, i: number) => {
+                console.log(".filter(el=> el.)", el);
+                return <OneImage el={el} key={i} />;
+              })}
+            {/* Add your gallery content here */}
+          </div>
         </div>
       </div>
     </div>

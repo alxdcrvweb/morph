@@ -1,4 +1,3 @@
-import { injectable } from "inversify";
 import { RootStore } from "./RootStore";
 import { action, makeObservable, observable } from "mobx";
 import { ModalsEnum } from "../modals";
@@ -6,11 +5,11 @@ import "reflect-metadata";
 import axios from "axios";
 import { mintContract } from "../utils/contracts/mint";
 import { moralisUrl } from "../config/config";
-observable
+
 export class GalleryStore {
-  characters: any[] = [];
-  char: any;
-  takenNft: any;
+  @observable characters: any[] = [];
+  @observable char: any;
+  @observable takenNft: any;
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }

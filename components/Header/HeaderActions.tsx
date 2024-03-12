@@ -88,18 +88,18 @@ const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
         </Link>
       }
       {
-        // <Link href="/">
-        <div
-          className={cn(
-            styles.header__menu,
-            active == "mint" && styles.header__active,
-            styles.header__disabled,
-            styles.last
-          )}
-        >
-          Community
-        </div>
-        // </Link>
+        <Link href="/leaderboard">
+          <div
+            className={cn(
+              styles.header__menu,
+              active == "leaderboard" && styles.header__active,
+              // styles.header__disabled,
+              styles.last
+            )}
+          >
+            Leaderboard
+          </div>
+        </Link>
       }
       {/* {active !== "" && (
           <div
