@@ -6,6 +6,14 @@ export function toBNJS(val: BigNumber | number | string) {
   return new BN(val.toString());
 }
 
+export const ipfsGateway = (cid: string) => {
+  // console.log(cid)
+  if (cid) {
+    let com = "img-quality=10&";
+    let handleCid = cid.replace("ipfs://", "").replace("ipfs:/", "");
+    return `https://loot.mypinata.cloud/ipfs/${handleCid}?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`;
+  } else return "";
+};
 export function maskAddress(address: string) {
   return address.slice(0, 6) + "..." + address.slice(address.length - 4);
 }

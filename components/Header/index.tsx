@@ -14,6 +14,7 @@ import "@farcaster/auth-kit/styles.css";
 import story from "../../styles/story.module.scss";
 import { SignInButton, useProfile, useSignIn } from "@farcaster/auth-kit";
 import { Web3Store } from "../../stores/Web3Store";
+import classNames from "classnames";
 // import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
@@ -55,6 +56,10 @@ const Header: FC<HeaderProps> = observer((props) => {
       setActive("story");
     } else if (router.asPath.includes("mint")) {
       setActive("mint");
+    } else if (router.asPath.includes("gallery/")) {
+      setActive("nft");
+    } else if (router.asPath.includes("gallery")) {
+      setActive("gallery");
     } else if (router.asPath == "/") {
       setActive("");
     }
@@ -81,7 +86,9 @@ const Header: FC<HeaderProps> = observer((props) => {
             <div>Menu</div>
           </div>
         </div>
-        {<AudioPlayer routerPath={props.routerPath} />}
+        <div className={classNames(active == "nft" && styles.inactive)}>
+          {<AudioPlayer routerPath={props.routerPath} />}
+        </div>
 
         <div style={{ display: "flex", alignItems: "center" }}>
           <HeaderActions

@@ -1,5 +1,5 @@
-export const mintAddress = '0x6A2d4D668F595121378BcF033d5B1E0b75424d04'
-export const chainId = '0x1'
-export const netId = 1
-export const netName = 'Ethereum mainnet'
+export const chainId = '0x2105'
+export const netId = 8453
+export const netName = 'Base'
 // export const GA_MEASUREMENT_ID = 'G-4EFKJ9YH4G'
+export const moralisUrl = "https://deep-index.moralis.io/api/v2/"

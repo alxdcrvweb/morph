@@ -1,22 +1,25 @@
-import { Container } from "inversify";;
+import { Container } from "inversify";
 import { ModalStore } from "./ModalStore";
 import { useMemo } from "react";
 import { Web3Store } from "./Web3Store";
 // import {WalletStore} from "./WalletStore";
 import "reflect-metadata";
+import { GalleryStore } from "./GalleryStore";
 // @ts-ignore
 export class HistoryStore implements History {}
 export class RootStore {
   public web3store: Web3Store;
   public container: Container;
   public modalStore: ModalStore;
-  // public walletStore: WalletStore;
+  public galleryStore: GalleryStore;
   public constructor() {
     this.web3store = new Web3Store(this);
+    this.galleryStore = new GalleryStore(this);
     this.modalStore = new ModalStore(this);
     this.container = new Container();
     this.container.bind(Web3Store).toConstantValue(this.web3store);
     this.container.bind(ModalStore).toConstantValue(this.modalStore);
+    this.container.bind(GalleryStore).toConstantValue(this.galleryStore);
     this.container.bind(Container).toConstantValue(this.container);
   }
 }

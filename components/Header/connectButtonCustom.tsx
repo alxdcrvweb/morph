@@ -42,7 +42,7 @@ const ConnectButtonCustom = observer(
           // },[claim])
           useEffect(() => {
             if (connector) {
-              console.log("connector", connector, account);
+              // console.log("connector", connector, account);
               getProvider();
             }
           }, [connector]);

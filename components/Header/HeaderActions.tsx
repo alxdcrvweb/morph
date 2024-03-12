@@ -18,8 +18,8 @@ interface HeaderProps {
 
 const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
   const router = useRouter();
-
-  console.log(" HeaderActions routerPath", routerPath);
+  const web3Store = useInjection<Web3Store>(Web3Store);
+  // console.log(" HeaderActions routerPath", routerPath);
 
   // const clickHandler = () => {
   //   if (address) {
@@ -75,17 +75,17 @@ const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
         </Link>
       }
       {
-        // <Link href="/mint">
-        <div
-          className={cn(
-            styles.header__menu,
-            active == "mint" && styles.header__active,
-            styles.header__disabled
-          )}
-        >
-          Gallery
-        </div>
-        // </Link>
+        <Link href="/gallery">
+          <div
+            className={cn(
+              styles.header__menu,
+              active == "gallery" && styles.header__active,
+              !web3Store.farcasterUser && styles.header__disabled
+            )}
+          >
+            Gallery
+          </div>
+        </Link>
       }
       {
         // <Link href="/">
