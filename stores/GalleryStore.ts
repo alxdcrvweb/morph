@@ -5,6 +5,9 @@ import "reflect-metadata";
 import axios from "axios";
 import { mintContract } from "../utils/contracts/mint";
 import { moralisUrl } from "../config/config";
+import { injectable } from "inversify";
+
+injectable()
 
 export class GalleryStore {
   @observable characters: any[] = [];

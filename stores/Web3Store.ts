@@ -4,12 +4,15 @@ import Web3 from "web3";
 import { RootStore } from "./RootStore";
 import { mintAbi, mintContract } from "../utils/contracts/mint";
 import { ModalsEnum } from "../modals";
+import { injectable } from "inversify";
 interface User {
   login: string;
   email: string;
   address?: string;
   id?: string;
 }
+
+injectable()
 
 export class Web3Store {
   @observable address: string | null = null;
