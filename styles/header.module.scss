@@ -5,6 +5,11 @@
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
+.disabled {
+  pointer-events: none;
+  color: #757575!important;
+
+}
 .inactive {
   opacity: 0;
   pointer-events: none;
