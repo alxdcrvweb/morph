@@ -7,7 +7,7 @@ import { mintContract } from "../utils/contracts/mint";
 import { moralisUrl } from "../config/config";
 import { injectable } from "inversify";
 
-injectable()
+injectable();
 
 export class GalleryStore {
   @observable characters: any[] = [];
@@ -37,19 +37,23 @@ export class GalleryStore {
       });
       console.log(res, res.data.result.length);
 
-      this.characters = res.data.result
-        // .filter((el: any) => el.token_uri)
-        .map((el: any) => {
-          console.log(el);
-          return {
-            block_number: el.block_number,
-            id: el.token_id,
-            ...el.normalized_metadata,
-          };
-        });
-        
+      return (
+        res.data.result
+          // .filter((el: any) => el.token_uri)
+          .map((el: any) => {
+            console.log(el);
+            return {
+              block_number: el.block_number,
+              id: el.token_id,
+              ...el.normalized_metadata,
+            };
+          })
+      );
     } catch (e) {
       console.log(e);
     }
+  };
+  setCharacters = (characters: any[]) => {
+    this.characters = characters;
   };
 }

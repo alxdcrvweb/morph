@@ -4,7 +4,13 @@ import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { LocomotiveScrollProvider, Scroll } from "react-locomotive-scroll";
 import decor1 from "../public/showdown/decor1.svg";
 import decor2 from "../public/showdown/decor2.svg";
@@ -14,6 +20,7 @@ import BackLink from "./StoryBackLink";
 import { useInjection } from "inversify-react";
 import axios from "axios";
 import { Web3Store } from "../stores/Web3Store";
+import { useProfile, useSignIn } from "@farcaster/auth-kit";
 // import { getCsrfToken } from "next-auth/react";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
@@ -29,68 +36,51 @@ export default function MainLayout({ children, props }: MyHead) {
   const [prevPath, setPrevPath] = useState("");
   const routerPathName = router.asPath.split("/")[1];
   const mainRef = useRef(null);
-  const userStore = useInjection(Web3Store);
-  
-  // const getNonce = useCallback(async () => {
-  //   const nonce = await getCsrfToken();
-  //   if (!nonce) throw new Error("Unable to generate nonce");
-  //   return nonce;
-  // }, []);
-  // const getUserById = async (id: string | null) => {
-  //   try {
-  //     const response = await axios.get(
-  //       `https://api.neynar.com/v2/farcaster/user/bulk?fids=${id}&viewer_fid=${id}`,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           api_key: process.env.NEYNAR_API_KEY as string,
-  //         },
-  //       }
-  //     );
-  //     userStore.setFarcasterUser(response.data);
-  //   } catch (error) {
-  //     console.error("error", error);
-  //   }
+  const web3store = useInjection(Web3Store);
+  const { isAuthenticated, profile } = useProfile();
+  const sign = useSignIn({
+    onSuccess: ({ fid }) => console.log("Your fid:", fid),
+  });
+  const checkProfile = async (fid: number) => {
+    try {
+      const response = await axios.get(
+        `https://api.neynar.com/v2/farcaster/user/bulk?fids=${fid}&viewer_fid=${fid}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            api_key: process.env.NEYNAR_API_KEY as string,
+          },
+        }
+      );
+      console.log(response.data);
+      localStorage.setItem(
+        "farcasterProfile",
+        JSON.stringify(response.data.users[0])
+      );
+      web3store.setFarcasterUser(response.data.users[0]);
+    } catch (error) {
+      console.error("error", error);
+    }
 
-  //   // console.log("HIIIII", response);
-  // };
-  // useEffect(() => {
-  //   if (localStorage.getItem("id") && !userStore.farcasterUser) {
-  //     let id = localStorage.getItem("id");
-  //     getUserById(id);
-  //   }
-  // }, [localStorage.getItem("id")]);
-  // const [locoScroll, setLocoScroll] = useState<Scroll>()
-
-  // useEffect(() => {
-
-  // 	if (!locoScroll) return
-  // 	const call = () => locoScroll.update()
-
-  // 	ScrollTrigger.addEventListener("refresh", call);
-  // 	ScrollTrigger.refresh();
-
-  // 	return () => { ScrollTrigger.removeEventListener("refresh", call) }
-
-  // }, [locoScroll])
-
-  // const locationChangeHandler = useCallback((scroll: Scroll) => {
-  // 	console.log('================== locationChangeHandler');
-
-  // 	console.log('prevPath', prevPath);
-  // 	console.log('prevPath.split(/[/]/)[1]', prevPath.split(/[/]/)[1]);
-  // 	console.log('routerPathName', routerPathName);
-  // 	console.log('boool', (prevPath.split('/')[1] === 'story' || routerPathName === 'story'));
-  // 	console.log('locationChangeHandler ==================');
-
-  // 	if (prevPath.split(/[/]/)[1] === 'story' || router.asPath.split('/')[1] === 'story') scroll.scrollTo(0, { duration: 0, disableLerp: true })
-
-  // }, [prevPath])
-
-  // useEffect(() => {
-  // 	console.log('useEffect prevPath', prevPath);
-
-  // }, [prevPath])
+    // console.log("HIIIII", response);
+  };
+  useEffect(() => {
+    if (isAuthenticated && JSON.stringify(profile) !== "{}") {
+      checkProfile(profile.fid);
+    }
+  }, [isAuthenticated, profile]);
+  useEffect(() => {
+    let profile = localStorage.getItem("farcasterProfile");
+    console.log(profile);
+    if (
+      profile &&
+      profile !== "{}" &&
+      JSON.parse(profile)?.custody == undefined
+    ) {
+      web3store.setFarcasterUser(JSON.parse(profile));
+      // console.log(profile);
+    }
+  }, []);
 
   useEffect(() => {
     return () => setPrevPath(router.asPath);
@@ -148,7 +138,7 @@ export default function MainLayout({ children, props }: MyHead) {
         // location={router.asPath}
         // onLocationChange={locationChangeHandler}
       >
-        <Header routerPath={routerPathName} csrfToken={props.csrfToken}/>
+        <Header routerPath={routerPathName} csrfToken={props.csrfToken} />
         <main data-scroll-container ref={mainRef}>
           {children}
         </main>

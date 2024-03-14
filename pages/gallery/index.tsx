@@ -12,16 +12,50 @@ const GalleryPage: React.FC = observer(() => {
   const web3store = useInjection(Web3Store);
   const [char, setChar] = useState<any>([]);
   const [faction, setFaction] = useState("all");
-  useEffect(() => {
-    if (web3store.farcasterUser.custody) {
-      galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
+  const [updated, setUpdated] = useState(false)
+  // const f = async () => {
+  //   console.log("hi function");
+  //   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  //   for (let i = 0; i < 10; i++) {
+  //     console.log(i);
+  //     await delay(1000);
+  //   }
+  // };
+  const checkChars = async () => {
+    console.log("HI CHECK", updated);
+    const addresses = [
+      web3store.farcasterUser?.custody_address,
+      ...web3store.farcasterUser.verified_addresses.eth_addresses,
+    ];
+    const check = (address: string) =>
+      new Promise((resolve) =>
+        resolve(galleryStore.getCharacters(address, chainId))
+      );
+    for (let i = 0; i <= addresses.length; i++) {
+      console.log(addresses[i]);
+      if (addresses[i]) {
+        let c = await check(addresses[i]);
+        //@ts-ignore
+        if (c?.length > 0) {
+          console.log("hi result", c);
+          galleryStore.setCharacters(c);
+          break;
+        }
+      }
     }
-  }, [web3store.farcasterUser]);
+  };
   useEffect(() => {
-    if (web3store.farcasterUser.custody) {
-      galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
+    if (web3store?.farcasterUser?.custody_address && !updated) {
+      setUpdated(true)
+      checkChars();
     }
-  }, []);
+  }, [web3store?.farcasterUser?.custody_address]);
+  // useEffect(() => {
+  //   // f();
+  //   if (web3store.farcasterUser.custody_address) {
+  //     checkChars();
+  //   }
+  // }, []);
   useEffect(() => {
     setChar(galleryStore.characters);
   }, [galleryStore.characters]);
@@ -72,7 +106,7 @@ const GalleryPage: React.FC = observer(() => {
               return fa[0].value == faction;
             })
             .map((el: any, i: number) => {
-              console.log(".filter(el=> el.)", el);
+              // console.log(".filter(el=> el.)", el);
               return <OneImage el={el} key={i} />;
             })}
           {/* Add your gallery content here */}

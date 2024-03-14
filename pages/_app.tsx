@@ -19,10 +19,7 @@ import Head from "next/head";
 import MainLayout from "../components/MainLayout";
 import AppLoader from "../components/loader";
 import {
-  AuthKitProvider,
-  SignInButton,
-  useProfile,
-  useSignInMessage,
+  AuthKitProvider
 } from "@farcaster/auth-kit";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";

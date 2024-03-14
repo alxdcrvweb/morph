@@ -15,6 +15,7 @@ import story from "../../styles/story.module.scss";
 import { SignInButton, useProfile, useSignIn } from "@farcaster/auth-kit";
 import { Web3Store } from "../../stores/Web3Store";
 import classNames from "classnames";
+import axios from "axios";
 // import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
@@ -26,27 +27,6 @@ const Header: FC<HeaderProps> = observer((props) => {
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
   const web3store = useInjection(Web3Store);
-  const { isAuthenticated, profile } = useProfile();
-  const sign = useSignIn({
-    onSuccess: ({ fid }) => console.log("Your fid:", fid),
-  });
-  console.log(sign);
-  console.log(isAuthenticated, profile);
-  useEffect(() => {
-    if (isAuthenticated && JSON.stringify(profile) !== "{}") {
-      console.log(profile);
-      localStorage.setItem("farcasterProfile", JSON.stringify(profile));
-      web3store.setFarcasterUser(profile);
-    }
-  }, [isAuthenticated, profile]);
-  useEffect(() => {
-    let profile = localStorage.getItem("farcasterProfile");
-    console.log(profile);
-    if (profile && profile !== "{}") {
-      web3store.setFarcasterUser(JSON.parse(profile));
-      console.log(JSON.parse(localStorage.getItem("farcasterProfile")));
-    }
-  }, []);
   const [active, setActive] = useState("");
   useEffect(() => {
     console.log(router.asPath);
@@ -126,7 +106,7 @@ const Header: FC<HeaderProps> = observer((props) => {
           ) : (
             <div className={styles.wrapcast}>
               @{web3store.farcasterUser?.username}
-              <img src={web3store.farcasterUser?.pfpUrl} />
+              <img src={web3store.farcasterUser?.pfp_url} />
             </div>
           )}
           {/* {props.csrfToken ? (
