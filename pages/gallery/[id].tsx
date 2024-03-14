@@ -161,8 +161,8 @@ const GalleryPage: React.FC = observer(() => {
               <div>
                 {(details.mirage
                   ? details.mirage
-                  : details.droid
-                  ? details.droid
+                  : details.droids
+                  ? details.droids
                   : "None"
                 ).replace("oberver", "observer")}
               </div>
@@ -188,7 +188,7 @@ const GalleryPage: React.FC = observer(() => {
                 if (
                   el.trait_type == "faction" ||
                   el.trait_type == "mirage" ||
-                  el.trait_type == "droid"
+                  el.trait_type == "droids"
                 )
                   return null;
                 return (
