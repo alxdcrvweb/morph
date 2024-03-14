@@ -68,6 +68,7 @@ const GalleryPage: React.FC = observer(() => {
   }, [galleryStore.char]);
   useEffect(() => {
     if (oneChar) {
+      setDetails({});
       oneChar?.attributes?.map((el: any) => {
         setDetails((prev) => ({ ...prev, [el.trait_type]: el.value }));
       });
