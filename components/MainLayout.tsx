@@ -38,9 +38,6 @@ export default function MainLayout({ children, props }: MyHead) {
   const mainRef = useRef(null);
   const web3store = useInjection(Web3Store);
   const { isAuthenticated, profile } = useProfile();
-  const sign = useSignIn({
-    onSuccess: ({ fid }) => console.log("Your fid:", fid),
-  });
   const checkProfile = async (fid: number) => {
     try {
       const response = await axios.get(

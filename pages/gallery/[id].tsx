@@ -59,6 +59,9 @@ const GalleryPage: React.FC = observer(() => {
     galleryStore.setChar(router.asPath.split("/")[2]);
   }, [galleryStore.characters]);
   useEffect(() => {
+    galleryStore.setChar(router.asPath.split("/")[2]);
+  }, [router.asPath]);
+  useEffect(() => {
     if (galleryStore.char) {
       setOneChar(galleryStore.char);
     }
@@ -79,6 +82,7 @@ const GalleryPage: React.FC = observer(() => {
           <img
             className={style.gallery__img}
             style={{ opacity: load ? 1 : 0 }}
+            key={oneChar?.image}
             src={"/api/image?cid=" + oneChar?.image}
             onLoad={(e) => {
               setLoad(true);

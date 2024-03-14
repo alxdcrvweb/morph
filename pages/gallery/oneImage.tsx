@@ -3,7 +3,7 @@ import { ipfsGateway } from "../../utils/utilities";
 import style from "../../styles/gallery.module.scss";
 import { useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
-const OneImage = ({ el }: any) => {
+const OneImage = ({ el, }: any) => {
   const [load, setLoad] = useState(false);
   return (
     <Link href={`/gallery/${el.id}`} key={el.id}>
