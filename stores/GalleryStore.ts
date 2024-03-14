@@ -47,6 +47,7 @@ export class GalleryStore {
             ...el.normalized_metadata,
           };
         });
+        
     } catch (e) {
       console.log(e);
     }

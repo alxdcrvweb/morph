@@ -13,8 +13,9 @@ import OneImage from "./oneImage";
 import { RotatingLines } from "react-loader-spinner";
 import BackButton from "../../components/Header/backButton";
 const GalleryPage: React.FC = observer(() => {
-  const galleryStore = useInjection(GalleryStore);
   const web3store = useInjection(Web3Store);
+  const galleryStore = useInjection(GalleryStore);
+
   const router = useRouter();
   const [load, setLoad] = useState(false);
   const [show, setShow] = useState(false);
@@ -24,10 +25,10 @@ const GalleryPage: React.FC = observer(() => {
   const [oneChar, setOneChar] = useState<any>(undefined);
   console.log(oneChar);
   useEffect(() => {
-    if (galleryStore && web3store.farcasterUser.custody) {
+    if (web3store.farcasterUser.custody) {
       galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
     }
-  }, [galleryStore.characters, web3store.farcasterUser]);
+  }, [galleryStore, web3store.farcasterUser]);
   useEffect(() => {
     setChar(galleryStore.characters);
     galleryStore.setChar(router.asPath.split("/")[2]);

@@ -13,10 +13,10 @@ const GalleryPage: React.FC = observer(() => {
   const [char, setChar] = useState<any>([]);
   const [faction, setFaction] = useState("all");
   useEffect(() => {
-    if (web3store.farcasterUser.custody && galleryStore.characters) {
+    if (web3store.farcasterUser.custody) {
       galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
     }
-  }, [web3store.farcasterUser, galleryStore.characters]);
+  }, [web3store.farcasterUser]);
   useEffect(() => {
     if (web3store.farcasterUser.custody) {
       galleryStore.getCharacters(web3store.farcasterUser.custody, chainId);
