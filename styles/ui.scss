@@ -161,7 +161,14 @@
   @include adaptiv-value("font-size", 20, 18, 1);
   line-height: 113%;
 }
-
+._littleText2 {
+  font-family: "ApocLC";
+  @include adaptiv-value("font-size", 20, 18, 1);
+  line-height: 123%;
+  div {
+    color: transparent;
+  }
+}
 .nostra {
   font-family: "Nostra";
 }
@@ -193,7 +200,7 @@
 }
 .tr {
   transition: 0.5s ease;
-  transition-property: opacity, z-index
+  transition-property: opacity, z-index;
 }
 ._back {
   cursor: pointer;

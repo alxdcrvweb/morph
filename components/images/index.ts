@@ -105,6 +105,14 @@ export const IMAGES = {
     third: '/showdown/third.png',
     stone: '/showdown/stone.png',
   },
+  agreement: {
+    art: "/agreement/art.png",
+    first: "/agreement/first.png",
+    fanatic: "/agreement/fanatic.png",
+    screen: "/agreement/screen.png",
+    logo: "/agreement/logo.png",
+    cube: "/agreement/cube.png",
+  },
   mint: {
     mintbg: "/mintbg.png",
     mintFinish: "/mintFinish.png",

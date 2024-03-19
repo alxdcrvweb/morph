@@ -9,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 import decor1 from "../../public/showdown/decor1.svg";
 import decor2 from "../../public/showdown/decor2.svg";
 import Image from "next/image";
+import classNames from "classnames";
 // import { getCsrfToken } from 'next-auth/react';
 // export async function getServerSideProps(context:any) {
 // 	const csrfToken = await getCsrfToken(context);
@@ -18,8 +19,9 @@ import Image from "next/image";
 const { art, gatherer, third, stone } = IMAGES.showdown;
 
 const FirstStory: NextPage = observer(() => {
-  const isMobile = useMediaQuery({ maxWidth: 767.98 });
-
+  const slide = (dir: number) => {
+    router.push("/story/" + dir);
+  };
   const router = useRouter();
 
   const handleClick = () => {
@@ -188,26 +190,130 @@ const FirstStory: NextPage = observer(() => {
                 storyStyles.story__content_padding
               )}
             >
-              <div className={storyStyles.story__head}>Next chapter</div>
+              {/* <div className={storyStyles.story__head}>Next chapter</div> */}
               <div className={storyStyles.story__main}>
-                <div className={storyStyles.story__body}>
-                  <h2 className={cn(storyStyles.story__title, "_subtitle")}>
-                    <span>02</span>
+                <div
+                  className={classNames(
+                    storyStyles.story__slide,
+                    storyStyles.story__slide__empty
+                  )}
+                >
+                  <h2
+                    className={cn(
+                      storyStyles.story__title,
+                      storyStyles.story__subtitle
+                    )}
+                  >
+                    <span>01</span>
                     <img src="/icons/storyDecor.svg" alt="" />
-                    The Encounter
+                    Nightmare Fuel
                   </h2>
-                  <div className={storyStyles.story__status}>
-                    Work in progress
+                  <div className={storyStyles.story__status__subtitle}>
+                    Passed
+                  </div>
+                </div>
+                <div className={storyStyles.story__footer}>
+                  <h2
+                    className={cn(
+                      storyStyles.story__title,
+                      storyStyles.story__subtitle
+                    )}
+                  >
+                    <span>01</span>
+                    <img src="/icons/storyDecor.svg" alt="" />
+                    Nightmare Fuel
+                  </h2>
+                  <div className={storyStyles.story__status__subtitle}>
+                    Playing
                   </div>
                   <div
                     onClick={handleClick}
                     className={cn(
                       storyStyles.story__explore,
-                      storyStyles.story__explore_dark
+                      storyStyles.story__explore_dark,
+                      storyStyles.story__explore_desctop
                     )}
                   >
                     Back to chapters
                   </div>
+                  <div className={storyStyles.story__row}>
+                    <img
+                      src="/arrow.svg"
+                      className={cn(
+                        storyStyles.story__back,
+                        storyStyles.story__slide__empty
+                      )}
+                      onClick={() => slide(1)}
+                    />
+                    <svg
+                      width="42"
+                      height="10"
+                      viewBox="0 0 42 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        x="1"
+                        y="1"
+                        width="8"
+                        height="8"
+                        rx="4"
+                        stroke="white"
+                      />
+                      <rect
+                        x="17"
+                        y="1"
+                        width="8"
+                        height="8"
+                        rx="4"
+                        fill="white"
+                        stroke="white"
+                      />
+                      <rect
+                        x="33"
+                        y="1"
+                        width="8"
+                        height="8"
+                        rx="4"
+                        stroke="white"
+                      />
+                    </svg>
+
+                    <img
+                      style={{ transform: "rotate(180deg)" }}
+                      className={storyStyles.story__back}
+                      src="/arrow.svg"
+                      onClick={() => slide(2)}
+                    />
+                  </div>
+                </div>
+                <div
+                  className={storyStyles.story__slide}
+                  onClick={() => slide(2)}
+                >
+                  <h2
+                    className={cn(
+                      storyStyles.story__title,
+                      storyStyles.story__subtitle
+                    )}
+                  >
+                    <span>02</span>
+                    <img src="/icons/storyDecor.svg" alt="" />
+                    Agreement
+                  </h2>
+                  <div className={storyStyles.story__status__subtitle}>
+                    Next
+                  </div>
+                </div>
+                <div
+                  onClick={handleClick}
+                  className={cn(
+                    storyStyles.story__explore,
+                    storyStyles.story__explore_dark,
+                    storyStyles.story__explore_mobile
+                  )}
+                >
+                  Back to chapters
                 </div>
               </div>
             </div>
