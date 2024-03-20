@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ipfsGateway } from "../../utils/utilities";
-import axios, { AxiosResponse } from "axios";
-import { request } from "http";
 import fetch from "node-fetch";
 
 export default async function handler(
