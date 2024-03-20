@@ -22,19 +22,13 @@ export class GalleryStore {
   getCharacters = async (address: string, chain: string) => {
     const params = {
       chain: chain,
-      offset: "1",
-      normalizeMetadata: "true",
-      token_addresses: mintContract,
+      address: address,
     };
 
     const query = new URLSearchParams(params).toString();
 
     try {
-      const res = await axios.get(moralisUrl + address + `/nft/?` + query, {
-        headers: {
-          "X-API-Key": process.env.NEXT_PUBLIC_MORALIS_API_KEY as string,
-        },
-      });
+      const res = await axios.get("/api/nfts?" + query);
       console.log(res, res.data.result.length);
 
       return (

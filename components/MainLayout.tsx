@@ -40,15 +40,7 @@ export default function MainLayout({ children, props }: MyHead) {
   const { isAuthenticated, profile } = useProfile();
   const checkProfile = async (fid: number) => {
     try {
-      const response = await axios.get(
-        `https://api.neynar.com/v2/farcaster/user/bulk?fids=${fid}&viewer_fid=${fid}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            api_key: process.env.NEYNAR_API_KEY as string,
-          },
-        }
-      );
+      const response = await axios.get(`/api/getUsers?fid=${fid}`);
       console.log(response.data);
       localStorage.setItem(
         "farcasterProfile",
