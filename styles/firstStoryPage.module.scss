@@ -46,7 +46,7 @@
 }
 .forth {
   img {
-    max-width: 100%;
+    max-width: 100vw;
     @media (max-width: 768px) {
       display: none;
     }
@@ -155,7 +155,7 @@
   div {
     font-family: "ApocLCLight";
     font-size: 20px;
-    margin-top: 20px;
+    margin-top: 30px;
     font-style: italic;
   }
   img {
@@ -191,18 +191,34 @@
       flex-direction: column;
     }
   }
+  &__grid2 {
+    display: grid;
+    grid-template-columns: 0.8fr 1.1fr;
+    column-gap: 20px;
+    @media (max-width: ($md3+px)) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   // .gatherer__image
   &__image {
     display: flex;
     flex-direction: column;
     margin-bottom: 40px;
-    img {
+    &_in {
       max-width: 100%;
+    }
+    &_opeansea {
+      width: 20px;
+      height: 20px;
+      align-self: flex-end;
+      margin-top: -35px;
+      margin-right: 15px;
     }
     div {
       font-family: "ApocLCLight";
       font-size: 20px;
-      margin-top: 20px;
+      margin-top: 30px;
       font-style: italic;
     }
     @media (min-width: ($md1+px)) {

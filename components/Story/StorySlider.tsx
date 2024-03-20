@@ -7,14 +7,15 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 const StoryChoose: FC = observer(() => {
   const router = useRouter();
-  const slide = (index: number) => {
-    router.push("/story/" + index);
+  const slide = (dir: string) => {
+    router.push("/story/" + dir);
   };
   return (
     <div className={styles.story__choose}>
+      <div className={styles.story__backstory}>Backstory</div>
       <div
         className={classNames(styles.story__part, styles.story__nightmare)}
-        onClick={() => slide(1)}
+        onClick={() => slide("nightmare_fuel")}
       >
         <h2 className={classNames(styles.story__title, styles.story__subtitle)}>
           <span>01</span>
@@ -28,7 +29,7 @@ const StoryChoose: FC = observer(() => {
       </div>
       <div
         className={classNames(styles.story__part, styles.story__agreement)}
-        onClick={() => slide(2)}
+        onClick={() => slide("agreement")}
       >
         <h2 className={classNames(styles.story__title, styles.story__subtitle)}>
           <span>02</span>
@@ -43,7 +44,7 @@ const StoryChoose: FC = observer(() => {
       </div>
       <div
         className={classNames(styles.story__part, styles.story__ayon)}
-        onClick={() => slide(3)}
+        onClick={() => slide("3")}
       >
         <h2 className={classNames(styles.story__title, styles.story__subtitle)}>
           <span>03</span>

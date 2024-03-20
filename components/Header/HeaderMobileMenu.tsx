@@ -28,7 +28,7 @@ const HeaderMobileMenu: FC<HeaderMobileMenuProps> = observer(
 
     const menuList = [
       { id: 1, text: "Journey", pushTo: "/" },
-      { id: 2, text: "Story", pushTo: "/story/1" },
+      { id: 2, text: "Story", pushTo: "/story" },
       { id: 3, text: "Factions", pushTo: "/sleeping" },
       { id: 4, text: "Gallery", pushTo: "/gallery" },
       { id: 5, text: "Leaderboard", pushTo: "/leaderboard" },

@@ -154,12 +154,36 @@
   @include adaptiv-value("font-size", 28, 20, 1);
   font-family: "Moderat";
   line-height: 125%;
+  span {
+    color: #3edcbe;
+    cursor: pointer;
+    img {
+      position: absolute;
+      width: 130px;
+      height: 170px;
+      transition: 500ms ease all;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  }
 }
 
 ._littleText {
   font-family: "ApocLC";
   @include adaptiv-value("font-size", 20, 18, 1);
   line-height: 113%;
+  span {
+    color: #3edcbe;
+    cursor: pointer;
+    img {
+      position: absolute;
+      width: 130px;
+      height: 170px;
+      transition: 500ms ease all;
+      object-fit: cover;
+      pointer-events: none;
+    }
+  }
 }
 ._littleText2 {
   font-family: "ApocLC";
@@ -167,6 +191,18 @@
   line-height: 123%;
   div {
     color: transparent;
+  }
+  span {
+    color: #3edcbe;
+    cursor: pointer;
+    img {
+      position: absolute;
+      width: 130px;
+      height: 170px;
+      transition: 500ms ease all;
+      object-fit: cover;
+      pointer-events: none;
+    }
   }
 }
 .nostra {

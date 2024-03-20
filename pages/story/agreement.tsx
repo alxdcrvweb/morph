@@ -5,15 +5,17 @@ import styles from "../../styles/firstStoryPage.module.scss";
 import storyStyles from "../../styles/story.module.scss";
 import { IMAGES } from "../../components/images";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
-const { art, first, fanatic, screen, logo, cube } = IMAGES.agreement;
+const { art, first, fanatic, screen, logo, cube, opensea } = IMAGES.agreement;
 
 const FirstStory: NextPage = observer(() => {
   const router = useRouter();
+  const [prev, setPrev] = useState("");
   const handleClick = () => {
     router.push("/story");
   };
-  const slide = (dir: number) => {
+  const slide = (dir: string) => {
     router.push("/story/" + dir);
   };
   return (
@@ -29,9 +31,23 @@ const FirstStory: NextPage = observer(() => {
             <div className={styles.showdown__grid}>
               <div className={cn(styles.showdown__bigText, "_bigText")}>
                 Years passed and the camps of both factions grew. Occupying the
-                flooded part first, the followers of the First moved deeper into
-                the city, not renovating, but transforming the ruins of old
-                Ayyon into the semblance of a living temple.
+                flooded part first, the followers of the{" "}
+                <span
+                  onMouseEnter={() => {
+                    setPrev("first1");
+                  }}
+                  onMouseLeave={() => {
+                    setPrev("");
+                  }}
+                >
+                  First
+                  <img
+                    style={{ opacity: prev == "first1" ? 1 : 0 }}
+                    src="/agreement/first_prev.png"
+                  />
+                </span>{" "}
+                moved deeper into the city, not renovating, but transforming the
+                ruins of old Ayyon into the semblance of a living temple.
               </div>
               <div className={cn(styles.showdown__littleText, "_littleText")}>
                 Their goal was to get as many residents as possible to begin
@@ -43,9 +59,24 @@ const FirstStory: NextPage = observer(() => {
             </div>
           </div>
           <div className={styles.gatherer}>
-            <div className={styles.gatherer__grid}>
+            <div className={styles.gatherer__grid2}>
               <div className={styles.gatherer__image}>
-                <img src={first} alt="" />
+                <a
+                  style={{ cursor: "pointer" }}
+                  href="https://opensea.io/assets/base/0x670971dcb8e1a510253511427593007e074954b7/440"
+                  target="_blank"
+                >
+                  <img
+                    className={styles.gatherer__image_in}
+                    src={first}
+                    alt=""
+                  />
+                </a>
+                <img
+                  className={styles.gatherer__image_opeansea}
+                  src={opensea}
+                  alt=""
+                />
                 <div>First</div>
               </div>
               <div className={styles.gatherer__content}>
@@ -54,10 +85,54 @@ const FirstStory: NextPage = observer(() => {
                 </h1>
                 <div className={styles.gatherer__box}>
                   <p className={"_littleText2"}>
-                    The First was assisted in organizing the learning process by
-                    the very first responders to his whispers - they would
-                    eventually be given the names Law and Fanatic.
-                    <div>.</div>
+                    The{" "}
+                    <span
+                      onMouseEnter={() => {
+                        setPrev("first2");
+                      }}
+                      onMouseLeave={() => {
+                        setPrev("");
+                      }}
+                    >
+                      First{" "}
+                      <img
+                        style={{ opacity: prev == "first2" ? 1 : 0 }}
+                        src="/agreement/first_prev.png"
+                      />
+                    </span>{" "}
+                    was assisted in organizing the learning process by the very
+                    first responders to his whispers - they would eventually be
+                    given the names{" "}
+                    <span
+                      onMouseEnter={() => {
+                        setPrev("law");
+                      }}
+                      onMouseLeave={() => {
+                        setPrev("");
+                      }}
+                    >
+                      Law{" "}
+                      <img
+                        style={{ opacity: prev == "law" ? 1 : 0 }}
+                        src="/agreement/law.png"
+                      />
+                    </span>{" "}
+                    and{" "}
+                    <span
+                      onMouseEnter={() => {
+                        setPrev("fanatic");
+                      }}
+                      onMouseLeave={() => {
+                        setPrev("");
+                      }}
+                    >
+                      Fanatic{" "}
+                      <img
+                        style={{ opacity: prev == "fanatic" ? 1 : 0 }}
+                        src="/agreement/fanatic_prev.png"
+                      />
+                    </span>
+                    .<div>.</div>
                     <div>.</div>
                     <div>.</div>
                     <div>.</div>
@@ -110,7 +185,22 @@ const FirstStory: NextPage = observer(() => {
                 </div>
               </div>
               <div className={styles.third__image}>
-                <img src={fanatic} alt="" />
+                <a
+                  style={{ cursor: "pointer" }}
+                  href="https://opensea.io/assets/base/0x670971dcb8e1a510253511427593007e074954b7/459"
+                  target="_blank"
+                >
+                  <img
+                    className={styles.gatherer__image_in}
+                    src={fanatic}
+                    alt=""
+                  />
+                </a>
+                <img
+                  src={opensea}
+                  className={styles.gatherer__image_opeansea}
+                  alt=""
+                />
                 <div>Fanatic</div>
               </div>
             </div>
@@ -120,11 +210,39 @@ const FirstStory: NextPage = observer(() => {
             <div className={styles.forth__box}>
               <p className={"_littleText"}>
                 <div style={{ marginTop: "60px" }}>
-                  Order, under the protection of Spider - a pioneer of body
-                  modifications - came to the center of the city day after day
-                  to talk to the First. To talk physically, not through mental
-                  whispers. It was the only time the First's voice could be
-                  heard with your own ears.
+                  <span
+                    onMouseEnter={() => {
+                      setPrev("order");
+                    }}
+                    onMouseLeave={() => {
+                      setPrev("");
+                    }}
+                  >
+                    Order{" "}
+                    <img
+                      style={{ opacity: prev == "order" ? 1 : 0 }}
+                      src="/agreement/order.png"
+                    />
+                  </span>
+                  , under the protection of{" "}
+                  <span
+                    onMouseEnter={() => {
+                      setPrev("spider");
+                    }}
+                    onMouseLeave={() => {
+                      setPrev("");
+                    }}
+                  >
+                    Spider
+                    <img
+                      style={{ opacity: prev == "spider" ? 1 : 0 }}
+                      src="/agreement/spider.png"
+                    />
+                  </span>{" "}
+                  - a pioneer of body modifications - came to the center of the
+                  city day after day to talk to the First. To talk physically,
+                  not through mental whispers. It was the only time the First's
+                  voice could be heard with your own ears.
                 </div>{" "}
                 <br />
                 <div style={{ marginTop: "80px" }}>
@@ -137,13 +255,13 @@ const FirstStory: NextPage = observer(() => {
                   city into two districts - later to be called Slums and Polis.
                 </div>
                 <br />
-                <div style={{ marginTop: "80px" }}>
+                <div style={{ marginTop: "80px", zIndex: 1000 }}>
                   It can be said that the real development of culture began
                   here.
                 </div>
               </p>
             </div>
-            <img src={screen} style={{ marginTop: "-200px" }} />
+            <img src={screen} className={storyStyles.story__full} />
           </div>
 
           <div>
@@ -157,7 +275,7 @@ const FirstStory: NextPage = observer(() => {
               <div className={storyStyles.story__main}>
                 <div
                   className={storyStyles.story__slide}
-                  onClick={() => slide(1)}
+                  onClick={() => slide("nightmare_fuel")}
                 >
                   <h2
                     className={cn(
@@ -201,7 +319,7 @@ const FirstStory: NextPage = observer(() => {
                     <img
                       src="/arrow.svg"
                       className={storyStyles.story__back}
-                      onClick={() => slide(1)}
+                      onClick={() => slide("nightmare_fuel")}
                     />
                     <svg
                       width="42"
@@ -244,7 +362,7 @@ const FirstStory: NextPage = observer(() => {
                         storyStyles.story__slide__empty
                       )}
                       src="/arrow.svg"
-                      onClick={() => slide(3)}
+                      onClick={() => slide("3")}
                     />
                   </div>
                 </div>

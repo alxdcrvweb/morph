@@ -19,7 +19,7 @@ import classNames from "classnames";
 const { art, gatherer, third, stone } = IMAGES.showdown;
 
 const FirstStory: NextPage = observer(() => {
-  const slide = (dir: number) => {
+  const slide = (dir: string) => {
     router.push("/story/" + dir);
   };
   const router = useRouter();
@@ -59,7 +59,11 @@ const FirstStory: NextPage = observer(() => {
           <div className={styles.gatherer}>
             <div className={styles.gatherer__grid}>
               <div className={styles.gatherer__image}>
-                <img src={gatherer} alt="" />
+                <img
+                  src={gatherer}
+                  className={styles.gatherer__image_in}
+                  alt=""
+                />
               </div>
               <div className={styles.gatherer__content}>
                 <h1 className={cn(styles.gatherer__title, "_subtitle")}>
@@ -68,9 +72,9 @@ const FirstStory: NextPage = observer(() => {
                 <div className={styles.gatherer__box}>
                   <p className={"_littleText"}>
                     The Sleepers date modern Ayyon from the awakening of the
-                    First. The Vigilants timeline, on the other hand, begins two
-                    weeks earlier. The day of what is now known as Nightmare
-                    Fuel.
+                    <span>First</span>. The Vigilants timeline, on the other
+                    hand, begins two weeks earlier. The day of what is now known
+                    as Nightmare Fuel.
                   </p>
                   <p className={"_littleText"}>
                     It began when the people of Ayyon found it harder to wake up
@@ -174,8 +178,8 @@ const FirstStory: NextPage = observer(() => {
                 It lasted exactly 300 hours. 300 hours of nightmare. 300 hours
                 that wiped out most of the planet's population, almost all the
                 flora and fauna, and set back humanity in development for
-                centuries. 299 hours for the First, who came out of sleep and
-                saw what became the fuel for these nightmares.{" "}
+                centuries. 299 hours for the <span>First</span>, who came out of
+                sleep and saw what became the fuel for these nightmares.{" "}
                 <div className={styles.fifth__box__text}>
                   In the beginning there was a word and that word was - wake up.
                 </div>
@@ -243,7 +247,7 @@ const FirstStory: NextPage = observer(() => {
                         storyStyles.story__back,
                         storyStyles.story__slide__empty
                       )}
-                      onClick={() => slide(1)}
+                      onClick={() => slide("1")}
                     />
                     <svg
                       width="42"
@@ -283,13 +287,13 @@ const FirstStory: NextPage = observer(() => {
                       style={{ transform: "rotate(180deg)" }}
                       className={storyStyles.story__back}
                       src="/arrow.svg"
-                      onClick={() => slide(2)}
+                      onClick={() => slide("agreement")}
                     />
                   </div>
                 </div>
                 <div
                   className={storyStyles.story__slide}
-                  onClick={() => slide(2)}
+                  onClick={() => slide("agreement")}
                 >
                   <h2
                     className={cn(

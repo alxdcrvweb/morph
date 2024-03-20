@@ -25,7 +25,7 @@
 .story__part {
   background-size: cover;
   background-position: center;
-  width: 33%;
+  width: 33.33%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -51,18 +51,35 @@
     }
   }
 }
+.story__full {
+  margin-top: -200px;
+  width: 100vw;
+  margin-left: -60px;
+}
+.story__backstory {
+  font-family: "Moderat";
+  font-size: 20px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+  top: 100px;
+}
 .story__nightmare {
   background-image: url("/story/nightmare.png");
-  opacity: 0.8;
+  opacity: 0.4;
   transition: 500ms all ease;
+  cursor: pointer;
   &:hover {
     opacity: 1;
   }
 }
 .story__agreement {
   background-image: url("/story/agreement.png");
-  opacity: 0.8;
+  opacity: 0.4;
   transition: 500ms all ease;
+  cursor: pointer;
   &:hover {
     opacity: 1;
   }
@@ -135,6 +152,7 @@
     padding-bottom: 100px;
     @media (max-width: 1368px) {
       flex-direction: column;
+      align-items: center;
     }
     // grid-template-rows: auto 1fr;
   }
@@ -190,6 +208,7 @@
     justify-content: flex-start;
     margin: 50px;
     margin-top: 20px;
+    cursor: pointer;
     opacity: 0.5;
     .story__subtitle {
       width: 130%;
@@ -335,9 +354,10 @@
     &_mobile {
       display: none;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1368px) {
       &_mobile {
         display: flex;
+        max-width: 500px;
       }
       &_desctop {
         display: none;
