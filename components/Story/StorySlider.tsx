@@ -43,15 +43,15 @@ const StoryChoose: FC = observer(() => {
         </div>
       </div>
       <div
-        className={classNames(styles.story__part, styles.story__ayon)}
-        onClick={() => slide("3")}
+        className={classNames(styles.story__part, styles.story__ayyon)}
+        onClick={() => slide("modern")}
       >
         <h2 className={classNames(styles.story__title, styles.story__subtitle)}>
           <span>03</span>
           <img src="/icons/storyDecor.svg" alt="" />
           Modern Ayyon
         </h2>
-        <div>Soon</div>
+        <div>100 years after agreement</div>
       </div>
     </div>
   );

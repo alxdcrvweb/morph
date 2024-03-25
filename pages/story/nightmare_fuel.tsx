@@ -18,7 +18,7 @@ import classNames from "classnames";
 
 const { art, gatherer, third, stone } = IMAGES.showdown;
 
-const FirstStory: NextPage = observer(() => {
+const Nightmare: NextPage = observer(() => {
   const slide = (dir: string) => {
     router.push("/story/" + dir);
   };
@@ -328,4 +328,4 @@ const FirstStory: NextPage = observer(() => {
   );
 });
 
-export default FirstStory;
+export default Nightmare;

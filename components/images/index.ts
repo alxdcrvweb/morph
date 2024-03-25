@@ -114,6 +114,13 @@ export const IMAGES = {
     cube: "/agreement/cube.png",
     opensea: "/agreement/opensea.svg",
   },
+  modern: {
+    bottom: "/modern/bottom.png",
+    life: "/modern/life.png",
+    people: "/modern/people.png",
+    ayyon: "/modern/ayyon.png",
+    logo: "/modern/logo.svg",
+  },
   mint: {
     mintbg: "/mintbg.png",
     mintFinish: "/mintFinish.png",

@@ -53,8 +53,14 @@
 }
 .story__full {
   margin-top: -200px;
-  width: 100vw;
-  margin-left: -60px;
+  width: 100%;
+  transform: scale(1.55);
+  @media (max-width: 1268px) {
+    transform: scale(1.2);
+  }
+  @media (max-width: 768px) {
+    transform: scale(1);
+  }
 }
 .story__backstory {
   font-family: "Moderat";
@@ -84,10 +90,14 @@
     opacity: 1;
   }
 }
-.story__ayon {
-  background-image: url("/story/ayon.png");
-  opacity: 0.8;
+.story__ayyon {
+  background-image: url("/story/ayyon.png");
+  opacity: 0.4;
   transition: 500ms all ease;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
 }
 .story__slide__empty {
   opacity: 0 !important;
