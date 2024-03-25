@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import classNames from "classnames";
 import ShowImage from "../../components/Story/ShowImage";
+import Link from "next/link";
 
 const { ayyon, bottom, logo, life, people } = IMAGES.modern;
 const { opensea } = IMAGES.agreement;
@@ -187,40 +188,45 @@ const Modern: NextPage = observer(() => {
                   Despite the Agreement, some of the high-ranking Sleepers were
                   downright dangerous. One could say it wasn't entirely their
                   fault - great knowledge could drive them mad enough that even
-                  a whisper from the First wouldn't keep them sane. But that
-                  didn't diminish the danger. Many of the Vigilants were using
-                  an app from the Innovator: a tracker for where the{" "}
-                  <ShowImage
-                    setPrev={setPrev}
-                    prev={prev}
-                    name={"Wendigo"}
-                    imageUrl="/modern/Wendigo.png"
-                  />{" "}
-                  or the{" "}
-                  <ShowImage
-                    setPrev={setPrev}
-                    prev={prev}
-                    name={"Gatherer"}
-                    imageUrl="/modern/Gatherer.png"
-                  />{" "}
-                  is now. Nominally there were no witnesses of harm from them.
-                  So either there was no harm - or no surviving witnesses, there
-                  is no answer to that question yet. Better to use the app.
-                </div>
-                <br />
-                <div style={{ marginTop: "80px" }}>
-                  After a week of negotiations, an Agreement was made. The
-                  Sleepers did not disrupt the flow of progress, the Vigilants
-                  did not intrude on tradition. At the site of their
-                  negotiations, they worked together to build a tower, made of
-                  new materials, but covered with the symbols of the eyes and
-                  fumigated with the smoke of altars. This tower divided the
-                  city into two districts - later to be called Slums and Polis.
+                  a whisper from the First wouldn't keep them sane.
+                  <div style={{ marginTop: "80px", zIndex: 1000 }}>
+                    But that didn't diminish the danger. Many of the Vigilants
+                    were using an app from the{" "}
+                    <ShowImage
+                      setPrev={setPrev}
+                      prev={prev}
+                      name={"Innovator"}
+                      imageUrl="/modern/Innovator.png"
+                    />{" "}
+                    : a tracker for where the{" "}
+                    <ShowImage
+                      setPrev={setPrev}
+                      prev={prev}
+                      name={"Wendigo"}
+                      imageUrl="/modern/Wendigo.png"
+                    />{" "}
+                    or the{" "}
+                    <ShowImage
+                      setPrev={setPrev}
+                      prev={prev}
+                      name={"Gatherer"}
+                      imageUrl="/modern/Gatherer.png"
+                    />{" "}
+                    is now. Nominally there were no witnesses of harm from them.
+                    So either there was no harm - or no surviving witnesses,
+                    there is no answer to that question yet. Better to use the
+                    app.
+                  </div>
                 </div>
                 <br />
                 <div style={{ marginTop: "80px", zIndex: 1000 }}>
-                  It can be said that the real development of culture began
-                  here.
+                  Life in Ayyon has begun to at least remotely resemble the
+                  times before the{" "}
+                  <span>
+                    <Link href="/story/nightmare_fuel">Nightmare Fuel</Link>
+                  </span>{" "}
+                  . At least now there was a warm, comforting existence - as
+                  wild as it would have looked from the people of the past.
                 </div>
               </p>
             </div>

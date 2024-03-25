@@ -172,6 +172,9 @@
   font-family: "ApocLC";
   @include adaptiv-value("font-size", 20, 18, 1);
   line-height: 113%;
+  a {
+    color: #3edcbe;
+  }
   span {
     color: #3edcbe;
     cursor: pointer;
