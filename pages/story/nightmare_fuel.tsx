@@ -71,7 +71,7 @@ const Nightmare: NextPage = observer(() => {
                 </h1>
                 <div className={styles.gatherer__box}>
                   <p className={"_littleText"}>
-                    The Sleepers date modern Ayyon from the awakening of the
+                    The Sleepers date modern Ayyon from the awakening of the {" "}
                     <span>First</span>. The Vigilants timeline, on the other
                     hand, begins two weeks earlier. The day of what is now known
                     as Nightmare Fuel.
