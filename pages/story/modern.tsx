@@ -164,9 +164,9 @@ const Modern: NextPage = observer(() => {
                 }}
               >
                 <a
-                  style={{ cursor: "pointer" }}
-                  href="https://opensea.io/assets/base/0x670971dcb8e1a510253511427593007e074954b7/459"
-                  target="_blank"
+                //   style={{ cursor: "pointer" }}
+                //   href="https://opensea.io/assets/base/0x670971dcb8e1a510253511427593007e074954b7/459"
+                //   target="_blank"
                 >
                   <img className={styles.ride__image} src={people} alt="" />
                 </a>
