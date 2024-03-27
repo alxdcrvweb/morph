@@ -93,7 +93,7 @@ export default function MainLayout({ children, props }: MyHead) {
       <LocomotiveScrollProvider
         options={{
           smooth: true,
-          touchMultiplier: 1,
+          touchMultiplier: 2,
           smartphone: {
             breakpoint: 0,
             smooth: true,
