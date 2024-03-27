@@ -93,14 +93,14 @@ export default function MainLayout({ children, props }: MyHead) {
       <LocomotiveScrollProvider
         options={{
           smooth: true,
-          touchMultiplier: 2,
+          touchMultiplier: 5,
           smartphone: {
             breakpoint: 0,
-            smooth: true,
+            smooth: false,
           },
           tablet: {
             breakpoint: 0,
-            smooth: true,
+            smooth: false,
           },
         }}
         watch={[]}

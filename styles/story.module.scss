@@ -71,6 +71,9 @@
   z-index: 1000;
   pointer-events: none;
   top: 100px;
+  @media (max-width: 768px) {
+    display: none
+  }
 }
 .story__nightmare {
   background-image: url("/story/nightmare.png");

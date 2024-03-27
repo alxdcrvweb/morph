@@ -16,8 +16,12 @@ export class GalleryStore {
   constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
-  setChar = (id: string) => {
-    this.char = this.characters.find((el) => el.id == id);
+  setChar = (id?: string) => {
+    if (id) {
+      this.char = this.characters.find((el) => el.id == id);
+    } else {
+      this.char = null;
+    }
   };
   getCharacters = async (address: string, chain: string) => {
     const params = {

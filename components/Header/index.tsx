@@ -16,6 +16,7 @@ import { SignInButton, useProfile, useSignIn } from "@farcaster/auth-kit";
 import { Web3Store } from "../../stores/Web3Store";
 import classNames from "classnames";
 import axios from "axios";
+import { GalleryStore } from "../../stores/GalleryStore";
 // import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
@@ -24,9 +25,11 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = observer((props) => {
   console.log(props.csrfToken);
+  const [menu, setMenu] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const router = useRouter();
   const web3store = useInjection(Web3Store);
+  const galleryStore = useInjection(GalleryStore);
   const [active, setActive] = useState("");
   useEffect(() => {
     console.log(router.asPath);
@@ -49,6 +52,17 @@ const Header: FC<HeaderProps> = observer((props) => {
 
   const closeMenuHandler = () => {
     setOpenMenu(false);
+  };
+  const logout = () => {
+    web3store.setFarcasterUser(null);
+    localStorage.removeItem("farcasterProfile");
+    setMenu(false);
+    galleryStore.setCharacters([]);
+    galleryStore.setChar(null);
+    if (router.asPath.includes("gallery")) {
+      router.push("/");
+    }
+    
   };
   return (
     <header className={styles.header}>
@@ -104,9 +118,21 @@ const Header: FC<HeaderProps> = observer((props) => {
               />
             </div>
           ) : (
-            <div className={styles.wrapcast}>
-              @{web3store.farcasterUser?.username}
-              <img src={web3store.farcasterUser?.pfp_url} />
+            <div className={styles.user}>
+              <div className={styles.wrapcast} onClick={() => setMenu(!menu)}>
+                @{web3store.farcasterUser?.username}
+                <img src={web3store.farcasterUser?.pfp_url} />
+              </div>
+              <div
+                className={styles.logout}
+                onClick={logout}
+                style={{
+                  opacity: menu ? 1 : 0,
+                  pointerEvents: menu ? "auto" : "none",
+                }}
+              >
+                Logout
+              </div>
             </div>
           )}
           {/* {props.csrfToken ? (
