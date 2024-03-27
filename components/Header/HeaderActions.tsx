@@ -80,7 +80,9 @@ const HeaderActions: FC<HeaderProps> = observer(({ routerPath, active }) => {
             className={cn(
               styles.header__menu,
               active == "gallery" && styles.header__active,
-              !web3Store.farcasterUser && styles.header__disabled
+              !web3Store.farcasterUser &&
+                !web3Store.address &&
+                styles.header__disabled
             )}
           >
             Gallery

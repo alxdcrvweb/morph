@@ -9,6 +9,34 @@
   background-image: url("../public/leaderboard/showdown__bg.png");
   background-size: cover;
 }
+.leaderboard__connect {
+  font-size: 40px;
+  margin-bottom: 60px;
+  @media (max-width: 800px) {
+    font-size: 30px;
+  }
+}
+.leaderboard__or {
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.leaderboard__button {
+  width: 350px;
+  height: 48px;
+  border-radius: 20px;
+  background: #464646;
+  color: white;
+  font-family: "Moderat";
+  font-size: 20px;
+  &:hover {
+    box-shadow: 0px 0px 10px white;
+  }
+  @media (max-width: 800px) {
+    font-size: 15px;
+    width: 250px;
+  }
+}
 .leaderboard__title {
   font-size: 64px;
   font-family: "ApocLC";

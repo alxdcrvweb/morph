@@ -1,20 +1,32 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useInjection } from "inversify-react";
 import { observer } from "mobx-react";
-import { useEffect, useState } from "react";
-import style from "../../modals/Modal.module.sass";
+import { useEffect } from "react";
 import { SeparatedConnect } from "./separatedConnect";
-// import { useConnect, useWalletClient } from "wagmi";
+import leaderboardCss from "../../styles/leaderboard.module.scss";
 import classNames from "classnames";
-import Link from "next/link";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Web3Store } from "../../stores/Web3Store";
 import { useAccount } from "wagmi";
+
 const ConnectButtonCustom = observer(
   ({ isHeader, isAuth }: { isHeader?: boolean; isAuth?: boolean }) => {
-    const { setConnected, setProvider, disconnected, setAddress } =
-      useInjection(Web3Store);
+    const {
+      setConnected,
+      setProvider,
+      isInitConnect,
+      setInitConnect,
+      address,
+      farcasterUser,
+    } = useInjection(Web3Store);
+
     const router = useRouter();
+    useEffect(() => {
+      if (router.asPath.includes("connect") && (address || farcasterUser)) {
+        router.push("/");
+      }
+    }, [address, farcasterUser, router.asPath]);
+
     return (
       <ConnectButton.Custom>
         {({
@@ -27,7 +39,6 @@ const ConnectButtonCustom = observer(
           // const connect = useConnect()
           // console.log(connect, window.ethereum);
           const { connector } = useAccount();
-          
 
           const ready = mounted && authenticationStatus !== "loading";
           const connected =
@@ -47,25 +58,31 @@ const ConnectButtonCustom = observer(
             }
           }, [connector]);
           const getProvider = async () => {
-            const res = await connector?.getProvider();
-            setProvider(res, account?.address);
-          };
-          useEffect(() => {
-            setConnected(connected as boolean);
-            console.log("account:", account);
-            // if (
-            //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
-            // ) {
-            //   setNeedChangeWallet(true);
-            // } else {
-            //   setNeedChangeWallet(false);
-            // }
-            if (connected) {
-              setAddress(account);
-            } else {
-              disconnected();
+            try {
+              if (!isInitConnect) {
+                const res = await connector?.getProvider();
+                setProvider(res, account?.address);
+              }
+            } catch (e) {
+              console.log(e);
             }
-          }, []);
+          };
+          // useEffect(() => {
+          //   setConnected(connected as boolean);
+          //   console.log("account:", account);
+          //   // if (
+          //   //   user?.account?.address.toLowerCase() !== account?.address?.toLowerCase()
+          //   // ) {
+          //   //   setNeedChangeWallet(true);
+          //   // } else {
+          //   //   setNeedChangeWallet(false);
+          //   // }
+          //   if (connected) {
+          //     setAddress(account);
+          //   } else {
+          //     disconnected();
+          //   }
+          // }, []);
           // useEffect(() => {
           //   if (account?.address ) {
           //     setAddress(walletClient?.transport, account?.address);
@@ -88,7 +105,7 @@ const ConnectButtonCustom = observer(
                     <button
                       onClick={openChainModal}
                       type="button"
-                      className={classNames(style.modal__mint__button)}
+                      className={classNames(leaderboardCss.leaderboard__button)}
                     >
                       Change Network
                     </button>

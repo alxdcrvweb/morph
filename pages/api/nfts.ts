@@ -8,7 +8,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req?.query?.chain);
   const address = req?.query?.address.toString();
   const chain = req?.query?.chain.toString();
   if (!address || !chain) {

@@ -22,7 +22,14 @@ export function fd(val: number | string | BN) {
   if (!val) return "";
   return numeral(val?.toString()).format("0,0[.][000000000000000000]");
 }
-
+export const addressSlice = (address: string | undefined) => {
+  if (!address) return "0000...0000";
+  return (
+    address.slice(0, 4) +
+    "..." +
+    address.slice(address.length - 4, address.length)
+  );
+};
 export function getRandomIntInclusive(min: number, max: number) {
   min = Math.ceil(min);
   max = Math.floor(max);

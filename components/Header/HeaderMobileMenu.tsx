@@ -65,6 +65,7 @@ const HeaderMobileMenu: FC<HeaderMobileMenuProps> = observer(
                   styles.menu__route,
                   el.text == "Gallery" &&
                     !web3store.farcasterUser &&
+                    !web3store.address &&
                     styles.disabled
                 )}
                 onClick={() => {

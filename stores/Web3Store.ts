@@ -12,11 +12,11 @@ interface User {
   id?: string;
 }
 
-injectable()
+injectable();
 
 export class Web3Store {
-  @observable address: string | null = null;
-  @observable isConnecting: boolean = false;
+  @observable address: any = undefined;
+  @observable isInitConnect: boolean = false;
   @observable provider: any = null;
   @observable web3: Web3 | null = null;
   @observable disabledConnectBtn: boolean = false;
@@ -38,8 +38,12 @@ export class Web3Store {
   public constructor(private readonly rootStore: RootStore) {
     makeObservable(this);
   }
+  setInitConnect = (status: boolean) => {
+    this.isInitConnect = status;
+  }
   setProvider = (provider?: any, address?: string) => {
     if (address) {
+      this.setInitConnect(true)
       this.address = address;
     }
     console.log("CONNECT", provider);
@@ -63,7 +67,12 @@ export class Web3Store {
     }
   };
   setAddress = (user: any) => {
-    this.address = user.address;
+    if (user?.address) {
+      this.address = user.address;
+    } else {
+      console.log("hi disconnect 2");
+      this.address = null;
+    }
   };
   subscribeProvider = () => {
     console.log("subscribeProvider");

@@ -96,6 +96,19 @@ section {
 ._1sj0tk81 {
   color: #000;
 }
+._1n3pr301 {
+  width: 350px;
+  color: transparent!important;
+  background: transparent!important;
+  transform: translateY(-48px);
+  border-radius: 20px!important;
+  &:hover {
+    box-shadow: 0px 0px 10px white;
+  }
+  @media (max-width: 800px) {
+    width: 250px;
+  }
+}
 .social {
   position: absolute;
   bottom: 30px;

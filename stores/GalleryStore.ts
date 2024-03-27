@@ -24,6 +24,7 @@ export class GalleryStore {
     }
   };
   getCharacters = async (address: string, chain: string) => {
+    console.log(address, "hiii");
     const params = {
       chain: chain,
       address: address,

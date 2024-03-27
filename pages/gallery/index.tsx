@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { observer } from "mobx-react";
 import { useInjection } from "inversify-react";
 import { GalleryStore } from "../../stores/GalleryStore";
@@ -12,7 +12,7 @@ const GalleryPage: React.FC = observer(() => {
   const web3store = useInjection(Web3Store);
   const [char, setChar] = useState<any>([]);
   const [faction, setFaction] = useState("all");
-  const [updated, setUpdated] = useState(false)
+  const [updated, setUpdated] = useState(false);
   // const f = async () => {
   //   console.log("hi function");
   //   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -21,6 +21,16 @@ const GalleryPage: React.FC = observer(() => {
   //     await delay(1000);
   //   }
   // };
+  const memoChars = useMemo(
+    () =>
+      char.filter((el) => {
+        if (faction == "all") return true;
+        let fa = el.attributes.filter((el) => el.trait_type == "faction");
+        // console.log(fa);
+        return fa[0].value == faction;
+      }),
+    [char, faction]
+  );
   const checkChars = async () => {
     console.log("HI CHECK", updated);
     const addresses = [
@@ -44,12 +54,23 @@ const GalleryPage: React.FC = observer(() => {
       }
     }
   };
+  const checkOne = async () => {
+    try {
+      await galleryStore.getCharacters(web3store.address, chainId).then((res) => {
+        galleryStore.setCharacters(res);
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (web3store?.farcasterUser?.custody_address && !updated) {
-      setUpdated(true)
+      setUpdated(true);
       checkChars();
+    } else if (web3store.address) {
+      checkOne();
     }
-  }, [web3store?.farcasterUser?.custody_address]);
+  }, [web3store?.farcasterUser?.custody_address, web3store.address]);
   // useEffect(() => {
   //   // f();
   //   if (web3store.farcasterUser.custody_address) {
@@ -98,17 +119,14 @@ const GalleryPage: React.FC = observer(() => {
           </div>
         </div>
         <div className={style.gallery}>
-          {char
-            .filter((el) => {
-              if (faction == "all") return true;
-              let fa = el.attributes.filter((el) => el.trait_type == "faction");
-              console.log(fa);
-              return fa[0].value == faction;
-            })
-            .map((el: any, i: number) => {
-              // console.log(".filter(el=> el.)", el);
-              return <OneImage el={el} key={i} />;
-            })}
+          {memoChars.length != 0
+            ? memoChars.map((el: any, i: number) => {
+                // console.log(".filter(el=> el.)", el);
+                return <OneImage el={el} key={i} />;
+              })
+            : faction == "all"
+            ? "You don't have any Morphs on account"
+            : "You don't have any Morphs of this faction on account"}
           {/* Add your gallery content here */}
         </div>
       </div>

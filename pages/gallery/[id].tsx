@@ -48,12 +48,21 @@ const GalleryPage: React.FC = observer(() => {
       }
     }
   };
+  const checkOne = async () => {
+    try {
+      await galleryStore.getCharacters(web3store.address, chainId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     if (web3store?.farcasterUser?.custody_address && !updated) {
       setUpdated(true);
       checkChars();
+    } else if (web3store.address) {
+      checkOne();
     }
-  }, [web3store?.farcasterUser?.custody_address]);
+  }, [web3store?.farcasterUser?.custody_address, web3store.address]);
   useEffect(() => {
     setChar(galleryStore.characters);
     galleryStore.setChar(router.asPath.split("/")[2]);
@@ -262,7 +271,7 @@ const GalleryPage: React.FC = observer(() => {
                 let fa = el.attributes.filter(
                   (el) => el.trait_type == "faction"
                 );
-                console.log(fa);
+                // console.log(fa);
                 return fa[0].value == faction;
               })
               .map((el: any, i: number) => {

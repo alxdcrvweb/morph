@@ -9,6 +9,13 @@
   pointer-events: none;
   color: #757575 !important;
 }
+.wrapcast__connect {
+  background-color: #212121;
+  width: 95px;
+  height: 35px;
+  color: white;
+  border-radius: 20px;
+}
 .inactive {
   opacity: 0;
   pointer-events: none;
@@ -151,6 +158,18 @@
   align-items: flex-end;
   height: 35px;
   transform: translateY(35px);
+}
+.wrapcast__address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Moderat";
+  background-color: #212121;
+  border-radius: 20px;
+  padding: 7px;
 }
 .wrapcast {
   display: flex;

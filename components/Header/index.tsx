@@ -17,6 +17,11 @@ import { Web3Store } from "../../stores/Web3Store";
 import classNames from "classnames";
 import axios from "axios";
 import { GalleryStore } from "../../stores/GalleryStore";
+import Link from "next/link";
+import { addressSlice } from "../../utils/utilities";
+import { useConnectModal } from "@rainbow-me/rainbowkit";
+import { useDisconnect } from "wagmi";
+import ConnectButtonCustom from "./connectButtonCustom";
 // import { SignInButton } from "@farcaster/auth-kit";
 interface HeaderProps {
   routerPath: string;
@@ -62,7 +67,18 @@ const Header: FC<HeaderProps> = observer((props) => {
     if (router.asPath.includes("gallery")) {
       router.push("/");
     }
-    
+  };
+  const { disconnect } = useDisconnect();
+  const logoutAddress = () => {
+    disconnect();
+    console.log("hi disconnect");
+    setMenu(false);
+    web3store.setAddress(null);
+    galleryStore.setCharacters([]);
+    galleryStore.setChar(null);
+    if (router.asPath.includes("gallery")) {
+      router.push("/");
+    }
   };
   return (
     <header className={styles.header}>
@@ -108,24 +124,44 @@ const Header: FC<HeaderProps> = observer((props) => {
             </div>
           )} */}
           {/* {console.log(web3store.farcasterUser)} */}
-          {!web3store.farcasterUser ? (
-            <div style={{ opacity: 1, color: "white" }}>
-              <SignInButton
-                onSuccess={(profile) => {
-                  console.log(profile, "profile");
-                  web3store.setFarcasterUser(profile);
-                }}
-              />
-            </div>
+          {console.log(web3store.address)}
+          {!web3store.farcasterUser && !web3store.address ? (
+            <>
+              <div style={{ opacity: 1, color: "white" }}>
+                <Link href={"/connect"}>
+                  <button className={styles.wrapcast__connect}>Connect</button>
+                </Link>
+              </div>
+              <div style={{ display: "none" }}>
+                <ConnectButtonCustom />
+              </div>
+            </>
           ) : (
             <div className={styles.user}>
-              <div className={styles.wrapcast} onClick={() => setMenu(!menu)}>
-                @{web3store.farcasterUser?.username}
-                <img src={web3store.farcasterUser?.pfp_url} />
-              </div>
+              {web3store.farcasterUser?.username ? (
+                <div className={styles.wrapcast} onClick={() => setMenu(!menu)}>
+                  @{web3store.farcasterUser?.username}
+                  <img src={web3store.farcasterUser?.pfp_url} />
+                </div>
+              ) : (
+                <div
+                  className={styles.wrapcast__address}
+                  onClick={() => {
+                    setMenu(!menu);
+                  }}
+                >
+                  {addressSlice(web3store.address)}
+                </div>
+              )}
               <div
                 className={styles.logout}
-                onClick={logout}
+                onClick={() => {
+                  if (web3store.farcasterUser) {
+                    logout();
+                  } else {
+                    logoutAddress();
+                  }
+                }}
                 style={{
                   opacity: menu ? 1 : 0,
                   pointerEvents: menu ? "auto" : "none",
