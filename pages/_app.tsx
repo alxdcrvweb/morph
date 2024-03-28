@@ -51,7 +51,7 @@ const connectors = connectorsForWallets(
   ],
   {
     appName: "My RainbowKit App",
-    projectId: "8271a5dee2c5981640ad5d12b20132af",
+    projectId: projectId,
   }
 );
 const wagmiConfig = createConfig({
