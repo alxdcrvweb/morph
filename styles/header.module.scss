@@ -15,6 +15,8 @@
   height: 35px;
   color: white;
   border-radius: 20px;
+  font-family: "Moderat";
+  font-size: 12px;
 }
 .inactive {
   opacity: 0;
@@ -36,11 +38,14 @@
   }
   @media (max-width: 850px) {
     display: none;
-    width: 120px;
+    width: 100%;
+    text-align: center;
+    left: 0px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 20px;
     div {
       margin-top: 0px;
     }
@@ -169,7 +174,8 @@
   font-family: "Moderat";
   background-color: #212121;
   border-radius: 20px;
-  padding: 7px;
+  padding: 10.5px;
+  margin-top: -1px;
 }
 .wrapcast {
   display: flex;

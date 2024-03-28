@@ -91,6 +91,7 @@ h6 {
 */
 
 main {
+	overflow-x: hidden;
 	&::-webkit-scrollbar {
 		display: none;
 	}
