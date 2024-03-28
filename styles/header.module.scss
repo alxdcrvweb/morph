@@ -17,6 +17,9 @@
   border-radius: 20px;
   font-family: "Moderat";
   font-size: 12px;
+  &:hover {
+    color: #75fff4;
+  }
 }
 .inactive {
   opacity: 0;
