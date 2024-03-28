@@ -10,7 +10,10 @@ import "../components/polyfills";
 const rootStore = new RootStore();
 const container = rootStore.container;
 import "@rainbow-me/rainbowkit/styles.css";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import {
+  RainbowKitProvider,
+  connectorsForWallets,
+} from "@rainbow-me/rainbowkit";
 import "@farcaster/auth-kit/styles.css";
 import { base } from "wagmi/chains";
 import { ToastContainer } from "react-toastify";
@@ -18,14 +21,40 @@ import "../components/polyfills";
 import Head from "next/head";
 import MainLayout from "../components/MainLayout";
 import AppLoader from "../components/loader";
+import { AuthKitProvider } from "@farcaster/auth-kit";
 import {
-  AuthKitProvider
-} from "@farcaster/auth-kit";
+  rainbowWallet,
+  walletConnectWallet,
+  metaMaskWallet,
+  trustWallet,
+  coinbaseWallet,
+  ledgerWallet 
+} from "@rainbow-me/rainbowkit/wallets";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 // import { SessionProvider, getCsrfToken } from "next-auth/react";
+const connectors = connectorsForWallets(
+  [
+    {
+      groupName: "Recommended",
+      wallets: [
+        rainbowWallet,
+        walletConnectWallet,
+        metaMaskWallet,
+        trustWallet,
+        coinbaseWallet,
+        ledgerWallet
+      ],
+    },
+  ],
+  {
+    appName: "My RainbowKit App",
+    projectId: "1s2d3f4g5h6j7k8l9",
+  }
+);
 const wagmiConfig = createConfig({
+  connectors,
   chains: [base],
   transports: {
     [base.id]: http(),
@@ -55,7 +84,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             <Provider container={container}>
               <WagmiProvider config={wagmiConfig}>
                 <QueryClientProvider client={queryClient}>
-                  <RainbowKitProvider>
+                  <RainbowKitProvider initialChain={base}>
                     <Suspense fallback={<h1>Loading posts...</h1>}>
                       {/* <Rotate /> */}
                       <Head>
