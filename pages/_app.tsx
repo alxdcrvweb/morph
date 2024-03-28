@@ -34,6 +34,7 @@ import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 // import { SessionProvider, getCsrfToken } from "next-auth/react";
+const projectId = '8271a5dee2c5981640ad5d12b20132af';
 const connectors = connectorsForWallets(
   [
     {
@@ -50,7 +51,7 @@ const connectors = connectorsForWallets(
   ],
   {
     appName: "My RainbowKit App",
-    projectId: "1s2d3f4g5h6j7k8l9",
+    projectId: "8271a5dee2c5981640ad5d12b20132af",
   }
 );
 const wagmiConfig = createConfig({
