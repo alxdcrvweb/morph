@@ -71,9 +71,11 @@ const GalleryPage: React.FC = observer((props) => {
     }
   };
   useEffect(() => {
-    let tt = setTimeout(() => {
-      setLoad(inView);
-    }, 1000);
+    let tt = setInterval(() => {
+      if (!oneChar) {
+        setLoad(!load);
+      }
+    }, 2000);
     return () => clearTimeout(tt);
   }, [inView]);
   useEffect(() => {
@@ -141,7 +143,7 @@ const GalleryPage: React.FC = observer((props) => {
         <meta
           name="fc:frame:image"
           /* @ts-ignore */
-          content={"https://www.mrphs.io/api/getNftById?id=" + props?.id}
+          content={"https://www.mrphs.io/api/og?id=" + props?.id}
         />
         <meta name="fc:frame:image:aspect_ratio" content="1:1" />
       </Head>
