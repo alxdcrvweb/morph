@@ -14,7 +14,6 @@ import { useInView } from "react-intersection-observer";
 
 import Head from "next/head";
 import BackButton from "../../components/Header/backButton";
-const imageUrl = `http://localhost:3000/testNft.jpg`;
 export const runtime = "experimental-edge";
 
 export const getServerSideProps = async (context) => {

@@ -24,7 +24,7 @@ export default async function GET(request: Request) {
     flexDirection: "column",
     alignItems: "center",
     backgroundSize: "auto",
-    backgroundImage: `url(http://localhost:3000/morphBg.png)`,
+    backgroundImage: `url(https://www.mrphs.io/morphBg.png)`,
     width: "1331px",
     height: "1331px",
   };
