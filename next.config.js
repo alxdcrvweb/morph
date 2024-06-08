@@ -20,6 +20,11 @@ module.exports = {
     domains: ["ipfs.io"],
   },
   reactStrictMode: true,
+  swcMinify: true,
+  // Other configurations...
+  experimental: {
+    runtime: "edge",
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

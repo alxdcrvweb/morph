@@ -4,7 +4,7 @@ import { ModalsEnum } from "../modals";
 import "reflect-metadata";
 import axios from "axios";
 import { mintContract } from "../utils/contracts/mint";
-import { moralisUrl } from "../config/config";
+import { chainId, moralisUrl } from "../config/config";
 import { injectable } from "inversify";
 
 injectable();
@@ -18,9 +18,36 @@ export class GalleryStore {
   }
   setChar = (id?: string) => {
     if (id) {
-      this.char = this.characters.find((el) => el.id == id);
+      let ch = this.characters.find((el) => el.id == id);
+      if (ch) this.char = ch;
+      console.log(ch);
+      if (!ch) {
+        console.log(ch, chainId, id);
+        this.getOneCharacter(chainId, id);
+      }
     } else {
       this.char = null;
+    }
+  };
+  getOneCharacter = async (chain: string, id: string) => {
+    const params = {
+      chain: chain,
+      id: id,
+    };
+
+    const query = new URLSearchParams(params).toString();
+    try {
+      const res = await axios.get("/api/oneNft?" + query);
+      console.log(res.data);
+      this.char = {
+        block_number: res.data.block_number,
+        id: res.data.token_id,
+        owner: res.data.owner_of,
+        ...res.data.normalized_metadata,
+      };
+      console.log(res);
+    } catch (e) {
+      console.log(e);
     }
   };
   getCharacters = async (address: string, chain: string) => {
@@ -40,10 +67,11 @@ export class GalleryStore {
         res.data.result
           // .filter((el: any) => el.token_uri)
           .map((el: any) => {
-            console.log(el);
+            // console.log(el);
             return {
               block_number: el.block_number,
               id: el.token_id,
+              owner: el.owner_of,
               ...el.normalized_metadata,
             };
           })

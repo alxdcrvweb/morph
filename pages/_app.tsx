@@ -28,13 +28,13 @@ import {
   metaMaskWallet,
   trustWallet,
   coinbaseWallet,
-  ledgerWallet 
+  ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
 // import { SessionProvider, getCsrfToken } from "next-auth/react";
-const projectId = '8271a5dee2c5981640ad5d12b20132af';
+const projectId = "8271a5dee2c5981640ad5d12b20132af";
 const connectors = connectorsForWallets(
   [
     {
@@ -45,7 +45,7 @@ const connectors = connectorsForWallets(
         metaMaskWallet,
         trustWallet,
         coinbaseWallet,
-        ledgerWallet
+        ledgerWallet,
       ],
     },
   ],
@@ -66,6 +66,7 @@ const wagmiConfig = createConfig({
 //   return { props: { csrfToken } };
 // }
 const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const AnyComponent = Component as any;
   console.log(pageProps);
@@ -79,38 +80,34 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   };
   return (
     <>
-      {loading ? (
-        <AuthKitProvider config={config}>
-          <AppLoader>
-            <Provider container={container}>
-              <WagmiProvider config={wagmiConfig}>
-                <QueryClientProvider client={queryClient}>
-                  <RainbowKitProvider initialChain={base}>
-                    <Suspense fallback={<h1>Loading posts...</h1>}>
-                      {/* <Rotate /> */}
-                      <Head>
-                        <meta
-                          name="viewport"
-                          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-                        ></meta>
-                      </Head>
+      <AuthKitProvider config={config}>
+        <AppLoader>
+        <Provider container={container}>
+          <WagmiProvider config={wagmiConfig}>
+            <QueryClientProvider client={queryClient}>
+              <RainbowKitProvider initialChain={base}>
+                <Suspense fallback={<h1>Loading posts...</h1>}>
+                  {/* <Rotate /> */}
+                  <Head>
+                    <meta
+                      name="viewport"
+                      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+                    ></meta>
+                  </Head>
 
-                      <MainLayout props={pageProps}>
-                        <AnyComponent {...pageProps} />
-                      </MainLayout>
+                  <MainLayout props={pageProps}>
+                  <AnyComponent {...pageProps} />
+                  </MainLayout>
 
-                      <ToastContainer style={{ zIndex: 10000000000 }} />
-                      <ModalsContainer />
-                    </Suspense>
-                  </RainbowKitProvider>
-                </QueryClientProvider>
-              </WagmiProvider>
-            </Provider>
-          </AppLoader>
-        </AuthKitProvider>
-      ) : (
-        <></>
-      )}
+                  <ToastContainer style={{ zIndex: 10000000000 }} />
+                  <ModalsContainer />
+                </Suspense>
+              </RainbowKitProvider>
+            </QueryClientProvider>
+          </WagmiProvider>
+        </Provider>
+        </AppLoader>
+      </AuthKitProvider>
     </>
   );
 }

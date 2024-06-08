@@ -5,11 +5,28 @@ import { fromWei } from "web3-utils";
 export function toBNJS(val: BigNumber | number | string) {
   return new BN(val.toString());
 }
-
+export const ipfsGatewayById = (id: string) => {
+  // console.log(cid)
+  let com = "img-quality=80&img-width=640&img-height=700&";
+  // let modifiedId = Number(id) > 400 ? Number(id) - 400 : id
+  let cid =
+    (Number(id) > 400 && Number(id) <= 702)
+      ? "QmeQrA41fYPhrSV22VLnLoix5r5ptWXmtr9jqTaWWDPg56"
+      : Number(id) <= 400
+      ? "QmWV3QZSVgQH6udJL7WweYGSyg2DN8rsuJFFaaFHuziRen"
+      : "";
+  console.log(
+    cid,
+    `https://loot.mypinata.cloud/ipfs/${cid}/${id}.png?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`
+  );
+  if (id) {
+    return `https://loot.mypinata.cloud/ipfs/${cid}/${id}.png?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`;
+  } else return "";
+};
 export const ipfsGateway = (cid: string) => {
   // console.log(cid)
   if (cid) {
-    let com = "img-quality=80&img-width=320&img-height=350&";
+    let com = "img-quality=80&img-width=640&img-height=700&";
     let handleCid = cid.replace("ipfs://", "").replace("ipfs:/", "");
     return `https://loot.mypinata.cloud/ipfs/${handleCid}?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`;
   } else return "";

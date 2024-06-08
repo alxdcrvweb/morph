@@ -6,20 +6,14 @@ import HeaderMenu from "./HeaderMenu";
 import cn from "classnames";
 import { useRouter } from "next/router";
 import { useInjection } from "inversify-react";
-import Social from "../Social";
 import { observer } from "mobx-react";
 import "@farcaster/auth-kit/styles.css";
 // import { SignInButton, StatusAPIResponse } from "@farcaster/auth-kit";
-
-import story from "../../styles/story.module.scss";
-import { SignInButton, useProfile, useSignIn } from "@farcaster/auth-kit";
 import { Web3Store } from "../../stores/Web3Store";
 import classNames from "classnames";
-import axios from "axios";
 import { GalleryStore } from "../../stores/GalleryStore";
 import Link from "next/link";
 import { addressSlice } from "../../utils/utilities";
-import { useConnectModal } from "@rainbow-me/rainbowkit";
 import { useDisconnect } from "wagmi";
 import ConnectButtonCustom from "./connectButtonCustom";
 // import { SignInButton } from "@farcaster/auth-kit";
@@ -50,6 +44,8 @@ const Header: FC<HeaderProps> = observer((props) => {
       setActive("gallery");
     } else if (router.asPath.includes("leaderboard")) {
       setActive("leaderboard");
+    } else if (router.asPath.includes("vote")) {
+      setActive("vote");
     } else if (router.asPath == "/") {
       setActive("");
     }

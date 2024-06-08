@@ -5,7 +5,7 @@ import { GalleryStore } from "../../stores/GalleryStore";
 import { Web3Store } from "../../stores/Web3Store";
 import { chainId } from "../../config/config";
 import style from "../../styles/gallery.module.scss";
-import OneImage from "./oneImage";
+import OneImage from "../../components/Gallery/oneImage";
 import classNames from "classnames";
 const GalleryPage: React.FC = observer(() => {
   const galleryStore = useInjection(GalleryStore);
