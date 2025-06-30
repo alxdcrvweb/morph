@@ -17,10 +17,10 @@ export const ipfsGatewayById = (id: string) => {
       : "";
   console.log(
     cid,
-    `https://loot.mypinata.cloud/ipfs/${cid}/${id}.png?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`
+    `https://loot.mypinata.cloud/ipfs/${cid}/${id}.png?${com}pinataGatewayToken=${process.env.NEXT_PUBLIC_PINATA_GATEWAY_TOKEN}`
   );
   if (id) {
-    return `https://loot.mypinata.cloud/ipfs/${cid}/${id}.png?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`;
+    return `https://loot.mypinata.cloud/ipfs/${cid}/${id}.png?${com}pinataGatewayToken=${process.env.NEXT_PUBLIC_PINATA_GATEWAY_TOKEN}`;
   } else return "";
 };
 export const ipfsGateway = (cid: string) => {
@@ -28,7 +28,7 @@ export const ipfsGateway = (cid: string) => {
   if (cid) {
     let com = "img-quality=80&img-width=640&img-height=700&";
     let handleCid = cid.replace("ipfs://", "").replace("ipfs:/", "");
-    return `https://loot.mypinata.cloud/ipfs/${handleCid}?${com}pinataGatewayToken=tda9_4KZmY8KtgTMaz5LQ3fGHhh_WEfdRzJowpHsF_2t7VTU2zHsjskO7-PWCZoV`;
+    return `https://loot.mypinata.cloud/ipfs/${handleCid}?${com}pinataGatewayToken=${process.env.NEXT_PUBLIC_PINATA_GATEWAY_TOKEN}`;
   } else return "";
 };
 export function maskAddress(address: string) {
